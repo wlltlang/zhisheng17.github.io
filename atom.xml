@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-23T07:32:26.494Z</updated>
+  <updated>2017-10-13T16:16:21.962Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JsonPath —— JSON 解析神器</title>
+    <link href="http://yoursite.com/2017/10/13/JsonPath/"/>
+    <id>http://yoursite.com/2017/10/13/JsonPath/</id>
+    <published>2017-10-13T15:59:12.727Z</published>
+    <updated>2017-10-13T16:16:21.962Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/cb3.jpeg-1" alt=""></p>
+<p>真乃神器也，再复杂的 Json 都能给你解析出来，非常方便的获取 JSON 的内容，很强大！<br><a id="more"></a><br>语法简介</p>
+<table>
+<thead>
+<tr>
+<th><strong>JsonPath</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td>根节点</td>
+</tr>
+<tr>
+<td>@</td>
+<td>当前节点</td>
+</tr>
+<tr>
+<td>.or[]</td>
+<td>子节点</td>
+</tr>
+<tr>
+<td>..</td>
+<td>选择所有符合条件的节点</td>
+</tr>
+<tr>
+<td>*</td>
+<td>所有节点</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>迭代器标示，如数组下标</td>
+</tr>
+<tr>
+<td>[,]</td>
+<td>支持迭代器中做多选</td>
+</tr>
+<tr>
+<td>[start:end:step]</td>
+<td>数组切片运算符</td>
+</tr>
+<tr>
+<td>?()</td>
+<td>支持过滤操作</td>
+</tr>
+<tr>
+<td>()</td>
+<td>支持表达式计算</td>
+</tr>
+</tbody>
+</table>
+<p>JSON 值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">"store"</span>: &#123;</div><div class="line">    <span class="attr">"book"</span>: [</div><div class="line">      &#123; <span class="attr">"category"</span>: <span class="string">"reference"</span>,</div><div class="line">        <span class="attr">"author"</span>: <span class="string">"Nigel Rees"</span>,</div><div class="line">        <span class="attr">"title"</span>: <span class="string">"Sayings of the Century"</span>,</div><div class="line">        <span class="attr">"price"</span>: <span class="number">8.95</span></div><div class="line">      &#125;,</div><div class="line">      &#123; <span class="attr">"category"</span>: <span class="string">"fiction"</span>,</div><div class="line">        <span class="attr">"author"</span>: <span class="string">"Evelyn Waugh"</span>,</div><div class="line">        <span class="attr">"title"</span>: <span class="string">"Sword of Honour"</span>,</div><div class="line">        <span class="attr">"price"</span>: <span class="number">12.99</span>,</div><div class="line">        <span class="attr">"isbn"</span>: <span class="string">"0-553-21311-3"</span></div><div class="line">      &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"bicycle"</span>: &#123;</div><div class="line">      <span class="attr">"color"</span>: <span class="string">"red"</span>,</div><div class="line">      <span class="attr">"price"</span>: <span class="number">19.95</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>导包：<code>import com.jayway.jsonpath.JsonPath</code></p>
+<p>解析代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//输出book[0]的author值</span></div><div class="line">String author = JsonPath.read(json, <span class="string">"$.store.book[0].author"</span>);</div><div class="line">System.out.println(<span class="string">"author\t"</span>+author);</div><div class="line"><span class="comment">//输出全部author的值，使用Iterator迭代</span></div><div class="line">List&lt;String&gt; authors = JsonPath.read(json, <span class="string">"$.store.book[*].author"</span>);</div><div class="line">System.out.println(<span class="string">"authors\t"</span>+authors);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中category == 'reference'的book</span></div><div class="line">List&lt;Object&gt; books = JsonPath.read(json, <span class="string">"$.store.book[?(@.category == 'reference')]"</span>);</div><div class="line">System.out.println(<span class="string">"books\t"</span>+books);</div><div class="line"><span class="comment">//输出book[*]中category == 'reference'的book或者</span></div><div class="line">List&lt;Object&gt; books2 = JsonPath.read(json, <span class="string">"$.store.book[?(@.category == 'reference' || @.price&gt;10)]"</span>);</div><div class="line">System.out.println(<span class="string">"books2\t"</span>+books2);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中category == 'reference'的book的author</span></div><div class="line">List&lt;Object&gt; books1 = JsonPath.read(json, <span class="string">"$.store.book[?(@.category == 'reference')].author"</span>);</div><div class="line">System.out.println(<span class="string">"books1\t"</span>+books1);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中price&gt;10的book</span></div><div class="line">List&lt;Object&gt; b1 = JsonPath.read(json, <span class="string">"$.store.book[?(@.price&gt;10)]"</span>);</div><div class="line">System.out.println(<span class="string">"b1"</span>+b1);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中含有isbn元素的book</span></div><div class="line">List&lt;Object&gt; b2 = JsonPath.read(json, <span class="string">"$.store.book[?(@.isbn)]"</span>);</div><div class="line">System.out.println(<span class="string">"b2"</span>+b2);</div><div class="line"></div><div class="line"><span class="comment">//输出该json中所有price的值</span></div><div class="line">List&lt;Double&gt; prices = JsonPath.read(json, <span class="string">"$..price"</span>);</div><div class="line">System.out.println(<span class="string">"prices"</span>+prices);</div><div class="line"></div><div class="line"><span class="comment">//输出该json中所有title的值</span></div><div class="line">List&lt;Double&gt; title = JsonPath.read(json, <span class="string">"$..title"</span>);</div><div class="line">System.out.println(<span class="string">"title"</span>+title);</div><div class="line"><span class="comment">//输出该json中book 0,1的值</span></div><div class="line">List&lt;Double&gt; book01 = JsonPath.read(json, <span class="string">"$..book[0,1]"</span>);</div><div class="line">System.out.println(<span class="string">"book01"</span>+book01);</div><div class="line"><span class="comment">/* //输出该json中book 0,1的值</span></div><div class="line">List&lt;Double&gt; book012 = JsonPath.read(json, "$..book[-2:]");</div><div class="line">System.out.println("book012"+book012);*/</div><div class="line"></div><div class="line"><span class="comment">//可以提前编辑一个路径，并多次使用它</span></div><div class="line">JsonPath path = JsonPath.compile(<span class="string">"$.store.book[*]"</span>);</div><div class="line">List&lt;Object&gt; b3 = path.read(json);</div><div class="line">System.out.println(<span class="string">"path\t"</span>+path+<span class="string">"\n"</span>+b3);</div></pre></td></tr></table></figure>
+<p>用法比较简单，多使用几次就会使用了！文章主要参考网上！原谅很多天不跟博的我现在竟然这样水了这么一篇文章，哈哈！实在是忙！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/cb3.jpeg-1&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;真乃神器也，再复杂的 Json 都能给你解析出来，非常方便的获取 JSON 的内容，很强大！&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JSON" scheme="http://yoursite.com/tags/JSON/"/>
+    
+  </entry>
   
   <entry>
     <title>Google Guava 缓存实现接口的限流</title>
@@ -2058,39 +2137,6 @@
     
     
       <category term="AJAX" scheme="http://yoursite.com/tags/AJAX/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java.sql.SQLException Field &#39;id&#39; doesn&#39;t have a default value</title>
-    <link href="http://yoursite.com/2017/06/20/Java-error1/"/>
-    <id>http://yoursite.com/2017/06/20/Java-error1/</id>
-    <published>2017-06-20T07:10:47.405Z</published>
-    <updated>2017-06-20T07:15:22.728Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、错误描述</p>
-<p>在做一个电商网站项目时，使用 Mybatis + MySQL 时出现问题 <code>Caused by: java.sql.SQLException: Field &#39;id&#39; doesn&#39;t have a default value</code> ，网上很多人说是 <a href="https://my.oschina.net/boonya/blog/692232" target="_blank" rel="external">MyBatis 插入数据行 ID 没生成自增</a>。但是我尝试好久，没解决该问题。</p>
-<p>2、错误原因</p>
-<p>后来才发现是因为创建数据库时的建表语句中的 id 是主键的，但是在插入的过程中，没有给予数值，并且没有让 id 自增。</p>
-<p>3、解决办法</p>
-<p>修改数据库表中的id，让其自增（在插入的过程中，不插入id数据时）。</p>
-<p>（我是直接将整个数据库都导出来，然后在每个表的 id 后面加上一个 <code>auto_increment</code>）, 如下 ：<br><a id="more"></a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`d_user`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`password`</span> <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`zip`</span> <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`address`</span> <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`phone`</span> <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`email`</span> <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</div><div class="line">)</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、错误描述&lt;/p&gt;
-&lt;p&gt;在做一个电商网站项目时，使用 Mybatis + MySQL 时出现问题 &lt;code&gt;Caused by: java.sql.SQLException: Field &amp;#39;id&amp;#39; doesn&amp;#39;t have a default value&lt;/code&gt; ，网上很多人说是 &lt;a href=&quot;https://my.oschina.net/boonya/blog/692232&quot;&gt;MyBatis 插入数据行 ID 没生成自增&lt;/a&gt;。但是我尝试好久，没解决该问题。&lt;/p&gt;
-&lt;p&gt;2、错误原因&lt;/p&gt;
-&lt;p&gt;后来才发现是因为创建数据库时的建表语句中的 id 是主键的，但是在插入的过程中，没有给予数值，并且没有让 id 自增。&lt;/p&gt;
-&lt;p&gt;3、解决办法&lt;/p&gt;
-&lt;p&gt;修改数据库表中的id，让其自增（在插入的过程中，不插入id数据时）。&lt;/p&gt;
-&lt;p&gt;（我是直接将整个数据库都导出来，然后在每个表的 id 后面加上一个 &lt;code&gt;auto_increment&lt;/code&gt;）, 如下 ：&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
