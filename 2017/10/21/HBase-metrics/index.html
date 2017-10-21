@@ -14,14 +14,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Elasticsearch | Zhisheng的博客</title>
+  <title>HBase 集群监控 | Zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zhisheng的博客">
-<meta property="og:url" content="http://yoursite.com/tags/Elasticsearch/index.html">
+  <meta name="description" content="为什么需要监控？为了保证系统的稳定性，可靠性，可运维性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase 集群监控">
+<meta property="og:url" content="http://yoursite.com/2017/10/21/HBase-metrics/index.html">
 <meta property="og:site_name" content="Zhisheng的博客">
+<meta property="og:description" content="为什么需要监控？为了保证系统的稳定性，可靠性，可运维性。">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/cb8.jpg-1">
+<meta property="og:updated_time" content="2017-10-21T06:53:05.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhisheng的博客">
+<meta name="twitter:title" content="HBase 集群监控">
+<meta name="twitter:description" content="为什么需要监控？为了保证系统的稳定性，可靠性，可运维性。">
+<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/cb8.jpg-1">
   
     <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
   
@@ -180,99 +186,244 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-HBase-metrics" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/09/Elasticsearch-install/" class="archive-article-date">
-  	<time datetime="2017-09-09T03:56:42.374Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/Elasticsearch-install/">全文搜索引擎 Elasticsearch 集群搭建入门教程</a>
+    <h1 class="article-title" itemprop="name">
+      HBase 集群监控
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/21/HBase-metrics/" class="archive-article-date">
+  	<time datetime="2017-10-21T06:49:14.105Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+    <div id="toc-article" class="toc-article">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要监控？"><span class="toc-number">1.</span> <span class="toc-text">为什么需要监控？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何构建-HBase-集群监控系统？"><span class="toc-number">2.</span> <span class="toc-text">如何构建 HBase 集群监控系统？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HBase-集群监控指标"><span class="toc-number">3.</span> <span class="toc-text">HBase 集群监控指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OS-监控数据"><span class="toc-number">3.1.</span> <span class="toc-text">OS 监控数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM-监控数据"><span class="toc-number">3.2.</span> <span class="toc-text">JVM 监控数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Region-Servers-健康"><span class="toc-number">3.3.</span> <span class="toc-text">Region Servers 健康</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MemoryPool"><span class="toc-number">3.4.</span> <span class="toc-text">MemoryPool</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">5.</span> <span class="toc-text">最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐相关文章"><span class="toc-number">7.</span> <span class="toc-text">推荐相关文章</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+      
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ohfk1r827.bkt.clouddn.com/cb8.jpg-1" alt=""></p>
+<h3 id="为什么需要监控？"><a href="#为什么需要监控？" class="headerlink" title="为什么需要监控？"></a>为什么需要监控？</h3><p>为了保证系统的稳定性，可靠性，可运维性。<br><a id="more"></a></p>
+<ol>
+<li>掌控集群的核心性能指标，了解集群的性能表现。</li>
+<li>集群出现问题时及时报警，便于运维同学及时修复问题。</li>
+<li>集群重要指标值异常时进行预警，将问题扼杀在摇篮中，不用等集群真正不可用时才采取行动。</li>
+<li>当集群出现问题时，监控系统可以帮助我们更快的定位问题和解决问题</li>
+</ol>
+<h3 id="如何构建-HBase-集群监控系统？"><a href="#如何构建-HBase-集群监控系统？" class="headerlink" title="如何构建 HBase 集群监控系统？"></a>如何构建 HBase 集群监控系统？</h3><p>公司有自己的监控系统，我们所要做的就是将 HBase 中我们关心的指标项发送到监控系统去，问题就转换为我们开发，采集并返回哪些 HBase 集群监控指标项。</p>
+<h3 id="HBase-集群监控指标"><a href="#HBase-集群监控指标" class="headerlink" title="HBase 集群监控指标"></a>HBase 集群监控指标</h3><p>采集的监控数据主要包括以下几个方面：某台机器 OS 层面上的数据，例如 CPU、内存、磁盘、网络、load、网络流量等；某台 regionserver（或master）机器 jvm 的状态，例如关于线程的信息，GC 的次数和时间，内存使用状况，以及 ERROR、WARN、Fatal 事件出现的次数；regionserver（或 master）进程中的统计信息。</p>
+<p>可以通过以下地址获取 HBase 提供的 JMX 信息的 web 页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://your_master:60010/jmx  //所有的bean</div></pre></td></tr></table></figure>
+<p>JMX web 页面的数据格式是<code>json</code>格式，信息很多！</p>
+<h4 id="OS-监控数据"><a href="#OS-监控数据" class="headerlink" title="OS 监控数据"></a>OS 监控数据</h4><p>HBase 中对于 OS 的监控数据，主要是 OperatingSystem 的对象来进行的，如下就是我提取出来的 JSON 信息，</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"name"</span> : <span class="string">"java.lang:type=OperatingSystem"</span>,</div><div class="line">    <span class="attr">"modelerType"</span> : <span class="string">"com.sun.management.UnixOperatingSystem"</span>,</div><div class="line">    <span class="attr">"MaxFileDescriptorCount"</span> : <span class="number">1000000</span>,</div><div class="line">    <span class="attr">"OpenFileDescriptorCount"</span> : <span class="number">413</span>,</div><div class="line">    <span class="attr">"CommittedVirtualMemorySize"</span> : <span class="number">1892225024</span>,</div><div class="line">    <span class="attr">"FreePhysicalMemorySize"</span> : <span class="number">284946432</span>,</div><div class="line">    <span class="attr">"FreeSwapSpaceSize"</span> : <span class="number">535703552</span>,</div><div class="line">    <span class="attr">"ProcessCpuLoad"</span> : <span class="number">0.0016732901066722444</span>,</div><div class="line">    <span class="attr">"ProcessCpuTime"</span> : <span class="number">59306210000000</span>,</div><div class="line">    <span class="attr">"SystemCpuLoad"</span> : <span class="number">0.018197029910060655</span>,</div><div class="line">    <span class="attr">"TotalPhysicalMemorySize"</span> : <span class="number">16660848640</span>,</div><div class="line">    <span class="attr">"TotalSwapSpaceSize"</span> : <span class="number">536862720</span>,</div><div class="line">    <span class="attr">"AvailableProcessors"</span> : <span class="number">8</span>,</div><div class="line">    <span class="attr">"Arch"</span> : <span class="string">"amd64"</span>,</div><div class="line">    <span class="attr">"SystemLoadAverage"</span> : <span class="number">0.0</span>,</div><div class="line">    <span class="attr">"Name"</span> : <span class="string">"Linux"</span>,</div><div class="line">    <span class="attr">"Version"</span> : <span class="string">"2.6.32-431.11.7.el6.ucloud.x86_64"</span>,</div><div class="line">    <span class="attr">"ObjectName"</span> : <span class="string">"java.lang:type=OperatingSystem"</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>其中比较重要的指标有 <code>OpenFileDescriptorCount</code> ,  <code>FreePhysicalMemorySize</code> ,  <code>ProcessCpuLoad</code> , <code>SystemCpuLoad</code> ,  <code>AvailableProcessors</code> ,  <code>SystemLoadAverage</code></p>
+<h4 id="JVM-监控数据"><a href="#JVM-监控数据" class="headerlink" title="JVM 监控数据"></a>JVM 监控数据</h4><p>Hbase 中对于 JVM 的监控数据，主要是 JvmMetrics 的对象来进行的，如下就是我提取出来的 JSON 信息，</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"name"</span> : <span class="string">"Hadoop:service=HBase,name=JvmMetrics"</span>,</div><div class="line">    <span class="attr">"modelerType"</span> : <span class="string">"JvmMetrics"</span>,</div><div class="line">    <span class="attr">"tag.Context"</span> : <span class="string">"jvm"</span>,</div><div class="line">    <span class="attr">"tag.ProcessName"</span> : <span class="string">"Master"</span>,</div><div class="line">    <span class="attr">"tag.SessionId"</span> : <span class="string">""</span>,</div><div class="line">    <span class="attr">"tag.Hostname"</span> : <span class="string">"uhadoop-qrljqo-master2"</span>,</div><div class="line">    <span class="attr">"MemNonHeapUsedM"</span> : <span class="number">53.846107</span>,</div><div class="line">    <span class="attr">"MemNonHeapCommittedM"</span> : <span class="number">85.84375</span>,</div><div class="line">    <span class="attr">"MemNonHeapMaxM"</span> : <span class="number">130.0</span>,</div><div class="line">    <span class="attr">"MemHeapUsedM"</span> : <span class="number">79.05823</span>,</div><div class="line">    <span class="attr">"MemHeapCommittedM"</span> : <span class="number">240.125</span>,</div><div class="line">    <span class="attr">"MemHeapMaxM"</span> : <span class="number">989.875</span>,</div><div class="line">    <span class="attr">"MemMaxM"</span> : <span class="number">989.875</span>,</div><div class="line">    <span class="attr">"GcCountParNew"</span> : <span class="number">15190</span>,</div><div class="line">    <span class="attr">"GcTimeMillisParNew"</span> : <span class="number">72300</span>,</div><div class="line">    <span class="attr">"GcCountConcurrentMarkSweep"</span> : <span class="number">2</span>,</div><div class="line">    <span class="attr">"GcTimeMillisConcurrentMarkSweep"</span> : <span class="number">319</span>,</div><div class="line">    <span class="attr">"GcCount"</span> : <span class="number">15192</span>,</div><div class="line">    <span class="attr">"GcTimeMillis"</span> : <span class="number">72619</span>,</div><div class="line">    <span class="attr">"ThreadsNew"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"ThreadsRunnable"</span> : <span class="number">21</span>,</div><div class="line">    <span class="attr">"ThreadsBlocked"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"ThreadsWaiting"</span> : <span class="number">144</span>,</div><div class="line">    <span class="attr">"ThreadsTimedWaiting"</span> : <span class="number">18</span>,</div><div class="line">    <span class="attr">"ThreadsTerminated"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"LogFatal"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"LogError"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"LogWarn"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"LogInfo"</span> : <span class="number">0</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p> JvmMetrics 主要统计的信息包括：内存的使用状态信息；GC的统计信息；线程的统计信息；以及事件的统计信息。</p>
+<p>内存的统计信息主要是：JVM 当前已经使用的 NonHeapMemory 的大小、以及配置的 NonHeapMemory 的大小；JVM 当前已经使用的 HeapMemory 的大小、以及配置的 HeapMemory 的大小； JVM 运行时的可以使用的最大的内存的大小。</p>
+<p>GC 的统计较为简单，仅统计了进程在固定间隔内 GC 的次数和花费的总时间。</p>
+<p>线程的统计，主要是统计进程内当前线程的处于 NEW 、RUNNABLE、BLOCKED、WAITING、TIMED_WAITING、TERMINATED 这六种状态下的线程数量。</p>
+<p>对于事件的统计，主要统计固定时间间隔内的 Fatal、Error、Warn 以及 Info 的数量。(这块好像不怎么重要)</p>
+<h4 id="Region-Servers-健康"><a href="#Region-Servers-健康" class="headerlink" title="Region Servers 健康"></a>Region Servers 健康</h4><p>你也可以通过如下地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://your_master:60010/jmx?qry=Hadoop:service=HBase,name=Master,sub=Server</div></pre></td></tr></table></figure>
+<p>获得到 Region Servers 健康值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"name"</span> : <span class="string">"Hadoop:service=HBase,name=Master,sub=Server"</span>,</div><div class="line">    <span class="attr">"modelerType"</span> : <span class="string">"Master,sub=Server"</span>,</div><div class="line">    <span class="attr">"tag.liveRegionServers"</span> : <span class="string">"xxx"</span>,</div><div class="line">    <span class="attr">"tag.deadRegionServers"</span> : <span class="string">""</span>,</div><div class="line">    <span class="attr">"tag.zookeeperQuorum"</span> : <span class="string">"xxx"</span>,</div><div class="line">    <span class="attr">"tag.serverName"</span> : <span class="string">"xxx2,60000,1495683310213"</span>,</div><div class="line">    <span class="attr">"tag.clusterId"</span> : <span class="string">"e5e044a3-ef9f-48f7-ba63-637376f5fa90"</span>,</div><div class="line">    <span class="attr">"tag.isActiveMaster"</span> : <span class="string">"true"</span>,</div><div class="line">    <span class="attr">"tag.Context"</span> : <span class="string">"master"</span>,</div><div class="line">    <span class="attr">"tag.Hostname"</span> : <span class="string">"xxx"</span>,</div><div class="line">    <span class="attr">"masterActiveTime"</span> : <span class="number">1495683312239</span>,</div><div class="line">    <span class="attr">"masterStartTime"</span> : <span class="number">1495683310213</span>,</div><div class="line">    <span class="attr">"averageLoad"</span> : <span class="number">143.66666666666666</span>,</div><div class="line">    <span class="attr">"numRegionServers"</span> : <span class="number">3</span>,</div><div class="line">    <span class="attr">"numDeadRegionServers"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"clusterRequests"</span> : <span class="number">1297834323</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h4 id="MemoryPool"><a href="#MemoryPool" class="headerlink" title="MemoryPool"></a>MemoryPool</h4><p>从全部的 JSON 值中你会看到很多种 MemoryPool 值，比如 Par Eden Space 、CMS Perm Gen、Par Survivor Space、CMS Old Gen、Code Cache ，按需获取吧。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>任何一个服务的监控系统都是一个不断迭代，不断优化的过程，不可能一开始就做到最好。监控总是比问题发生来的更早一些，而每一次出问题，又进一步加强相应方面的监控，我们需要让监控系统从出问题时才报警到可能出现问题时就预警逐渐过渡，最终让监控系统成为我们保证系统稳定性的一个有力工具。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>监控指标有很多，但请按需获取 ! 转载文章请注明原出处，谢谢支持！  <a href="http://www.54tianzhisheng.cn/2017/10/21/HBase-metrics/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/10/21/HBase-metrics/</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>1、<a href="https://www.tuicool.com/articles/zQNrM3" target="_blank" rel="external">hbase性能监控（一）</a></p>
+<p>2、<a href="https://www.tuicool.com/articles/YbQbIj" target="_blank" rel="external">hbase性能监控（二）</a></p>
+<p>3、<a href="https://www.tuicool.com/articles/imArAb" target="_blank" rel="external">hbase性能监控（三）</a></p>
+<p>4、<a href="https://blog.bcmeng.com/post/hbase-monitor.html" target="_blank" rel="external">HBase 集群监控系统构建</a></p>
+<p>5、<a href="http://blog.csdn.net/englishsname/article/details/53883682" target="_blank" rel="external">hbase jmx常用监控指标</a></p>
+<h3 id="推荐相关文章"><a href="#推荐相关文章" class="headerlink" title="推荐相关文章"></a>推荐相关文章</h3><p>1、<a href="http://www.54tianzhisheng.cn/2017/10/18/ElasticSearch-nodes-metrics/" target="_blank" rel="external">ElasticSearch 单个节点监控</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2017/10/15/ElasticSearch-cluster-health-metrics/" target="_blank" rel="external">ElasticSearch 集群监控</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你支持我买服务器！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Elasticsearch</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aQZLiQAwEQP7/aTZiT3sBSlKzM5bTJ4IA3OlD0ZL68Yiv59/r/et/30nef769Ht+4MDAwLstIfi65wbN45Y8pomJgYNyAkYds8slqEFfvi4GBgZEE3yRq81jHwMDA6DF6MZ2Uvv81cDEwMC7ISKIwj9f3MZ38/hdrcQwMjAsyTg0GvvH6B+YbGBgYv4wxKTij7drRoebL9WBgYKxm9NpqeYmbLzTnRbU4BgbGIkY1RpNN26Ql1xyRYmBgrGYkG7s8miexm0fth9ViYGCsYyQFar51Kw8dB8NLDAyM+zB6MVcdcPa+m9wXAwPjDozq9i5vyZ0aNmBgYGCcbaLN2235MODDfAMDA2MpY9JKm28Qe0XshykHBgbGCkay0DyaJ422UfGMgYGxmlHdnOVHuybts2YJjYGBsZRRDdBqBFejufoom/8DGBgYl2L0lt47LpaUqdUQLwwJMDAwLsuYHLPIm2iTh1KuxTEwMFYzeke4kpjOx5/5YYuXkw0MDIx1jEmk9grRaiutHOsYGBjrGL2vVXl5OdormDEwMHYzei37SW+vV/oe6BpiYGBclvEsXvlBijwcq801DAyMuzF6xyOSkJ0sqIfHwMDYzUhCNh92vv/8qcAt7FsxMDAWMXqHvU6NB47NYzEwMDAGTbQ81vMDascCFwMDYxEjL1l7xyzyRt5oa4iBgXFZRrWIPdXcn0c2BgbGHRi9wUD1yEX19Ec1jjEwMJYy/gDyUZmvHT17/wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/07/Elasticsearch-analyzers/" class="archive-article-date">
-  	<time datetime="2017-09-07T01:50:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-07</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/07/Elasticsearch-analyzers/">Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a>
-    </h1>
+  
+    <a href="/2017/10/18/ElasticSearch-nodes-metrics/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ElasticSearch 单个节点监控</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Elasticsearch</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+  <section id="comments">
+<!--高速版，加载速度快，使用前需测试页面的兼容性-->
+<div id="SOHUCS" sid="HBase 集群监控"  style="padding: 0px 30px 0px 46px;"></div>
+<script>
+  (function(){
+    var appid = 'cysWCg9Ij',
+    conf = '7f51baf245f3217589bb3b4ba8d8c691';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+    window.SCS_NO_IFRAME = true;
+  })()
+</script>
+  </section>
   
-  
-    </div></section>
-  
-
-    
-
 
           </div>
         </div>
@@ -303,9 +454,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
