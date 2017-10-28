@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-28T07:50:08.534Z</updated>
+  <updated>2017-10-28T07:58:08.357Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/10/28/Data-Desensitization/"/>
     <id>http://yoursite.com/2017/10/28/Data-Desensitization/</id>
     <published>2017-10-28T07:46:00.673Z</published>
-    <updated>2017-10-28T07:50:08.534Z</updated>
+    <updated>2017-10-28T07:58:08.357Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/cb9.jpg-1" alt=""></p>
 <h3 id="什么是数据脱敏？"><a href="#什么是数据脱敏？" class="headerlink" title="什么是数据脱敏？"></a>什么是数据脱敏？</h3><p>百度百科是这样描述的：<br><a id="more"></a></p>
@@ -51,7 +51,7 @@
 <p>5、【地址】只显示到地区，不显示详细地址，比如：<code>上海徐汇区漕河泾开发区***</code></p>
 <p>6、【电子邮箱】 邮箱前缀仅显示第一个字母，前缀其他隐藏，用星号代替，@及后面的地址显示，比如：<code>d**@126.com</code></p>
 <p>7、【银行卡号】前六位，后四位，其他用星号隐藏每位1个星号，比如：<code>6222600**********1234</code></p>
-<p>8、【密码】密码的全部字符都用<em>代替，比如：`<strong>*</strong></em>`</p>
+<p>8、【密码】密码的全部字符都用<em>代替，比如：<strong><strong><em>*</em></strong></strong></em></p>
 <p>根据以上规则进行数据脱敏！</p>
 <p>具体思路目前是这样的：</p>
 <p>从原数据源查询到的生产数据 ——&gt; 数据脱敏 ——&gt; 更新到目标数据源。</p>
