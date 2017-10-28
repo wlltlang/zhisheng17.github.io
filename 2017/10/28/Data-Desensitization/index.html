@@ -15,46 +15,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>通过项目逐步深入了解Spring MVC（一） | Zhisheng的博客</title>
+  <title>小白谈数据脱敏 | Zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="相关阅读：本文档和项目代码地址：https://github.com/zhisheng17/springmvc
-
-了解 Spring：
-Spring 官网：http://spring.io/
-一个好的东西一般都会有一个好的文档解释说明，如果你英语还行，建议还是看官方文档。
-
-Spring MVC基础知识什么是Spring MVC？
-Spring MVC框架原理（掌握）
-​    前端控制器、处理器">
+  <meta name="description" content="什么是数据脱敏？百度百科是这样描述的：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="通过项目逐步深入了解Spring MVC（一）">
-<meta property="og:url" content="http://yoursite.com/2017/03/28/通过项目逐步深入了解Spring MVC（一）/index.html">
+<meta property="og:title" content="小白谈数据脱敏">
+<meta property="og:url" content="http://yoursite.com/2017/10/28/Data-Desensitization/index.html">
 <meta property="og:site_name" content="Zhisheng的博客">
-<meta property="og:description" content="相关阅读：本文档和项目代码地址：https://github.com/zhisheng17/springmvc
-
-了解 Spring：
-Spring 官网：http://spring.io/
-一个好的东西一般都会有一个好的文档解释说明，如果你英语还行，建议还是看官方文档。
-
-Spring MVC基础知识什么是Spring MVC？
-Spring MVC框架原理（掌握）
-​    前端控制器、处理器">
-<meta property="og:image" content="http://img.blog.csdn.net/20161219214558360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20161219214629187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20161219214646359?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-06-13T10:46:02.579Z">
+<meta property="og:description" content="什么是数据脱敏？百度百科是这样描述的：">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/cb9.jpg-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/ticket1.jpg-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/ticket2.jpg-1">
+<meta property="og:updated_time" content="2017-10-28T07:50:08.534Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="通过项目逐步深入了解Spring MVC（一）">
-<meta name="twitter:description" content="相关阅读：本文档和项目代码地址：https://github.com/zhisheng17/springmvc
-
-了解 Spring：
-Spring 官网：http://spring.io/
-一个好的东西一般都会有一个好的文档解释说明，如果你英语还行，建议还是看官方文档。
-
-Spring MVC基础知识什么是Spring MVC？
-Spring MVC框架原理（掌握）
-​    前端控制器、处理器">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20161219214558360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="小白谈数据脱敏">
+<meta name="twitter:description" content="什么是数据脱敏？百度百科是这样描述的：">
+<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/cb9.jpg-1">
   
     <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
   
@@ -213,20 +189,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-通过项目逐步深入了解Spring MVC（一）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Data-Desensitization" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      通过项目逐步深入了解Spring MVC（一）
+      小白谈数据脱敏
     </h1>
   
 
         
-        <a href="/2017/03/28/通过项目逐步深入了解Spring MVC（一）/" class="archive-article-date">
-  	<time datetime="2017-03-28T10:55:16.943Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-28</time>
+        <a href="/2017/10/28/Data-Desensitization/" class="archive-article-date">
+  	<time datetime="2017-10-28T07:46:00.673Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-28</time>
 </a>
         
       </header>
@@ -241,7 +217,7 @@ var _hmt = _hmt || [];
     <div id="toc-article" class="toc-article">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关阅读："><span class="toc-number">1.</span> <span class="toc-text">相关阅读：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-MVC基础知识"><span class="toc-number"></span> <span class="toc-text">Spring MVC基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-MVC高级应用"><span class="toc-number"></span> <span class="toc-text">Spring MVC高级应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-MVC-框架"><span class="toc-number"></span> <span class="toc-text">Spring MVC 框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-MVC？"><span class="toc-number">1.</span> <span class="toc-text">什么是Spring MVC？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-MVC"><span class="toc-number">2.</span> <span class="toc-text">Web MVC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-MVC-框架-1"><span class="toc-number">3.</span> <span class="toc-text">Spring MVC 框架</span></a></li></ol>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是数据脱敏？"><span class="toc-number">1.</span> <span class="toc-text">什么是数据脱敏？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生活中的常见例子"><span class="toc-number">2.</span> <span class="toc-text">生活中的常见例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#敏感数据梳理"><span class="toc-number">3.</span> <span class="toc-text">敏感数据梳理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#确定脱敏规则"><span class="toc-number">4.</span> <span class="toc-text">确定脱敏规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脱敏工具代码"><span class="toc-number">5.</span> <span class="toc-text">脱敏工具代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">6.</span> <span class="toc-text">最后</span></a></li></ol>
          </div>
    <script type="text/javascript">
     function showToc(){
@@ -262,74 +238,43 @@ var _hmt = _hmt || [];
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="相关阅读："><a href="#相关阅读：" class="headerlink" title="相关阅读："></a>相关阅读：</h3><p>本文档和项目代码地址：<a href="https://github.com/zhisheng17/springmvc" target="_blank" rel="external">https://github.com/zhisheng17/springmvc</a></p>
-<hr>
-<p>了解 Spring：</p>
-<p>Spring 官网：<a href="http://spring.io/" target="_blank" rel="external">http://spring.io/</a></p>
-<p>一个好的东西一般都会有一个好的文档解释说明，如果你英语还行，建议还是看官方文档。</p>
-<hr>
-<h2 id="Spring-MVC基础知识"><a href="#Spring-MVC基础知识" class="headerlink" title="Spring MVC基础知识"></a>Spring MVC基础知识</h2><p>什么是Spring MVC？</p>
-<p>Spring MVC框架原理（掌握）</p>
-<p>​    前端控制器、处理器映射器、处理器适配器、试图解析器<br><a id="more"></a><br>Spring MVC 入门程序</p>
-<p>​    目的：对前端控制器、处理器映射器、处理器适配器、试图解析器学习</p>
-<p>​    非注解的处理器映射器、处理器适配器</p>
-<p>​    注解的处理器映射器、处理器适配器（掌握）</p>
-<p>Spring MVC 和 Mybatis 整合（掌握）</p>
-<p>Spring MVC 注解开发：（掌握）</p>
-<p>​    常用的注解学习</p>
-<p>​    参数绑定（简单类型，pojo类型、集合类型）</p>
-<p>​    自定义的参数绑定（掌握）</p>
-<p>Spring MVC 和 Struts2区别</p>
-<h2 id="Spring-MVC高级应用"><a href="#Spring-MVC高级应用" class="headerlink" title="Spring MVC高级应用"></a>Spring MVC高级应用</h2><p>参数绑定（集合类型）</p>
-<p>数据回显</p>
-<p>上传图片</p>
-<p>json 数据交互</p>
-<p>RESTful 支持</p>
-<p>拦截器</p>
-<hr>
-<h2 id="Spring-MVC-框架"><a href="#Spring-MVC-框架" class="headerlink" title="Spring MVC 框架"></a>Spring MVC 框架</h2><h3 id="什么是Spring-MVC？"><a href="#什么是Spring-MVC？" class="headerlink" title="什么是Spring MVC？"></a>什么是Spring MVC？</h3><p>springmvc是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合。<br>springmvc是一个基于mvc的web框架。</p>
-<p><img src="http://img.blog.csdn.net/20161219214558360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="Web-MVC"><a href="#Web-MVC" class="headerlink" title="Web MVC"></a>Web MVC</h3><p>MVC 设计模式在  <strong>B/S</strong> 系统下应用：</p>
-<p><img src="http://img.blog.csdn.net/20161219214629187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>1、  用户发起request请求至控制器(Controller)</p>
-<p>控制接收用户请求的数据，委托给模型进行处理</p>
-<p>2、  控制器通过模型(Model)处理数据并得到处理结果</p>
-<p>模型通常是指业务逻辑</p>
-<p>3、  模型处理结果返回给控制器</p>
-<p>4、  控制器将模型数据在视图(View)中展示</p>
-<p>web中模型无法将数据直接在视图上显示，需要通过控制器完成。如果在C/S应用中模型是可以将数据在视图中展示的。</p>
-<p>5、  控制器将视图response响应给用户</p>
-<p>通过视图展示给用户要的数据或处理结果。</p>
-<h3 id="Spring-MVC-框架-1"><a href="#Spring-MVC-框架-1" class="headerlink" title="Spring MVC 框架"></a>Spring MVC 框架</h3><p><img src="http://img.blog.csdn.net/20161219214646359?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>第一步：发起请求到前端控制器(DispatcherServlet)</p>
-<p>第二步：前端控制器请求HandlerMapping查找 Handler</p>
-<p>可以根据xml配置、注解进行查找</p>
-<p>第三步：处理器映射器HandlerMapping向前端控制器返回Handler</p>
-<p>第四步：前端控制器调用处理器适配器去执行Handler</p>
-<p>第五步：处理器适配器去执行Handler</p>
-<p>第六步：Handler执行完成给适配器返回ModelAndView</p>
-<p>第七步：处理器适配器向前端控制器返回ModelAndView</p>
-<p>ModelAndView是springmvc框架的一个底层对象，包括Model和view</p>
-<p>第八步：前端控制器请求视图解析器去进行视图解析</p>
-<p>根据逻辑视图名解析成真正的视图(jsp)</p>
-<p>第九步：视图解析器向前端控制器返回View</p>
-<p>第十步：前端控制器进行视图渲染</p>
-<p>视图渲染将模型数据(在ModelAndView对象中)填充到request域</p>
-<p>第十一步：前端控制器向用户响应结果</p>
-<p><strong>组件</strong>：</p>
-<p>1、前端控制器DispatcherServlet（不需要程序员开发）</p>
-<p>作用接收请求，响应结果，相当于转发器，中央处理器。</p>
-<p>有了DispatcherServlet减少了其它组件之间的耦合度。</p>
-<p>2、处理器映射器HandlerMapping(不需要程序员开发)</p>
-<p>作用：根据请求的url查找Handler</p>
-<p>3、处理器适配器HandlerAdapter</p>
-<p>作用：按照特定规则（HandlerAdapter要求的规则）去执行Handler</p>
-<p>4、处理器Handler(需要程序员开发)</p>
-<p>注意：编写Handler时按照HandlerAdapter的要求去做，这样适配器才可以去正确执行Handler</p>
-<p>5、视图解析器View resolver(不需要程序员开发)</p>
-<p>作用：进行视图解析，根据逻辑视图名解析成真正的视图（view）</p>
-<p>6、视图View(需要程序员开发jsp)</p>
-<p>View是一个接口，实现类支持不同的View类型（jsp、freemarker、pdf…）</p>
+        <p><img src="http://ohfk1r827.bkt.clouddn.com/cb9.jpg-1" alt=""></p>
+<h3 id="什么是数据脱敏？"><a href="#什么是数据脱敏？" class="headerlink" title="什么是数据脱敏？"></a>什么是数据脱敏？</h3><p>百度百科是这样描述的：<br><a id="more"></a></p>
+<blockquote>
+<p>数据脱敏是指对某些敏感信息通过脱敏规则进行数据的变形，实现敏感隐私数据的可靠保护。在涉及客户安全数据或者一些商业性敏感数据的情况下，在不违反系统规则条件下，对真实数据进行改造并提供测试使用，如身份证号、手机号、卡号、客户姓名、客户地址、等个人敏感信息都需要通过脱敏规则进行数据的变形，实现敏感隐私数据的可靠保护。这样就可以在开发、测试和其他非生产环境以及外包环境中可以安全的使用脱敏后的真实数据集。</p>
+</blockquote>
+<h3 id="生活中的常见例子"><a href="#生活中的常见例子" class="headerlink" title="生活中的常见例子"></a>生活中的常见例子</h3><p>1、火车票：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/ticket1.jpg-1" alt=""></p>
+<p>2、淘宝网页上的收获地址信息：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/ticket2.jpg-1" alt=""></p>
+<h3 id="敏感数据梳理"><a href="#敏感数据梳理" class="headerlink" title="敏感数据梳理"></a>敏感数据梳理</h3><p>在进行数据脱敏之前我们应该要确定公司的哪些数据（哪些表、哪些字段）要作为脱敏的目标，下面从用户、公司、卖家反面分析：</p>
+<p>1、用户：名字、手机号码、身份证号码、固定电话、收货地址、电子邮箱、银行卡号、密码等</p>
+<p>2、卖家：名字、手机号码、身份证号码、固定电话等</p>
+<p>3、公司：交易金额、优惠券码、充值码等</p>
+<h3 id="确定脱敏规则"><a href="#确定脱敏规则" class="headerlink" title="确定脱敏规则"></a>确定脱敏规则</h3><p>确定好了公司的哪些数据要作为脱敏目标后，我们就需要制定脱敏的规则（具体的实施方法）。</p>
+<p>常见方法：</p>
+<p>1、替换：如统一将女性用户名替换为F，这种方法更像“障眼法”，对内部人员可以完全保持信息完整性，但易破解。</p>
+<p>2、重排：序号12345 重排为 54321，按照一定的顺序进行打乱，很像“替换”， 可以在需要时方便还原信息，但同样易破解。</p>
+<p>3、加密：编号 12345 加密为 23456，安全程度取决于采用哪种加密算法，一般根据实际情况而定。</p>
+<p>4、截断：13811001111 截断为 138，舍弃必要信息来保证数据的模糊性，是比较常用的脱敏方法，但往往对生产不够友好。（丢失字段的长度）</p>
+<p>5、掩码: 123456 -&gt; 1xxxx6，保留了部分信息，并且保证了信息的长度不变性，对信息持有者更易辨别， 如火车票上得身份信息。（常用方法）</p>
+<p>6、日期偏移取整：20130520 12:30:45 -&gt; 20130520 12:00:00，舍弃精度来保证原始数据的安全性，一般此种方法可以保护数据的时间分布密度。</p>
+<p>目前我的脱敏规则想法是：</p>
+<p>1、【中文姓名】只显示第一个汉字，其他隐藏为2个星号，比如：<code>李**</code></p>
+<p>2、【身份证号】显示最后四位，其他隐藏。共计18位或者15位，比如：<code>*************1234</code></p>
+<p>3、【固定电话】 显示后四位，其他隐藏，比如：<code>*******3241</code></p>
+<p>4、【手机号码】前三位，后四位，其他隐藏，比如：<code>135****6810</code></p>
+<p>5、【地址】只显示到地区，不显示详细地址，比如：<code>上海徐汇区漕河泾开发区***</code></p>
+<p>6、【电子邮箱】 邮箱前缀仅显示第一个字母，前缀其他隐藏，用星号代替，@及后面的地址显示，比如：<code>d**@126.com</code></p>
+<p>7、【银行卡号】前六位，后四位，其他用星号隐藏每位1个星号，比如：<code>6222600**********1234</code></p>
+<p>8、【密码】密码的全部字符都用<em>代替，比如：`<strong>*</strong></em>`</p>
+<p>根据以上规则进行数据脱敏！</p>
+<p>具体思路目前是这样的：</p>
+<p>从原数据源查询到的生产数据 ——&gt; 数据脱敏 ——&gt; 更新到目标数据源。</p>
+<p>原数据源、目标数据源、需要脱敏的表、字段等都放在配置文件中，做到可扩展性！</p>
+<h3 id="脱敏工具代码"><a href="#脱敏工具代码" class="headerlink" title="脱敏工具代码"></a>脱敏工具代码</h3><p>根据以上规则已经写好了一份简单的脱敏规则工具类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 数据脱敏工具类</div><div class="line"> * Created by zhisheng_tian on 2017/10/25.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DesensitizedUtils</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【中文姓名】只显示第一个汉字，其他隐藏为2个星号，比如：李**</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> fullName</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">chineseName</span><span class="params">(String fullName)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(fullName)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        String name = StringUtils.left(fullName, <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> StringUtils.rightPad(name, StringUtils.length(fullName), <span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【身份证号】显示最后四位，其他隐藏。共计18位或者15位，比如：*************1234</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> id</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">idCardNum</span><span class="params">(String id)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(id)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        String num = StringUtils.right(id, <span class="number">4</span>);</div><div class="line">        <span class="keyword">return</span> StringUtils.leftPad(num, StringUtils.length(id), <span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【固定电话】 显示后四位，其他隐藏，比如：*******3241</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> num</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">fixedPhone</span><span class="params">(String num)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(num)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> StringUtils.leftPad(StringUtils.right(num, <span class="number">4</span>), StringUtils.length(num), <span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【手机号码】前三位，后四位，其他隐藏，比如：135****6810</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> num</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">mobilePhone</span><span class="params">(String num)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(num)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> StringUtils.left(num, <span class="number">3</span>).concat(StringUtils.removeStart(StringUtils.leftPad(StringUtils.right(num, <span class="number">4</span>), StringUtils.length(num), <span class="string">"*"</span>), <span class="string">"***"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【地址】只显示到地区，不显示详细地址，比如：上海徐汇区漕河泾开发区***</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> address</div><div class="line">     * <span class="doctag">@param</span> sensitiveSize 敏感信息长度</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">address</span><span class="params">(String address, <span class="keyword">int</span> sensitiveSize)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(address)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> length = StringUtils.length(address);</div><div class="line">        <span class="keyword">return</span> StringUtils.rightPad(StringUtils.left(address, length - sensitiveSize), length, <span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【电子邮箱】 邮箱前缀仅显示第一个字母，前缀其他隐藏，用星号代替，@及后面的地址显示，比如：d**@126.com</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> email</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">email</span><span class="params">(String email)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(email)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> index = StringUtils.indexOf(email, <span class="string">"@"</span>);</div><div class="line">        <span class="keyword">if</span> (index &lt;= <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> email;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> StringUtils.rightPad(StringUtils.left(email, <span class="number">1</span>), index, <span class="string">"*"</span>).concat(StringUtils.mid(email, index, StringUtils.length(email)));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【银行卡号】前六位，后四位，其他用星号隐藏每位1个星号，比如：6222600**********1234</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> cardNum</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">bankCard</span><span class="params">(String cardNum)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(cardNum)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> StringUtils.left(cardNum, <span class="number">6</span>).concat(StringUtils.removeStart(StringUtils.leftPad(StringUtils.right(cardNum, <span class="number">4</span>), StringUtils.length(cardNum), <span class="string">"*"</span>), <span class="string">"******"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 【密码】密码的全部字符都用*代替，比如：******</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> password</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">password</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (StringUtils.isBlank(password)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        String pwd = StringUtils.left(password, <span class="number">0</span>);</div><div class="line">        <span class="keyword">return</span> StringUtils.rightPad(pwd, StringUtils.length(password), <span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>转载请注明地址：<a href="http://www.54tianzhisheng.cn/2017/10/28/Data-Desensitization/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/10/28/Data-Desensitization/</a></p>
 
       
 
@@ -374,11 +319,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spring MVC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -434,7 +375,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3awU7DMBAE0P7/T4PECQmSzqztUqSXU0XbxC9I8XZ2H4/4+Pg6vr++On5+/ud5rr519cn7c2448PDw8EZLb5eb/+We0d7QfM14eHh4p3ntZtA+rJOztbz7b+Hh4eG9Ay9/6O/dNvDw8PD+Ly8pYa8Wcb/EXcEEHh4e3it5SRiRFND5TWk3nuNZCx4eHl7Mm0UJf/v6eH8PDw8Pb9RVzx/KKxHwynmerBYPDw/vAC+PXNsL7H1ur7TE8PDw8M7xVkLbGWw2oNDGx3h4eHh7eXk5m7ej8iihbWvlUS8eHh7eaV5e7O4Kf9dT5yJrwcPDw9vKmz2CkyBjduNm1y3+AXh4eHjLvHwpeSO/BcyaYdEmhIeHh3eY15bRKwFEG9rm4fJlPo2Hh4e3ideW13nB3bbK2mBi+IsBDw8Pb5mXbwYrzao2yNgWBOPh4eEd4LXF7mw7aR/o7eZR5NN4eHh4y7x8JDR5dwbLx2HbTQUPDw/vBK99lOfZRhvR5s2zZKO6zKrx8PDwlnntT/28YZZsA7OIttiW8PDw8I7x2sfxUoFbbjx5sPvLt/Dw8PAO8/Im1nASYRTItltC9FsBDw8Pb4GXF7XtEtvBrDauzQMOPDw8vNfwVoYJ8rbWrFCelfh4eHh4u3h5234Wv842jHxDerIl4OHh4R3j5T/72+GApODOB7bq9hseHh7eAd7skrMtZDgRFscQj113FA8PD+/2bCtl7srt2PVuEUbg4eHhHeC1BetKMZ2cob3uk8kIPDw8vE282ZhUO1jQNrRWRgSGSDw8PLyStz59cP+wboOGvCEXbQx4eHh4x3j50FUeAc8y1TaHxsPDw3tnXv7ursGp2drw8PDw3o23qwSfXSUfX8DDw8M7zcubXu1f2lvWluxPggw8PDy8A7xZA6wNW9vodjgEMDvw8PDw0uMTMGnkKTBcEX0AAAAASUVORK5CYII=" alt="微信分享二维码">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3awW7rMAwEwP7/T7vXAg92dym/ApFGp8JJFE0OLCny6yte14/188ns/f+++vz8tYWBgfGxjOtx5e+52/luh+ed6+/FwMA4gJEcInk1Qba7JTtgYGBgPH9xsk8erDEwMDDWGUky91zKJmAMDAyMWRH7HGqfL9He/ckwMDBOY+S37n//93/pb2BgYHwU4ypXfsWftySv5YWBgbE3Iw9w7dHfCuL5MAcGBsYJjGRI663gmJTK9aAYBgbG1owkdM5Sw5WrtByJgYGxN6M9XN4SaNuWSfp4+yoGBsZhjDZ9zENnnnTmCSsGBsYJjJVRiXz0YZZ0LtXiGBgYmzLaL25D8CyM5j8xBgbGroz2Er89bjty0f4bwMDAOIfRHjdP/tbxRfmKgYFxDCMPee1F26yIjXqwGBgYxzNmqV57xLaQLlqYGBgYWzDyYYiVYJo0SofJKAYGxtaM2XjW7CotaVUm5/llQAQDA+MARts+XL+km53h9ofDwMDYlNFuN0v7Vtqc0XMMDIwDGLOQmhei7RGTgIuBgYHxnKK9e5WWtxluP4WBgbEp4ypXHkzzYJ1/9jbgYmBgbM1YT/La4nY2orHeEMXAwPh0xlvjp28VsXVPAwMD4xhGO9aQNxpnw6ntaTEwMDBmjLoNufAcAwMDox38ysvdtqz9pYWJgYGxNSMpYmcJXNJmWG+CYmBg7M2YlY5vDXutJIUYGBgHML4Bx8jbGR4ltGYAAAAASUVORK5CYII=" alt="微信分享二维码">
     </div>
 </div>
 
@@ -448,18 +389,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/03/28/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/28/Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑</div>
+    <a href="/2017/10/21/HBase-metrics/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HBase 集群监控</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -478,7 +410,7 @@ var _hmt = _hmt || [];
 
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="通过项目逐步深入了解Spring MVC（一）"  style="padding: 0px 30px 0px 46px;"></div>
+<div id="SOHUCS" sid="小白谈数据脱敏"  style="padding: 0px 30px 0px 46px;"></div>
 <script>
   (function(){
     var appid = 'cysWCg9Ij',
