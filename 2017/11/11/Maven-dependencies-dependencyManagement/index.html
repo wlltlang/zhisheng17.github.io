@@ -15,27 +15,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>程序访问文件的几种方式 | Zhisheng的博客</title>
+  <title>Maven 中 dependencies 与 dependencyManagement 的区别 | Zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IO程序访问文件的几种方式
-读取和写入文件 I/O 操作都调用操作系统提供的接口。因为磁盘设备是由操作系统管理的，应用程序要访问物理设备只能通过系统调用的方式来工作。读和写分别对应 read() 和 write() 两个系统调用。而只要是系统调用就可能存在内核空间地址和用户空间地址切换的问题，这也是为什么操作系统为了保护系统本身的运行安全而将内核程序运行使用的内存空间和用户程序运行的内存空间进行隔">
-<meta property="og:type" content="article">
-<meta property="og:title" content="程序访问文件的几种方式">
-<meta property="og:url" content="http://yoursite.com/2017/03/28/程序访问文件的几种方式/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Maven 中 dependencies 与 dependencyManagement 的区别">
+<meta property="og:url" content="http://yoursite.com/2017/11/11/Maven-dependencies-dependencyManagement/index.html">
 <meta property="og:site_name" content="Zhisheng的博客">
-<meta property="og:description" content="IO程序访问文件的几种方式
-读取和写入文件 I/O 操作都调用操作系统提供的接口。因为磁盘设备是由操作系统管理的，应用程序要访问物理设备只能通过系统调用的方式来工作。读和写分别对应 read() 和 write() 两个系统调用。而只要是系统调用就可能存在内核空间地址和用户空间地址切换的问题，这也是为什么操作系统为了保护系统本身的运行安全而将内核程序运行使用的内存空间和用户程序运行的内存空间进行隔">
-<meta property="og:image" content="http://img.blog.csdn.net/20170204143150730?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170204143221731?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170204143251908?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170204143307940?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170204143323377?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-06-13T10:44:24.438Z">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/c20.jpeg-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/projects.jpg-1">
+<meta property="og:updated_time" content="2017-11-11T08:46:53.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="程序访问文件的几种方式">
-<meta name="twitter:description" content="IO程序访问文件的几种方式
-读取和写入文件 I/O 操作都调用操作系统提供的接口。因为磁盘设备是由操作系统管理的，应用程序要访问物理设备只能通过系统调用的方式来工作。读和写分别对应 read() 和 write() 两个系统调用。而只要是系统调用就可能存在内核空间地址和用户空间地址切换的问题，这也是为什么操作系统为了保护系统本身的运行安全而将内核程序运行使用的内存空间和用户程序运行的内存空间进行隔">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170204143150730?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="Maven 中 dependencies 与 dependencyManagement 的区别">
+<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/c20.jpeg-1">
   
     <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
   
@@ -194,20 +185,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-程序访问文件的几种方式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Maven-dependencies-dependencyManagement" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      程序访问文件的几种方式
+      Maven 中 dependencies 与 dependencyManagement 的区别
     </h1>
   
 
         
-        <a href="/2017/03/28/程序访问文件的几种方式/" class="archive-article-date">
-  	<time datetime="2017-03-28T10:47:04.592Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-28</time>
+        <a href="/2017/11/11/Maven-dependencies-dependencyManagement/" class="archive-article-date">
+  	<time datetime="2017-11-11T08:44:56.946Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-11</time>
 </a>
         
       </header>
@@ -222,7 +213,7 @@ var _hmt = _hmt || [];
     <div id="toc-article" class="toc-article">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IO"><span class="toc-number">1.</span> <span class="toc-text">IO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序访问文件的几种方式"><span class="toc-number">1.1.</span> <span class="toc-text">程序访问文件的几种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-标准访问文件的方式"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 标准访问文件的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-直接-I-O-的方式"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 直接 I/O 的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-同步访问文件的方式"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 同步访问文件的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-异步访问文件的方式"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. 异步访问文件的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-内存映射的方式"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. 内存映射的方式</span></a></li></ol></li></ol></li></ol>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dependencyManagement"><span class="toc-number">2.</span> <span class="toc-text">dependencyManagement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dependencies"><span class="toc-number">3.</span> <span class="toc-text">dependencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-number">4.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除多模块插件配置重复"><span class="toc-number">5.</span> <span class="toc-text">消除多模块插件配置重复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">6.</span> <span class="toc-text">最后</span></a></li></ol>
          </div>
    <script type="text/javascript">
     function showToc(){
@@ -243,30 +234,33 @@ var _hmt = _hmt || [];
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><h3 id="程序访问文件的几种方式"><a href="#程序访问文件的几种方式" class="headerlink" title="程序访问文件的几种方式"></a>程序访问文件的几种方式</h3><blockquote>
-<p>读取和写入文件 I/O 操作都调用操作系统提供的接口。因为磁盘设备是由操作系统管理的，应用程序要访问物理设备只能通过系统调用的方式来工作。读和写分别对应 read() 和 write() 两个系统调用。而只要是系统调用就可能存在内核空间地址和用户空间地址切换的问题，这也是为什么操作系统为了保护系统本身的运行安全而将内核程序运行使用的内存空间和用户程序运行的内存空间进行隔离造成的。虽然这样可以保证内核程序运行的安全性，但是也存在数据可能需要从内核空间向用户空间复制的问题。</p>
-<p>如果遇到非常耗时的操作，如磁盘 I/O， 数据从磁盘复制到内核空间，然后又从内核空间复制到用户空间，将会非常缓慢。这时操作系统为了加速 I/O 访问，在内核空间使用缓存机制，也就是将从磁盘读取的文件按照一定的组织方式进行缓存，如果用户程序访问的是同一段磁盘地址的空间数据，那么操作系统将从内核缓存中直接取出返回给用户程序，这样就可以减小 I/O 的响应时间。</p>
-</blockquote>
+        <p><img src="http://ohfk1r827.bkt.clouddn.com/c20.jpeg-1" alt=""></p>
 <a id="more"></a>
-<h4 id="1-标准访问文件的方式"><a href="#1-标准访问文件的方式" class="headerlink" title="1. 标准访问文件的方式"></a>1. 标准访问文件的方式</h4><p>标准访问文件的方式就是当应用程序调用 read() 接口时，操作系统检查在内核的高速缓存中有没有需要的数据，如果已经缓存了，那么就直接从缓存中返回，如果没有，则从磁盘中读取，然后缓存在操作系统的缓存中。</p>
-<p>写入的方式是，用户的应用程序调用 write() 接口将数据从用户地址空间复制到内核地址空间的缓存中。这时对用户程序来说写操作就已经完成了，至于什么时候再写到磁盘中由操作系统决定，除非显示地调用 sync 同步命令。</p>
-<p>标准访问文件的方式如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170204143150730?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="2-直接-I-O-的方式"><a href="#2-直接-I-O-的方式" class="headerlink" title="2. 直接 I/O 的方式"></a>2. 直接 I/O 的方式</h4><p>直接 I/O 方式就是应用程序直接访问磁盘数据，而不经过操作系统内核数据缓冲区，这样做的目的就是减少一次从内核缓冲区到用户程序缓存的数据复制。此种方式通常是在对数据的缓存管理由应用程序实现的数据库管理系统中。如在数据库管理系统中，系统明确的知道应该缓存哪些数据，应该失效哪些数据，还可以对一些热点的数据进行预加载，提前将热点数据加载到内存，可以加速数据的访问效率。在这些情况下，如果是由操作系统进行缓存，则很难做到，因为操作系统并不知道哪些是热点数据，哪些数据是访问一次后再也不会访问了，操作系统就是简单的缓存最近一次从磁盘读取的数据。</p>
-<p>但是直接 I/O 也有负面的影响，如果访问的数据不再应用程序缓存中，则每次数据的加载都需要从磁盘读取，样加载的话速度非常的慢，通常是直接 I/O 与 异步 I/O 结合使用，会得到较好的性能。</p>
-<p>直接 I/O 的方式如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170204143221731?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="3-同步访问文件的方式"><a href="#3-同步访问文件的方式" class="headerlink" title="3. 同步访问文件的方式"></a>3. 同步访问文件的方式</h4><p>同步访问文件的方式就是数据的读取和写入都是同步操作的，它与标准访问文件的方式不同的是，只有当数据被成功写到磁盘时才返回给应用程序成功的标志。</p>
-<p>这种访问文件的方式性能比较差，只有在一些数据安全性要求比较高的场景中才会使用，而且通常这种方式的硬件都是定制的。</p>
-<p>同步访问文件的方式如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170204143251908?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="4-异步访问文件的方式"><a href="#4-异步访问文件的方式" class="headerlink" title="4. 异步访问文件的方式"></a>4. 异步访问文件的方式</h4><p>异步访问文件的方式就是当访问数据的线程发出请求之后，线程会接着去处理其他事情，而不是阻塞等待，当请求的数据返回后继续处理下面的操作。这种方式可以明显的提高应用程序的效率，但是不会改变访问文件的效率。</p>
-<p>异步访问文件的方式如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170204143307940?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="5-内存映射的方式"><a href="#5-内存映射的方式" class="headerlink" title="5. 内存映射的方式"></a>5. 内存映射的方式</h4><p>内存映射的方式是指操作系统将内存中的某一块区域与磁盘中的文件关联起来，当要访问内存中的一段数据时，转换为访问文件的某一段数据。这种方式的目的同样是减少数据从内核空间缓存到用户空间缓存的数据复制操作，因为这两个空间的数据是共享的。</p>
-<p>内存映射的方式如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170204143323377?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>注：以上参考书籍《深入分析Java Web 技术内幕修订版》许令波，更多精彩知识还请看原书。</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>这段时间项目中遇到过了一些 Jar 包冲突的问题，很多是由于我们项目模块很多的时候，用 Maven 管理不当导致的冲突问题，本文就这个问题参考网上的资料，于是总结下 Maven 中 dependencies 与 dependencyManagement 的区别。</p>
+<p>假设项目结构如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/projects.jpg-1" alt=""></p>
+<p>parent 为父模块，抽象出来管理子项目的公共依赖，为了项目的正确运行，必须让所有的子项目使用依赖项的统一版本，必须确保应用的各个项目的依赖项和版本一致，才能保证测试的和发布的是相同的结果。</p>
+<h3 id="dependencyManagement"><a href="#dependencyManagement" class="headerlink" title="dependencyManagement"></a>dependencyManagement</h3><p>在项目的 parent 层，可以通过  dependencyManagement 元素来管理 jar 包的版本，让子项目中引用一个依赖而不用显示的列出版本号。</p>
+<p>parent 中 pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version.framework</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version.framework</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">javaee-api.version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">javaee-api.version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>framework-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.framework&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javaee-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;javaee-api.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>extendion 中的 pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../parent/pom.xml<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--依赖关系--&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javaee-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>framework-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这样做的好处：统一管理项目的版本号，确保应用的各个项目的依赖和版本一致，才能保证测试的和发布的是相同的成果，因此，在顶层 pom 中定义共同的依赖关系。同时可以避免在每个使用的子项目中都声明一个版本号，这样想升级或者切换到另一个版本时，只需要在父类容器里更新，不需要任何一个子项目的修改；如果某个子项目需要另外一个版本号时，只需要在 dependencies 中声明一个版本号即可。子类就会使用子类声明的版本号，不继承于父类版本号。</p>
+<p>我们知道 Maven 的继承和 Java 的继承一样，是无法实现多重继承的，如果10个、20个甚至更多模块继承自同一个模块，那么按照我们之前的做法，这个父模块的 dependencyManagement 会包含大量的依赖。如果你想把这些依赖分类以更清晰的管理，那就不可能了，import scope 依赖能解决这个问题。你可以把 dependencyManagement 放到单独的专门用来管理依赖的 POM 中，然后在需要使用依赖的模块中通过 import scope 依赖，就可以引入dependencyManagement。例如可以写这样一个用于依赖管理的 POM：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng.sample<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sample-dependency-infrastructure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.8.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后就可以通过非继承的方式来引入这段依赖管理配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng.sample<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>sample-dependency-infrastructure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这样，父模块的 POM 就会非常干净，由专门的 packaging 为 pom 的 POM 来管理依赖，也契合的面向对象设计中的单一职责原则。此外，我们还能够创建多个这样的依赖管理 POM，以更细化的方式管理依赖。这种做法与面向对象设计中使用组合而非继承也有点相似的味道。</p>
+<h3 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h3><p>相对于 dependencyManagement，所有声明在父项目中 dependencies 里的依赖都会被子项目自动引入，并默认被所有的子项目继承。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p> <strong>dependencies</strong> 即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）</p>
+<p> <strong>dependencyManagement</strong> 里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，并且 version 和 scope 都读取自父 pom; 另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。</p>
+<h3 id="消除多模块插件配置重复"><a href="#消除多模块插件配置重复" class="headerlink" title="消除多模块插件配置重复"></a>消除多模块插件配置重复</h3><p>与 dependencyManagement 类似的，我们也可以使用 pluginManagement 元素管理插件。一个常见的用法就是我们希望项目所有模块的使用 Maven Compiler Plugin 的时候，都使用 Java 1.8，以及指定 Java 源文件编码为 UTF-8，这时可以在父模块的 POM 中如下配置 pluginManagement：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">pluginManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">pluginManagement</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这段配置会被应用到所有子模块的 maven-compiler-plugin 中，由于 Maven 内置了 maven-compiler-plugin 与生命周期的绑定，因此子模块就不再需要任何 maven-compiler-plugin 的配置了。</p>
+<p>与依赖配置不同的是，通常所有项目对于任意一个依赖的配置都应该是统一的，但插件却不是这样，例如你可以希望模块 A 运行所有单元测试，模块 B 要跳过一些测试，这时就需要配置 maven-surefire-plugin 来实现，那样两个模块的插件配置就不一致了。这也就是说，简单的把插件配置提取到父 POM 的 pluginManagement 中往往不适合所有情况，那我们在使用的时候就需要注意了，只有那些普适的插件配置才应该使用 pluginManagement 提取到父 POM 中。</p>
+<p>关于插件 pluginManagement，Maven 并没有提供与 import scope 依赖类似的方式管理，那我们只能借助继承关系，不过好在一般来说插件配置的数量远没有依赖配置那么多，因此这也不是一个问题。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>你看到的只是冰山一角，更多请看书籍<a href="https://union-click.jd.com/jdc?d=hNj9Lu" target="_blank" rel="external">《Maven 实战》</a> 。</p>
+<p>转载请注明地址：<a href="http://www.54tianzhisheng.cn/2017/11/11/Maven-dependencies-dependencyManagement/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/11/11/Maven-dependencies-dependencyManagement/</a></p>
 
       
 
@@ -311,7 +305,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
         		</li>
       		
 		</ul>
@@ -367,7 +361,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3awW4iQQwE0Pz/T7NSbiuWocqeDlnpzQmRAfp1pLFV7q+v+Hp8X8+vk0893/94uq5/69Wdt114eHh4o6W/uq5/5tU915tyTcq3+HrNeHh4eKd5eTHINyK/vy0wyZrx8PDwfgPvurWNHtPrb8bDw8P7f3n5UvKUoC1OeHh4eJ/ltY1v+9dZGNG29Xh4eHg/w9sMwD71+ofme3h4eHjlVD257gp58wCiWBseHh7eAV4bqs7unAWyLTjKWvDw8PDWvLyRvWbsy8Y+dIj+b3h4eHhrXhtA5IHpPvZtD2zVMS4eHh7eiJcUgPaBm7D3j/gIiYeHh3eYlx+Eao8L5McCWvabd/Dw8PCO8WY/M/vsdXffHp96E6bg4eHhHePlucVmPNay2zjjH3fi4eHhHeO1B6TaYVjbgu9/vVgQHh4e3oiXN7ttKDCLg9uy8ZKNh4eHd5jXPuhnvNm5hrbM4OHh4Z3jtYP//EBATko2NI+M36wfDw8P7ybeI77ao1SzR3l+ZGGVuODh4eEteHkL247222H/LFBux2N4eHh4p3nJx/KyUR+cKlv5IpLAw8PDu4nXxrVtNDDb76QwRC01Hh4e3pqXHxTYRABtkDEbfb1JWfDw8PBu5W0a3PyRfcNy4wjjr8KAh4eHd4x3/bH9aKqNX2fl52VhwMPDw7uJNwsjZk1wu335kYW8fcfDw8Pb82aR62ZsnwS4yUZEYQoeHh7eAV4ydmpb53YYlrNnxQwPDw/vXt6jvDZzpXbwv2nE8fDw8M7xZkViBt4/7mdbjIeHh3eClxeD5P19BNwGGW+2Dw8PD+8Ybxan5k1zXh5mbfGbSAIPDw/vV/JmBwhm+OJ78PDw8D7Ka6dqm8C3PShwQ2HAw8PDK3l5GDHD58vK49qiMODh4eHdypsNwPIiMYuD96en8PDw8A7w/gBmA5KXd92jGgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3a204DMQwFwP7/T4PEG4K25zhJu4jZJ9TuJbNIsWv7douPj68jP+fjx/H4nPbbzQceHh7eaOn3jnbpjz9ZX1W+Zjw8PLzTvHajTzbudonJ0/M14+Hh4V2B1z4+x+fhAQ8PD+9v8fJNPL9bfn88PDy8q/FmP/5nYSMvary01oKHh4cX89oG2BX+Ptjfw8PDw1voqq+EgZUzZ8Hgl6vw8PDwDvCSRTz+fL1c244s1CNZeHh4eFt5s+GqWTDIAe23d9eGh4eH9yZeEip2UXcVQfDw8PDO8fIbtYtuW1/565t9joeHh7eXVySpo7GAtgi7Ui6JYgseHh7eVl6eNOcPWC/15uvEw8PDO82bFQJmjf8cv56Of6u14OHh4W3ltYxZ6WF9+GD2MwAPDw/vHC9Zev6ANuFONv28eBH9J/Hw8PAWeMk4VP5JkeaOSsD1vwEPDw/vAG+WRs9KsSvFi3awAA8PD+80Lx8aaEsSs0GuNlAlJRU8PDy81/CKi0eNqzZs5Gl9Pb+Ah4eHF/NOtKPaV9Omy0U4wcPDwzvMS8oBeRqdn7MyUPXkuXh4eHiHee1jkm29/bvFPLkPHh4e3mFekkZHraayJZafk7y+2yyvx8PDwyt5662s2fl1+x8PDw/vMrw2RW5DxaxhNhvP+nYVHh4e3gFe24JaGYdaGR1IirZ3QwUeHh7eVt7KppwnwbPRgZX0Gg8PD+81vHzbXW9xzVpibdEEDw8P7wRvtvnOiqqny8G3XbEFDw8Pr2zw14NNQaLc3jMfZo1aaHh4eHjHeMWP/PjaZKH5K5i10PDw8PDey5u18NsQsnmkAA8PD+8yvDaEzMoTecB4UqvGw8PDO8BLbpePW82uzV9BXizGw8PDO8E71wDLt/L1xP0N/T08PLz/yPsEzIZK35Yyl50AAAAASUVORK5CYII=" alt="微信分享二维码">
     </div>
 </div>
 
@@ -381,18 +375,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/03/28/【字符串】判断两字符串是否互为旋转词？/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          【字符串】判断两字符串是否互为旋转词？
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/28/Java NIO 系列教程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java NIO 系列教程</div>
+    <a href="/2017/11/11/recommended-books/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">送你一份双十一剁手书单【墙裂推荐】</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -411,7 +396,7 @@ var _hmt = _hmt || [];
 
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="程序访问文件的几种方式"  style="padding: 0px 30px 0px 46px;"></div>
+<div id="SOHUCS" sid="Maven 中 dependencies 与 dependencyManagement 的区别"  style="padding: 0px 30px 0px 46px;"></div>
 <script>
   (function(){
     var appid = 'cysWCg9Ij',
