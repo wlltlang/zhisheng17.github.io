@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-11T08:46:53.198Z</updated>
+  <updated>2017-11-18T03:04:06.707Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于分布式环境下限流系统的设计</title>
+    <link href="http://yoursite.com/2017/11/18/flow-control/"/>
+    <id>http://yoursite.com/2017/11/18/flow-control/</id>
+    <published>2017-11-18T03:00:35.170Z</published>
+    <updated>2017-11-18T03:04:06.707Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/p1.jpeg-1" alt=""><br><a id="more"></a></p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><h4 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h4><p>就拿前些天的双十一的 “抢券活动” 来说，一般是设置整点开始抢的，你想想，淘宝的用户群体非常大，可以达到亿级别，而服务接口每秒能处理的量是有限的，那么这个时候问题就会出现，我们如何通过程序来控制用户抢券呢，于是就必须加上这个限流功能了。</p>
+<h4 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h4><p>1、服务接口所能提供的服务上限（limit）假如是 500次/s</p>
+<p>2、用户请求接口的次数未知，QPS可能达到 800次/s，1000次/s，或者更高</p>
+<p>3、当服务接口的访问频率超过 500次/s，超过的量将拒绝服务，多出的信息将会丢失</p>
+<p>4、线上环境是多节点部署的，但是调用的是同一个服务接口</p>
+<p>于是，为了保证服务的可用性，就要对服务接口调用的速率进行限制（接口限流）。</p>
+<h3 id="什么是限流？"><a href="#什么是限流？" class="headerlink" title="什么是限流？"></a>什么是限流？</h3><p>限流是对系统的<strong>出入流量</strong>进行<strong>控制</strong>，防止大流量出入，导致<strong>资源</strong>不足，系统不稳定。</p>
+<p>限流系统是对资源访问的控制组件，控制主要的两个功能：<strong>限流策略</strong>和<strong>熔断策略</strong>，对于熔断策略，不同的系统有不同的熔断策略诉求，有的系统希望直接拒绝、有的系统希望排队等待、有的系统希望服务降级、有的系统会定制自己的熔断策略，这里只针对<strong>限流策略</strong>这个功能做详细的设计。</p>
+<h3 id="限流算法"><a href="#限流算法" class="headerlink" title="限流算法"></a>限流算法</h3><h4 id="1、限制瞬时并发数"><a href="#1、限制瞬时并发数" class="headerlink" title="1、限制瞬时并发数"></a>1、限制瞬时并发数</h4><p>Guava RateLimiter 提供了令牌桶算法实现：平滑突发限流(SmoothBursty)和平滑预热限流(SmoothWarmingUp)实现。</p>
+<h4 id="2、限制某个接口的时间窗最大请求数"><a href="#2、限制某个接口的时间窗最大请求数" class="headerlink" title="2、限制某个接口的时间窗最大请求数"></a>2、限制某个接口的时间窗最大请求数</h4><p>即一个时间窗口内的请求数，如想限制某个接口/服务每秒/每分钟/每天的请求数/调用量。如一些基础服务会被很多其他系统调用，比如商品详情页服务会调用基础商品服务调用，但是怕因为更新量比较大将基础服务打挂，这时我们要对每秒/每分钟的调用量进行限速；一种实现方式如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">LoadingCache&lt;Long, AtomicLong&gt; counter =</div><div class="line">        CacheBuilder.newBuilder()</div><div class="line">                .expireAfterWrite(<span class="number">2</span>, TimeUnit.SECONDS)</div><div class="line">                .build(<span class="keyword">new</span> CacheLoader&lt;Long, AtomicLong&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> AtomicLong <span class="title">load</span><span class="params">(Long seconds)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> AtomicLong(<span class="number">0</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="keyword">long</span> limit = <span class="number">1000</span>;</div><div class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">    <span class="comment">//得到当前秒</span></div><div class="line">    <span class="keyword">long</span> currentSeconds = System.currentTimeMillis() / <span class="number">1000</span>;</div><div class="line">    <span class="keyword">if</span>(counter.get(currentSeconds).incrementAndGet() &gt; limit) &#123;</div><div class="line">        System.out.println(<span class="string">"限流了:"</span> + currentSeconds);</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//业务处理</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用Guava的Cache来存储计数器，过期时间设置为2秒（保证1秒内的计数器是有的），然后我们获取当前时间戳然后取秒数来作为KEY进行计数统计和限流，这种方式也是简单粗暴，刚才说的场景够用了。</p>
+<h4 id="3、令牌桶"><a href="#3、令牌桶" class="headerlink" title="3、令牌桶"></a>3、令牌桶</h4><p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1flk2kudl1oj318w0ymwgp.jpg" alt=""></p>
+<p>算法描述：</p>
+<ul>
+<li>假如用户配置的平均发送速率为r，则每隔1/r秒一个令牌被加入到桶中</li>
+<li>假设桶中最多可以存放b个令牌。如果令牌到达时令牌桶已经满了，那么这个令牌会被丢弃</li>
+<li>当流量以速率v进入，从桶中以速率v取令牌，拿到令牌的流量通过，拿不到令牌流量不通过，执行熔断逻辑</li>
+</ul>
+<p><strong>属性</strong></p>
+<ul>
+<li>长期来看，符合流量的速率是受到令牌添加速率的影响，被稳定为：r</li>
+<li>因为令牌桶有一定的存储量，可以抵挡一定的流量突发情况<ul>
+<li>M是以字节/秒为单位的最大可能传输速率。 M&gt;r</li>
+<li>T max = b/(M-r) 承受最大传输速率的时间</li>
+<li>B max = T max * M 承受最大传输速率的时间内传输的流量</li>
+</ul>
+</li>
+</ul>
+<p><strong>优点</strong>：流量比较平滑，并且可以抵挡一定的流量突发情况</p>
+<h4 id="4、Google-guava-提供的工具库中-RateLimiter-类（内部也是采用令牌桶算法实现）"><a href="#4、Google-guava-提供的工具库中-RateLimiter-类（内部也是采用令牌桶算法实现）" class="headerlink" title="4、Google guava 提供的工具库中 RateLimiter 类（内部也是采用令牌桶算法实现）"></a>4、Google guava 提供的工具库中 RateLimiter 类（内部也是采用令牌桶算法实现）</h4><p>最快的方式是使用 RateLimit 类，但是这仅限制在单节点，如果是分布式系统，每个节点的 QPS 是一样的，请求量到服务接口那的话就是 QPS * 节点数 了。所以这种方案在分布式的情况下不适用！</p>
+<h4 id="5、基于-Redis-实现，存储两个-key，一个用于计时，一个用于计数。请求每调用一次，计数器增加-1，若在计时器时间内计数器未超过阈值，则可以处理任务。"><a href="#5、基于-Redis-实现，存储两个-key，一个用于计时，一个用于计数。请求每调用一次，计数器增加-1，若在计时器时间内计数器未超过阈值，则可以处理任务。" class="headerlink" title="5、基于 Redis 实现，存储两个 key，一个用于计时，一个用于计数。请求每调用一次，计数器增加 1，若在计时器时间内计数器未超过阈值，则可以处理任务。"></a>5、基于 Redis 实现，存储两个 key，一个用于计时，一个用于计数。请求每调用一次，计数器增加 1，若在计时器时间内计数器未超过阈值，则可以处理任务。</h4><p>这种能够很好地解决了分布式环境下多实例所导致的并发问题。因为使用redis设置的计时器和计数器均是全局唯一的，不管多少个节点，它们使用的都是同样的计时器和计数器，因此可以做到非常精准的流控。</p>
+<p>代码就不公布了，毕竟涉及公司隐私了。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>参考文章：</p>
+<p><a href="https://www.zybuluo.com/kay2/note/949160" target="_blank" rel="external">基于Redis的限流系统的设计</a></p>
+<p>感兴趣的可以看看别人的代码是怎么写的：<a href="https://github.com/wukq/rate-limiter" target="_blank" rel="external">https://github.com/wukq/rate-limiter</a></p>
+<p>转载请注明文章地址为：<a href="http://www.54tianzhisheng.cn/2017/11/18/flow-control/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/11/18/flow-control/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/p1.jpeg-1&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Redis" scheme="http://yoursite.com/tags/Redis/"/>
+    
+      <category term="流控" scheme="http://yoursite.com/tags/%E6%B5%81%E6%8E%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>Maven 中 dependencies 与 dependencyManagement 的区别</title>
@@ -2227,37 +2287,6 @@
       &lt;h3 id=&quot;第-2-站-、爱奇艺-后端-Java-开发实习生&quot;&gt;&lt;a href=&quot;#第-2-站-、爱奇艺-后端-Java-开发实习生&quot; class=&quot;headerlink&quot; title=&quot;第 2 站 、爱奇艺   后端 Java 开发实习生&quot;&gt;&lt;/a&gt;第 2 站 、爱奇艺   后端 Java 开发实习生&lt;/h3&gt;&lt;h4 id=&quot;笔试（半个小时）&quot;&gt;&lt;a href=&quot;#笔试（半个小时）&quot; class=&quot;headerlink&quot; title=&quot;笔试（半个小时）&quot;&gt;&lt;/a&gt;笔试（半个小时）&lt;/h4&gt;&lt;p&gt;题目：（记得一些）&lt;/p&gt;
 &lt;p&gt;1、重载重写的区别？&lt;/p&gt;
 &lt;p&gt;2、转发和重定向的区别？&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="面经" scheme="http://yoursite.com/tags/%E9%9D%A2%E7%BB%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>秋招第一站 —— 亚信科技</title>
-    <link href="http://yoursite.com/2017/08/04/yaxin/"/>
-    <id>http://yoursite.com/2017/08/04/yaxin/</id>
-    <published>2017-08-04T03:30:50.681Z</published>
-    <updated>2017-08-04T03:31:32.737Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="第-1-站、亚信科技-Java-开发"><a href="#第-1-站、亚信科技-Java-开发" class="headerlink" title="第 1 站、亚信科技    Java 开发"></a>第 1 站、亚信科技    Java 开发</h3><p>1）自我介绍（说到一个亮点：长期坚持写博客，面试官觉得这个习惯很好，算加分项吧）</p>
-<p>2）看到简历项目中用到 Solr，详细的问了下 Solr（自己介绍了下 Solr 的使用场景和建立索引等东西）<br><a id="more"></a><br>3）项目里面写了一个 “ 敏感词和 JS 标签过滤防 XSS 攻击”，面试官让我讲了下这个 XSS 攻击，并且是怎样实现的</p>
-<p>4）项目里写了支持 Markdown，问是不是自己写的解析代码，（回答不是，自己引用的是 GitHub上的一个开源项目解析的）</p>
-<p>5）想问我前端的知识，我回复到：自己偏后端开发，前端只是了解，然后面试官就不问了</p>
-<p>6）问我考不考研？</p>
-<p>7）觉得杭州怎么样？是打算就呆在杭州还是把杭州作为一个跳板？</p>
-<p>8）有啥小目标？以后是打算继续技术方向，还是先技术后管理（还开玩笑的说：是不是赚他几个亿，当时我笑了笑）</p>
-<p>9）有啥兴趣爱好？</p>
-<p>大概就记得这么多了，目前已经拿到 Offer 了。</p>
-<p><strong>总结</strong>：面试问的问题不算多，主要是通过简历上项目所涉及的东西提问的，如果自己不太会的切记不要写上去。面试主要考察你回答问题来判断你的逻辑是否很清楚。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;第-1-站、亚信科技-Java-开发&quot;&gt;&lt;a href=&quot;#第-1-站、亚信科技-Java-开发&quot; class=&quot;headerlink&quot; title=&quot;第 1 站、亚信科技    Java 开发&quot;&gt;&lt;/a&gt;第 1 站、亚信科技    Java 开发&lt;/h3&gt;&lt;p&gt;1）自我介绍（说到一个亮点：长期坚持写博客，面试官觉得这个习惯很好，算加分项吧）&lt;/p&gt;
-&lt;p&gt;2）看到简历项目中用到 Solr，详细的问了下 Solr（自己介绍了下 Solr 的使用场景和建立索引等东西）&lt;br&gt;
     
     </summary>
     
