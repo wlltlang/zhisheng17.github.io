@@ -15,14 +15,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 旋转词 | Zhisheng的博客</title>
+  <title>基于 Harbor 搭建 Docker 私有镜像仓库 | Zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zhisheng的博客">
-<meta property="og:url" content="http://yoursite.com/tags/旋转词/index.html">
+  <meta name="description" content="什么是 Harbor？第一次使用这个的时候是刚进公司处理的第一个任务的时候，发现 Harbor 就是一个用于存储和分发 Docker 镜像的企业级Registry 服务器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Harbor 搭建 Docker 私有镜像仓库">
+<meta property="og:url" content="http://yoursite.com/2017/11/26/Docker-harbor/index.html">
 <meta property="og:site_name" content="Zhisheng的博客">
+<meta property="og:description" content="什么是 Harbor？第一次使用这个的时候是刚进公司处理的第一个任务的时候，发现 Harbor 就是一个用于存储和分发 Docker 镜像的企业级Registry 服务器。">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171126/j9de1Jf6m0.png-1">
+<meta property="og:image" content="http://img.blog.csdn.net/20170912121921883?/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDI3ODkyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171126/JgL96AjdEc.jpg-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171126/b98k9d2jcE.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171126/0d82GLa1Cb.png-1">
+<meta property="og:updated_time" content="2017-11-26T02:44:45.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhisheng的博客">
+<meta name="twitter:title" content="基于 Harbor 搭建 Docker 私有镜像仓库">
+<meta name="twitter:description" content="什么是 Harbor？第一次使用这个的时候是刚进公司处理的第一个任务的时候，发现 Harbor 就是一个用于存储和分发 Docker 镜像的企业级Registry 服务器。">
+<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171126/j9de1Jf6m0.png-1">
   
     <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
   
@@ -181,73 +191,270 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Docker-harbor" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/28/【字符串】判断两字符串是否互为旋转词？/" class="archive-article-date">
-  	<time datetime="2017-03-28T10:49:25.536Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/28/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a>
+    <h1 class="article-title" itemprop="name">
+      基于 Harbor 搭建 Docker 私有镜像仓库
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/11/26/Docker-harbor/" class="archive-article-date">
+  	<time datetime="2017-11-26T02:47:27.733Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-26</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+    <div id="toc-article" class="toc-article">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-Harbor？"><span class="toc-number">1.</span> <span class="toc-text">什么是 Harbor？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-number">2.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Docker"><span class="toc-number">3.</span> <span class="toc-text">安装 Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Docker-compose"><span class="toc-number">4.</span> <span class="toc-text">安装 Docker-compose</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-pip"><span class="toc-number">4.1.</span> <span class="toc-text">安装 pip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-docker-compose"><span class="toc-number">4.2.</span> <span class="toc-text">安装 docker compose</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Harbor"><span class="toc-number">5.</span> <span class="toc-text">安装 Harbor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">6.</span> <span class="toc-text">最后</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+      
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171126/j9de1Jf6m0.png-1" alt="mark"></p>
+<h3 id="什么是-Harbor？"><a href="#什么是-Harbor？" class="headerlink" title="什么是 Harbor？"></a>什么是 Harbor？</h3><p>第一次使用这个的时候是刚进公司处理的第一个任务的时候，发现 Harbor 就是一个用于存储和分发 Docker 镜像的企业级Registry 服务器。<br><a id="more"></a><br>网上找到一个 Harbor 的架构图：</p>
+<p><img src="http://img.blog.csdn.net/20170912121921883?/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDI3ODkyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>Harbor 是 VMware 公司开源的企业级 DockerRegistry 项目，项目地址为 <a href="https://github.com/vmware/harbor。其目标是帮助用户迅速搭建一个企业级的" target="_blank" rel="external">https://github.com/vmware/harbor。其目标是帮助用户迅速搭建一个企业级的</a> Docker registry 服务。它以 Docker 公司开源的 registry 为基础，提供了管理UI，基于角色的访问控制(Role Based Access Control)，AD/LDAP集成、以及审计日志(Auditlogging) 等企业用户需求的功能，同时还原生支持中文。Harbor 的每个组件都是以 Docker 容器的形式构建的，使用 Docker Compose 来对它进行部署。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>1、自己在腾讯云买的服务器（CentOS7.3）</p>
+<p>2、Docker 版本：17.05.0-ce</p>
+<p>3、Docker-compose：1.17.1</p>
+<p>4、Harbor：1.1.2</p>
+<h3 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h3><p>因为系统是 CentOS 7.3 ，内核啥的都已经是 3.10，所以不用担心内核升级的问题，一些操作啥的在 7.x 上操作也很方便。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">yum  update                             //系统版本更新</div><div class="line"></div><div class="line">vim /etc/yum.repos.d/docker.repo        //添加以下内容</div><div class="line"></div><div class="line">[dockerrepo]</div><div class="line">name=Docker Repository</div><div class="line">baseurl=https://yum.dockerproject.org/repo/main/centos/7/</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=https://yum.dockerproject.org/gpg</div><div class="line"></div><div class="line">//下面安装 Docker 引擎</div><div class="line">yum install docker-engine  -y</div><div class="line"></div><div class="line">//安装docker引擎，此步也可作为更新docker版本的操作：先#systemctl stop docker 停止docker服务，再#yum install docker-engine 更新docker版本</div><div class="line"></div><div class="line">systemctl  enable  docker.service</div><div class="line"></div><div class="line">systemctl  start   docker              //启动docker守护进程</div><div class="line"></div><div class="line">docker info                            //查看docker运行情况</div><div class="line"></div><div class="line">docker -v							//查看版本信息</div></pre></td></tr></table></figure>
+<p>修改 Docker 配置文件 /etc/default/docker 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DOCKER_OPTS=&quot;--registry-mirror=http://aad0405c.m.daocloud.io&quot;	//换成国内的镜像加速源，不然拉取镜像简直龟速，不想在吐槽了</div></pre></td></tr></table></figure>
+<p>使用 <code>service docker restart</code> 重启 Docker 服务即可。</p>
+<p>或者用官方提供的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://ef017c13.m.daocloud.io</div></pre></td></tr></table></figure>
+<h3 id="安装-Docker-compose"><a href="#安装-Docker-compose" class="headerlink" title="安装 Docker-compose"></a>安装 Docker-compose</h3><p>如果是想直接命令安装也行，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">下载指定版本的docker-compose</div><div class="line"></div><div class="line">sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose</div><div class="line"></div><div class="line">对二进制文件赋可执行权限</div><div class="line"></div><div class="line">chmod +x /usr/local/bin/docker-compose</div><div class="line"></div><div class="line">测试下docker-compose是否安装成功</div><div class="line"></div><div class="line">docker-compose --version</div><div class="line"></div><div class="line">出现如下</div><div class="line">docker-compose version 1.17.1, build 6d101fb</div></pre></td></tr></table></figure>
+<p>但是，这种方法简直龟速，幸好还有种方法，</p>
+<p>见这里：<a href="https://docs.docker.com/compose/install/#install-compose" target="_blank" rel="external">https://docs.docker.com/compose/install/#install-compose</a></p>
+<p>这种需要通过 Python 的 pip 安装</p>
+<h4 id="安装-pip"><a href="#安装-pip" class="headerlink" title="安装 pip"></a>安装 pip</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.2.tar.gz</div><div class="line"></div><div class="line">tar -vxf setuptools-1.4.2.tar.gz</div><div class="line"></div><div class="line">cd setuptools-1.4.2</div><div class="line"></div><div class="line">python2.7 setup.py install		//因为服务器自带 Python 2.7</div><div class="line"></div><div class="line">easy_install-2.7 pip</div></pre></td></tr></table></figure>
+<h4 id="安装-docker-compose"><a href="#安装-docker-compose" class="headerlink" title="安装 docker compose"></a>安装 docker compose</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install docker-compose</div><div class="line"></div><div class="line">docker-compose --version	//测试安装是否成功</div></pre></td></tr></table></figure>
+<h3 id="安装-Harbor"><a href="#安装-Harbor" class="headerlink" title="安装 Harbor"></a>安装 Harbor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/vmware/harbor/releases/download/v1.1.2/harbor-offline-installer-v1.1.2.tgz</div><div class="line"></div><div class="line">离线安装包,也是龟速，把这个下载链接用迅雷下载，速度却贼快，嘿嘿，然后再传到服务器上去，整个过程快很多！</div><div class="line"></div><div class="line">tar -zxvf harbor-offline-installer-v1.1.2.tgz</div></pre></td></tr></table></figure>
+<p>解压缩之后，进入目录下会看到 harbor.cfg 文件，该文件就是 Harbor 的配置文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line">## Configuration file of Harbor</div><div class="line"></div><div class="line"># hostname设置访问地址，可以使用ip、域名，不可以设置为127.0.0.1或localhost</div><div class="line">hostname = 115.159.227.249   #这里我先配置我的服务器IP地址</div><div class="line"></div><div class="line"># 访问协议，默认是http，也可以设置https，如果设置https，则nginx ssl需要设置on</div><div class="line">ui_url_protocol = http</div><div class="line"></div><div class="line"># mysql数据库root用户默认密码root123，实际使用时修改下</div><div class="line">db_password = root123</div><div class="line"></div><div class="line">#Maximum number of job workers in job service</div><div class="line">max_job_workers = 3</div><div class="line"></div><div class="line">#Determine whether or not to generate certificate for the registry&apos;s token.</div><div class="line">#If the value is on, the prepare script creates new root cert and private key</div><div class="line">#for generating token to access the registry. If the value is off the default key/cert will be used.</div><div class="line">#This flag also controls the creation of the notary signer&apos;s cert.</div><div class="line">customize_crt = on</div><div class="line"></div><div class="line">#The path of cert and key files for nginx, they are applied only the protocol is set to https</div><div class="line">ssl_cert = /data/cert/server.crt</div><div class="line">ssl_cert_key = /data/cert/server.key</div><div class="line"></div><div class="line">#The path of secretkey storage</div><div class="line">secretkey_path = /data</div><div class="line"></div><div class="line">#Admiral&apos;s url, comment this attribute, or set its value to NA when Harbor is standalone</div><div class="line">admiral_url = NA</div><div class="line"></div><div class="line">#NOTES: The properties between BEGIN INITIAL PROPERTIES and END INITIAL PROPERTIES</div><div class="line">#only take effect in the first boot, the subsequent changes of these properties</div><div class="line">#should be performed on web ui</div><div class="line"></div><div class="line">#************************BEGIN INITIAL PROPERTIES************************</div><div class="line"></div><div class="line">#Email account settings for sending out password resetting emails.</div><div class="line"></div><div class="line">#Email server uses the given username and password to authenticate on TLS connections to host and act as identity.</div><div class="line">#Identity left blank to act as username.</div><div class="line">email_identity =</div><div class="line"></div><div class="line">email_server = smtp.mydomain.com</div><div class="line">email_server_port = 25</div><div class="line">email_username = sample_admin@mydomain.com</div><div class="line">email_password = abc</div><div class="line">email_from = admin &lt;sample_admin@mydomain.com&gt;</div><div class="line">email_ssl = false</div><div class="line"></div><div class="line">##The initial password of Harbor admin, only works for the first time when Harbor starts.</div><div class="line">#It has no effect after the first launch of Harbor.</div><div class="line"># 启动Harbor后，管理员UI登录的密码，默认是Harbor12345</div><div class="line">harbor_admin_password = Harbor12345</div><div class="line"></div><div class="line"># 认证方式，这里支持多种认证方式，如LADP、本次存储、数据库认证。默认是db_auth，mysql数据库认证</div><div class="line">auth_mode = db_auth</div><div class="line"></div><div class="line">#The url for an ldap endpoint.</div><div class="line">ldap_url = ldaps://ldap.mydomain.com</div><div class="line"></div><div class="line">#A user&apos;s DN who has the permission to search the LDAP/AD server.</div><div class="line">#If your LDAP/AD server does not support anonymous search, you should configure this DN and ldap_search_pwd.</div><div class="line">#ldap_searchdn = uid=searchuser,ou=people,dc=mydomain,dc=com</div><div class="line"></div><div class="line">#the password of the ldap_searchdn</div><div class="line">#ldap_search_pwd = password</div><div class="line"></div><div class="line">#The base DN from which to look up a user in LDAP/AD</div><div class="line">ldap_basedn = ou=people,dc=mydomain,dc=com</div><div class="line"></div><div class="line">#Search filter for LDAP/AD, make sure the syntax of the filter is correct.</div><div class="line">#ldap_filter = (objectClass=person)</div><div class="line"></div><div class="line"># The attribute used in a search to match a user, it could be uid, cn, email, sAMAccountName or other attributes de</div><div class="line">pending on your LDAP/AD  ldap_uid = uid</div><div class="line"></div><div class="line">#the scope to search for users, 1-LDAP_SCOPE_BASE, 2-LDAP_SCOPE_ONELEVEL, 3-LDAP_SCOPE_SUBTREE</div><div class="line">ldap_scope = 3</div><div class="line"></div><div class="line">#Timeout (in seconds)  when connecting to an LDAP Server. The default value (and most reasonable) is 5 seconds.</div><div class="line">ldap_timeout = 5</div><div class="line"></div><div class="line"># 是否开启自注册</div><div class="line">self_registration = on</div><div class="line"></div><div class="line"># Token有效时间，默认30分钟</div><div class="line">token_expiration = 30</div><div class="line"></div><div class="line"># 用户创建项目权限控制，默认是everyone（所有人），也可以设置为adminonly（只能管理员）</div><div class="line">project_creation_restriction = everyone</div><div class="line"></div><div class="line">#Determine whether the job service should verify the ssl cert when it connects to a remote registry.</div><div class="line">#Set this flag to off when the remote registry uses a self-signed or untrusted certificate.</div><div class="line">verify_remote_cert = on</div><div class="line">#************************END INITIAL PROPERTIES************************</div></pre></td></tr></table></figure>
+<p>启动 harbor，修改完配置文件后，在的当前目录执行<code>./install.sh</code>，Harbor服务就会根据当期目录下的<code>docker-compose.yml</code>开始下载依赖的镜像，检测并按照顺序依次启动各个服务。</p>
+<p>启动完成后，我们访问刚设置的 hostname 即可，<a href="http://115.159.227.249/，默认是80端口，如果端口占用，我们可以去修改docker-compose.yml文件中，对应服务的端口映射。" target="_blank" rel="external">http://115.159.227.249/，默认是80端口，如果端口占用，我们可以去修改docker-compose.yml文件中，对应服务的端口映射。</a></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171126/JgL96AjdEc.jpg-1" alt="mark"></p>
+<p>登录 Web Harbor , 输入用户名 admin，默认密码（或已修改密码）登录系统。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171126/b98k9d2jcE.png-1" alt="mark"></p>
+<p>我们可以看到系统各个模块如下：</p>
+<ul>
+<li>项目：新增/删除项目，查看镜像仓库，给项目添加成员、查看操作日志、复制项目等</li>
+<li>日志：仓库各个镜像create、push、pull等操作日志</li>
+<li>系统管理<ul>
+<li>用户管理：新增/删除用户、设置管理员等</li>
+<li>复制管理：新增/删除从库目标、新建/删除/启停复制规则等</li>
+<li>配置管理：认证模式、复制、邮箱设置、系统设置等</li>
+</ul>
+</li>
+<li>其他设置<ul>
+<li>用户设置：修改用户名、邮箱、名称信息</li>
+<li>修改密码：修改用户密码</li>
+</ul>
+</li>
+</ul>
+<p>注意：非系统管理员用户登录，只能看到有权限的项目和日志，其他模块不可见。</p>
+<p>我们要尝试下能不能把自己 Docker 里面的镜像 push 到 Harbor 的 library 里来（默认这个 library 项目是公开的，所有人都可以有读的权限，都不需要 docker login 进来，就可以拉取里面的镜像）。</p>
+<p><strong>注意：</strong></p>
+<p>为了后面留坑，我这里先 在自己的 docker.service 中添加仓库：（这是个坑，建议你先按照我说的做，不然下面可能会一直登录不上）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim /usr/lib/systemd/system/docker.service</div><div class="line"></div><div class="line">里面的这行修改为：（其实就是添加 --insecure-registry 115.159.227.249 ）</div><div class="line">ExecStart=/usr/bin/dockerd --insecure-registry 115.159.227.249</div></pre></td></tr></table></figure>
+<p>添加完了后重新启动 docker：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl daemon-reload &amp;&amp; systemctl enable docker &amp;&amp; systemctl start docker</div></pre></td></tr></table></figure>
+<p>启动 docker 服务:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service docker start</div></pre></td></tr></table></figure>
+<p>登录：（为了测试下能否登录成功）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">admin登录</div><div class="line">$ docker login 115.159.227.249</div><div class="line">Username: admin</div><div class="line">Password:</div><div class="line">Login Succeeded</div></pre></td></tr></table></figure>
+<p>打 tag 并 push</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">docker tag ubuntu:15.10  115.159.227.249/library/ubuntu:15.10		//给我的镜像打个 tag</div><div class="line"></div><div class="line">docker push  115.159.227.249/library/ubuntu</div><div class="line"></div><div class="line">The push refers to a repository [115.159.227.249/library/ubuntu]</div><div class="line">98d59071f692: Pushed</div><div class="line">af288f00b8a7: Pushed</div><div class="line">4b955941a4d0: Pushed</div><div class="line">f121afdbbd5d: Pushed</div><div class="line">15.10: digest: sha256:ec89c4a90f45f5e103860191890f48d8379e0504a2881ff706aef0768dc0321b size: 1150</div></pre></td></tr></table></figure>
+<p>上传完毕后，登录Web Harbor，选择项目 library，就可以看到我刚 push 的镜像了。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171126/0d82GLa1Cb.png-1" alt="mark"></p>
+<p>同理，你也可以测试下从 Harbor pull 镜像到你的 Docker 中去，这里就不继续演示了。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>转载请注明地址为：<a href="http://www.54tianzhisheng.cn/2017/11/26/Docker-harbor/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/11/26/Docker-harbor/</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你支持我买服务器！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符串</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">旋转词</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3awY6DMAxF0f7/TzPSbGdo7rOhKs7NqkKI5rAwju3XC6/jd539fn+F3Pl3ve5YMmTIeCyDPI4zzp6Z7iGmypAhYwMGD7K1AE02yv9XhgwZMshWSNrHf6evT4YMGTLSx5FE8Ku/GzJkyHgIgydwZwG3UxlL00oZMmTsxug3Bu77/dH+hgwZMr6ScbTXtaW32q5kyJAxm/G+Dck3l26xX8JbhF0ZMmQMYqTBjg9boAJZo2n6z3dDhgwZQxkkavHGQCf6pW2G+DsgQ4aMEYwa5o5wTNqcMmTI2IfRb0mSoEmuk/2gqqEMGTKGMkgA7Qx71dLKIATLkCFjS0ZtnqGWGqYDZ0HAlSFDxiAG+Zv0zMiTQl7UO70iQ4aM0Qxe8OIHWr7RWhtgcb8MGTLGMQ68OoMR6aGUH2uDvFWGDBkPZ3QKYbUELm08oAxXhgwZGzDSY2ea8KXNBp6SypAhYx9G2h4g19NxitrRV4YMGbMZvFjGB7b6Lc/OfmTIkDGVUQuC5M50kKLWOpUhQ8aejDsaBnw4g9+zCLgyZMgYxKhVtEi45MfR2kiHDBkydmAc4eo3O9/fz1/BQiZDhoxBjE6zk4TglMSTywu+GzJkyHgUIy3fx2Nb4TgF34MMGTJ2Y9QKZzx+95O8BUyGDBkywhJ/OtRFjrKLFyFDhgwZl/Yiag2Dxb/LkCFjAwYJcGSMlYTLy7YuQ4aMbRi1YYtaC7M298FfqAwZMsYxfgAnPAPx00lmAwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/11/18/flow-control/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于分布式环境下限流系统的设计</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
 
+
+  <section id="comments">
+<!--高速版，加载速度快，使用前需测试页面的兼容性-->
+<div id="SOHUCS" sid="基于 Harbor 搭建 Docker 私有镜像仓库"  style="padding: 0px 30px 0px 46px;"></div>
+<script>
+  (function(){
+    var appid = 'cysWCg9Ij',
+    conf = '7f51baf245f3217589bb3b4ba8d8c691';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+    window.SCS_NO_IFRAME = true;
+  })()
+</script>
+  </section>
+  
 
           </div>
         </div>
@@ -278,9 +485,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
