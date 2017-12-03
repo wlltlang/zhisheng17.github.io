@@ -15,18 +15,39 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Maven 中 dependencies 与 dependencyManagement 的区别 | Zhisheng的博客</title>
+  <title>RestTemplate 详解 | Zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Maven 中 dependencies 与 dependencyManagement 的区别">
-<meta property="og:url" content="http://yoursite.com/2017/11/11/Maven-dependencies-dependencyManagement/index.html">
+  <meta name="description" content="背景这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RestTemplate 详解">
+<meta property="og:url" content="http://yoursite.com/2017/12/03/RestTemplate/index.html">
 <meta property="og:site_name" content="Zhisheng的博客">
-<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/c20.jpeg-1">
-<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/projects.jpg-1">
-<meta property="og:updated_time" content="2017-11-11T08:46:53.198Z">
+<meta property="og:description" content="背景这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/dB18a2j7bi.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/HIdKJdjkCC.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/97g3ha24HG.png">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/jHbbB37bjC.png">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/hbllDEdjLe.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/Lb08cmh0CL.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/aFjFlhl4l2.png">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/ij0G627Flh.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/2dhJF1ld7b.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/C7EJl11A7a.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/gF7ID9a8bk.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/707a2704Ij.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/DGJF2243G2.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/CmFD4kl9g4.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/1l7Il8faKH.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/756HHijFIh.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/A9dgDiG1JL.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/B7k85lBkBk.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/h5HaHC6g12.png-1">
+<meta property="og:updated_time" content="2017-12-03T07:08:10.734Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Maven 中 dependencies 与 dependencyManagement 的区别">
-<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/c20.jpeg-1">
+<meta name="twitter:title" content="RestTemplate 详解">
+<meta name="twitter:description" content="背景这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。">
+<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1">
   
     <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
   
@@ -185,20 +206,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Maven-dependencies-dependencyManagement" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-RestTemplate" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Maven 中 dependencies 与 dependencyManagement 的区别
+      RestTemplate 详解
     </h1>
   
 
         
-        <a href="/2017/11/11/Maven-dependencies-dependencyManagement/" class="archive-article-date">
-  	<time datetime="2017-11-11T08:44:56.946Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-11</time>
+        <a href="/2017/12/03/RestTemplate/" class="archive-article-date">
+  	<time datetime="2017-12-03T07:00:07.852Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
 </a>
         
       </header>
@@ -213,7 +234,7 @@ var _hmt = _hmt || [];
     <div id="toc-article" class="toc-article">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dependencyManagement"><span class="toc-number">2.</span> <span class="toc-text">dependencyManagement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dependencies"><span class="toc-number">3.</span> <span class="toc-text">dependencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-number">4.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除多模块插件配置重复"><span class="toc-number">5.</span> <span class="toc-text">消除多模块插件配置重复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">6.</span> <span class="toc-text">最后</span></a></li></ol>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用"><span class="toc-number">2.</span> <span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RestTemplate-内部方法"><span class="toc-number">3.</span> <span class="toc-text">RestTemplate 内部方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-方法"><span class="toc-number">4.</span> <span class="toc-text">Get 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST-方法"><span class="toc-number">5.</span> <span class="toc-text">POST 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT-方法"><span class="toc-number">6.</span> <span class="toc-text">PUT 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE-方法"><span class="toc-number">7.</span> <span class="toc-text">DELETE 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HEADER-方法"><span class="toc-number">8.</span> <span class="toc-text">HEADER 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OPTIONS"><span class="toc-number">9.</span> <span class="toc-text">OPTIONS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXCHANGE"><span class="toc-number">10.</span> <span class="toc-text">EXCHANGE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXECUTE"><span class="toc-number">11.</span> <span class="toc-text">EXECUTE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#doExecute-方法"><span class="toc-number">12.</span> <span class="toc-text">doExecute 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">13.</span> <span class="toc-text">最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">14.</span> <span class="toc-text">参考资料</span></a></li></ol>
          </div>
    <script type="text/javascript">
     function showToc(){
@@ -234,33 +255,144 @@ var _hmt = _hmt || [];
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://ohfk1r827.bkt.clouddn.com/c20.jpeg-1" alt=""></p>
-<a id="more"></a>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>这段时间项目中遇到过了一些 Jar 包冲突的问题，很多是由于我们项目模块很多的时候，用 Maven 管理不当导致的冲突问题，本文就这个问题参考网上的资料，于是总结下 Maven 中 dependencies 与 dependencyManagement 的区别。</p>
-<p>假设项目结构如下：</p>
-<p><img src="http://ohfk1r827.bkt.clouddn.com/projects.jpg-1" alt=""></p>
-<p>parent 为父模块，抽象出来管理子项目的公共依赖，为了项目的正确运行，必须让所有的子项目使用依赖项的统一版本，必须确保应用的各个项目的依赖项和版本一致，才能保证测试的和发布的是相同的结果。</p>
-<h3 id="dependencyManagement"><a href="#dependencyManagement" class="headerlink" title="dependencyManagement"></a>dependencyManagement</h3><p>在项目的 parent 层，可以通过  dependencyManagement 元素来管理 jar 包的版本，让子项目中引用一个依赖而不用显示的列出版本号。</p>
-<p>parent 中 pom.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version.framework</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version.framework</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">javaee-api.version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">javaee-api.version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>framework-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.framework&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javaee-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;javaee-api.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>extendion 中的 pom.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../parent/pom.xml<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--依赖关系--&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javaee-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>framework-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这样做的好处：统一管理项目的版本号，确保应用的各个项目的依赖和版本一致，才能保证测试的和发布的是相同的成果，因此，在顶层 pom 中定义共同的依赖关系。同时可以避免在每个使用的子项目中都声明一个版本号，这样想升级或者切换到另一个版本时，只需要在父类容器里更新，不需要任何一个子项目的修改；如果某个子项目需要另外一个版本号时，只需要在 dependencies 中声明一个版本号即可。子类就会使用子类声明的版本号，不继承于父类版本号。</p>
-<p>我们知道 Maven 的继承和 Java 的继承一样，是无法实现多重继承的，如果10个、20个甚至更多模块继承自同一个模块，那么按照我们之前的做法，这个父模块的 dependencyManagement 会包含大量的依赖。如果你想把这些依赖分类以更清晰的管理，那就不可能了，import scope 依赖能解决这个问题。你可以把 dependencyManagement 放到单独的专门用来管理依赖的 POM 中，然后在需要使用依赖的模块中通过 import scope 依赖，就可以引入dependencyManagement。例如可以写这样一个用于依赖管理的 POM：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng.sample<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sample-dependency-infrastructure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.8.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>然后就可以通过非继承的方式来引入这段依赖管理配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhisheng.sample<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>sample-dependency-infrastructure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactid</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这样，父模块的 POM 就会非常干净，由专门的 packaging 为 pom 的 POM 来管理依赖，也契合的面向对象设计中的单一职责原则。此外，我们还能够创建多个这样的依赖管理 POM，以更细化的方式管理依赖。这种做法与面向对象设计中使用组合而非继承也有点相似的味道。</p>
-<h3 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h3><p>相对于 dependencyManagement，所有声明在父项目中 dependencies 里的依赖都会被子项目自动引入，并默认被所有的子项目继承。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p> <strong>dependencies</strong> 即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）</p>
-<p> <strong>dependencyManagement</strong> 里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，并且 version 和 scope 都读取自父 pom; 另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。</p>
-<h3 id="消除多模块插件配置重复"><a href="#消除多模块插件配置重复" class="headerlink" title="消除多模块插件配置重复"></a>消除多模块插件配置重复</h3><p>与 dependencyManagement 类似的，我们也可以使用 pluginManagement 元素管理插件。一个常见的用法就是我们希望项目所有模块的使用 Maven Compiler Plugin 的时候，都使用 Java 1.8，以及指定 Java 源文件编码为 UTF-8，这时可以在父模块的 POM 中如下配置 pluginManagement：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">pluginManagement</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">pluginManagement</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这段配置会被应用到所有子模块的 maven-compiler-plugin 中，由于 Maven 内置了 maven-compiler-plugin 与生命周期的绑定，因此子模块就不再需要任何 maven-compiler-plugin 的配置了。</p>
-<p>与依赖配置不同的是，通常所有项目对于任意一个依赖的配置都应该是统一的，但插件却不是这样，例如你可以希望模块 A 运行所有单元测试，模块 B 要跳过一些测试，这时就需要配置 maven-surefire-plugin 来实现，那样两个模块的插件配置就不一致了。这也就是说，简单的把插件配置提取到父 POM 的 pluginManagement 中往往不适合所有情况，那我们在使用的时候就需要注意了，只有那些普适的插件配置才应该使用 pluginManagement 提取到父 POM 中。</p>
-<p>关于插件 pluginManagement，Maven 并没有提供与 import scope 依赖类似的方式管理，那我们只能借助继承关系，不过好在一般来说插件配置的数量远没有依赖配置那么多，因此这也不是一个问题。</p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>你看到的只是冰山一角，更多请看书籍<a href="https://union-click.jd.com/jdc?d=hNj9Lu" target="_blank" rel="external">《Maven 实战》</a> 。</p>
-<p>转载请注明地址：<a href="http://www.54tianzhisheng.cn/2017/11/11/Maven-dependencies-dependencyManagement/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/11/11/Maven-dependencies-dependencyManagement/</a></p>
+        <p><img src="http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1" alt=""></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。<br><a id="more"></a></p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>先讲讲如何使用吧，我项目是 SpringBoot 项目，可以在启动类中加入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在 Controller 层中引入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> RestTemplate restTemplate;</div></pre></td></tr></table></figure>
+<p>接下来就可以在 Controller 中各个方法中使用 restTemplate 了，但是 restTemplate 里面有什么方法呢？</p>
+<h3 id="RestTemplate-内部方法"><a href="#RestTemplate-内部方法" class="headerlink" title="RestTemplate 内部方法"></a>RestTemplate 内部方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/dB18a2j7bi.png-1" alt="mark"></p>
+<p>从图中 RestTemplate 可以看到有很多方法，我们可以提取出主要的几种方法是：</p>
+<ul>
+<li><strong>GET</strong></li>
+<li><strong>POST</strong></li>
+<li><strong>PUT</strong></li>
+<li><strong>DELETE</strong></li>
+<li><strong>HEAD</strong></li>
+<li><strong>OPTIONS</strong></li>
+<li><strong>EXCHANGE</strong></li>
+<li><strong>EXECUTE</strong></li>
+</ul>
+<p>图片中依然可以知道 RestTemplate 类中的方法主要是来自接口 RestOperations，下面我们具体看看这些方法里面的具体实现与该如何使用。</p>
+<h3 id="Get-方法"><a href="#Get-方法" class="headerlink" title="Get 方法"></a>Get 方法</h3><p>在 RestTemplate 中，发送一个 GET 请求，我们可以通过如下两种方式：</p>
+<ul>
+<li><p><strong>getForEntity</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/HIdKJdjkCC.png-1" alt="mark"></p>
+<p>getForEntity 方法的返回值是一个<code>ResponseEntity&lt;T&gt;</code>，<code>ResponseEntity&lt;T&gt;</code>是 Spring 对 HTTP 请求响应的封装，包括了几个重要的元素，如响应码、contentType、contentLength、响应消息体等。比如下面一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/gethello"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getHello</span><span class="params">()</span> </span>&#123;</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/hello"</span>, String.class);</div><div class="line">    String body = responseEntity.getBody();</div><div class="line">    HttpStatus statusCode = responseEntity.getStatusCode();</div><div class="line">    <span class="keyword">int</span> statusCodeValue = responseEntity.getStatusCodeValue();</div><div class="line">    HttpHeaders headers = responseEntity.getHeaders();</div><div class="line">    StringBuffer result = <span class="keyword">new</span> StringBuffer();</div><div class="line">    result.append(<span class="string">"responseEntity.getBody()："</span>).append(body).append(<span class="string">"&lt;hr&gt;"</span>)</div><div class="line">            .append(<span class="string">"responseEntity.getStatusCode()："</span>).append(statusCode).append(<span class="string">"&lt;hr&gt;"</span>)</div><div class="line">            .append(<span class="string">"responseEntity.getStatusCodeValue()："</span>).append(statusCodeValue).append(<span class="string">"&lt;hr&gt;"</span>)</div><div class="line">            .append(<span class="string">"responseEntity.getHeaders()："</span>).append(headers).append(<span class="string">"&lt;hr&gt;"</span>);</div><div class="line">    <span class="keyword">return</span> result.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关于这段代码，说如下几点：</p>
+<ul>
+<li><p>getForEntity 的第一个参数为我要调用的服务的地址，这里我调用了服务提供者提供的 /hello 接口，注意这里是通过服务名调用而不是服务地址，如果写成服务地址就没法实现客户端负载均衡了。（备注：我项目中需要通过 ConsulClient 去获取服务名，然后在去获取服务的 IP 和 Port，并把它拼接起来组合成我的服务地址，所以就没法实现客户端的负载均衡了，如果要是实现负载均衡，可以在 SpringBoot 启动类的中加入注解 <code>@LoadBalanced</code>, 如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="meta">@LoadBalanced</span></div><div class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> ）</p>
+</li>
+<li><p>getForEntity 第二个参数 String.class 表示我希望返回的 body 类型是 String</p>
+</li>
+<li><p>拿到返回结果之后，将返回结果遍历打印出来</p>
+</li>
+</ul>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/97g3ha24HG.png" alt="mark"></p>
+</li>
+</ul>
+<p>  有时候我在调用服务提供者提供的接口时，可能需要传递参数，有两种不同的方式:</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/sayhello"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/sayhello?name=&#123;1&#125;"</span>, String.class, <span class="string">"张三"</span>);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/sayhello2"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">sayHello2</span><span class="params">()</span> </span>&#123;</div><div class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">    map.put(<span class="string">"name"</span>, <span class="string">"李四"</span>);</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/sayhello?name=&#123;name&#125;"</span>, String.class, map);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>可以用一个数字做占位符，最后是一个可变长度的参数，来一 一替换前面的占位符</li>
+<li><p>也可以前面使用 name={name} 这种形式，最后一个参数是一个 map，map 的 key 即为前边占位符的名字，map的 value 为参数值</p>
+<p>第一个调用地址也可以是一个URI而不是字符串，这个时候我们构建一个URI即可，参数神马的都包含在URI中了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/sayhello3"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">sayHello3</span><span class="params">()</span> </span>&#123;</div><div class="line">    UriComponents uriComponents = UriComponentsBuilder.fromUriString(<span class="string">"http://HELLO-SERVICE/sayhello?name=&#123;name&#125;"</span>).build().expand(<span class="string">"王五"</span>).encode();</div><div class="line">    URI uri = uriComponents.toUri();</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(uri, String.class);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过Spring中提供的UriComponents来构建Uri即可。</p>
+<p>当然，服务提供者不仅可以返回String，也可以返回一个自定义类型的对象，比如我的服务提供者中有如下方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/getbook1"</span>, method = RequestMethod.GET)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book1</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Book(<span class="string">"三国演义"</span>, <span class="number">90</span>, <span class="string">"罗贯中"</span>, <span class="string">"花城出版社"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于该方法我可以在服务消费者中通过如下方式来调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book1"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book1</span><span class="params">()</span> </span>&#123;</div><div class="line">    ResponseEntity&lt;Book&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/getbook1"</span>, Book.class);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/jHbbB37bjC.png" alt="mark"></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>getForObject</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/hbllDEdjLe.png-1" alt="mark"><br>​</p>
+<p>getForObject 函数实际上是对 getForEntity 函数的进一步封装，如果你只关注返回的消息体的内容，对其他信息都不关注，此时可以使用 getForObject，举一个简单的例子，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book2"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book2</span><span class="params">()</span> </span>&#123;</div><div class="line">    Book book = restTemplate.getForObject(<span class="string">"http://HELLO-SERVICE/getbook1"</span>, Book.class);</div><div class="line">    <span class="keyword">return</span> book;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h3><p>在 RestTemplate 中，POST 请求可以通过如下三个方法来发起：</p>
+<ul>
+<li><p><strong>postForEntity</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/Lb08cmh0CL.png-1" alt="mark"></p>
+<p>该方法和get请求中的getForEntity方法类似，如下例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book3"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book3</span><span class="params">()</span> </span>&#123;</div><div class="line">    Book book = <span class="keyword">new</span> Book();</div><div class="line">    book.setName(<span class="string">"红楼梦"</span>);</div><div class="line">    ResponseEntity&lt;Book&gt; responseEntity = restTemplate.postForEntity(<span class="string">"http://HELLO-SERVICE/getbook2"</span>, book, Book.class);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>方法的第一参数表示要调用的服务的地址</li>
+<li>方法的第二个参数表示上传的参数</li>
+<li>方法的第三个参数表示返回的消息体的数据类型</li>
+</ul>
+<p>我这里创建了一个Book对象，这个Book对象只有name属性有值，将之传递到服务提供者那里去，服务提供者代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/getbook2"</span>, method = RequestMethod.POST)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book2</span><span class="params">(@RequestBody Book book)</span> </span>&#123;</div><div class="line">    System.out.println(book.getName());</div><div class="line">    book.setPrice(<span class="number">33</span>);</div><div class="line">    book.setAuthor(<span class="string">"曹雪芹"</span>);</div><div class="line">    book.setPublisher(<span class="string">"人民文学出版社"</span>);</div><div class="line">    <span class="keyword">return</span> book;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>服务提供者接收到服务消费者传来的参数book，给其他属性设置上值再返回，调用结果如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/aFjFlhl4l2.png" alt="mark"></p>
+</li>
+<li><p><strong>postForObject</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/ij0G627Flh.png-1" alt="mark"></p>
+<p>如果你只关注，返回的消息体，可以直接使用postForObject。用法和getForObject一致。</p>
+</li>
+<li><p><strong>postForLocation</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/2dhJF1ld7b.png-1" alt="mark"></p>
+<p>postForLocation 也是提交新资源，提交成功之后，返回新资源的 URI，postForLocation 的参数和前面两种的参数基本一致，只不过该方法的返回值为 URI ，这个只需要服务提供者返回一个 URI 即可，该 URI 表示新资源的位置。</p>
+</li>
+</ul>
+<h3 id="PUT-方法"><a href="#PUT-方法" class="headerlink" title="PUT 方法"></a>PUT 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/C7EJl11A7a.png-1" alt="mark"></p>
+<p>在 RestTemplate 中，PUT 请求可以通过 put 方法调用，put 方法的参数和前面介绍的 postForEntity 方法的参数基本一致，只是 put 方法没有返回值而已。举一个简单的例子，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/put"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">()</span> </span>&#123;</div><div class="line">    Book book = <span class="keyword">new</span> Book();</div><div class="line">    book.setName(<span class="string">"红楼梦"</span>);</div><div class="line">    restTemplate.put(<span class="string">"http://HELLO-SERVICE/getbook3/&#123;1&#125;"</span>, book, <span class="number">99</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>book对象是我要提交的参数，最后的99用来替换前面的占位符{1}</p>
+<h3 id="DELETE-方法"><a href="#DELETE-方法" class="headerlink" title="DELETE 方法"></a>DELETE 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/gF7ID9a8bk.png-1" alt="mark"></p>
+<p>delete 请求我们可以通过 delete 方法调用来实现，如下例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/delete"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</div><div class="line">    restTemplate.delete(<span class="string">"http://HELLO-SERVICE/getbook4/&#123;1&#125;"</span>, <span class="number">100</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HEADER-方法"><a href="#HEADER-方法" class="headerlink" title="HEADER 方法"></a>HEADER 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/707a2704Ij.png-1" alt="mark"></p>
+<p>返回资源的所有 HTTP headers。</p>
+<h3 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/DGJF2243G2.png-1" alt="mark"></p>
+<p>问可以执行哪些方法。</p>
+<h3 id="EXCHANGE"><a href="#EXCHANGE" class="headerlink" title="EXCHANGE"></a>EXCHANGE</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/CmFD4kl9g4.png-1" alt="mark"></p>
+<p>与其它接口的不同：</p>
+<ul>
+<li>允许调用者指定HTTP请求的方法（GET,POST,PUT等）</li>
+<li>可以在请求中增加body以及头信息，其内容通过参数 HttpEntity&lt;?&gt;requestEntity 描述</li>
+<li>exchange支持‘含参数的类型’（即泛型类）作为返回类型，该特性通过 ParameterizedTypeReference<t>responseType 描述</t></li>
+</ul>
+<h3 id="EXECUTE"><a href="#EXECUTE" class="headerlink" title="EXECUTE"></a>EXECUTE</h3><p>细心的你，不知道有没有发现上面所有的方法内部返回值都调用了同一个方法 —— execute  方法。</p>
+<p>下面我们来看看：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/1l7Il8faKH.png-1" alt="mark"></p>
+<p>可以看到，Excute方法只是将 String 格式的 URI 转成了 java.net.URI，之后调用了doExecute方法。整个调用过程关键起作用的是 doExecute 方法</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/756HHijFIh.png-1" alt="mark"></p>
+<h3 id="doExecute-方法"><a href="#doExecute-方法" class="headerlink" title="doExecute 方法"></a>doExecute 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/A9dgDiG1JL.png-1" alt="mark"></p>
+<p>这里需要了解两个类： RequestCallback 和 ResponseExtractor</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/B7k85lBkBk.png-1" alt="mark"></p>
+<p>RestTemplate 类中可以看到他们两的实现类。</p>
+<p><strong>RequestCallback</strong> ：用于操作请求头和body，在请求发出前执行。</p>
+<p>该接口有两个实现类：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">AcceptHeaderRequestCallback</th>
+<th style="text-align:left">只处理请求头，用于getXXX()方法。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">HttpEntityRequestCallback</td>
+<td style="text-align:left">继承于AcceptHeaderRequestCallback可以处理请求头和body，用于putXXX()、postXXX()和exchange()方法。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ResponseExtractor</strong>：解析HTTP响应的数据，而且不需要担心异常和资源的关闭</p>
+<p>上面图纸这个实现类 ResponseEntityResponseExtractor 的作用是：使用 HttpMessageConverterExtractor 提取 body（委托模式），然后将 body 和响应头、状态封装成 ResponseEntity 对象。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>转载请注明地址：<a href="http://www.54tianzhisheng.cn/2017/12/03/RestTemplate/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/12/03/RestTemplate/</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>1、<a href="https://www.cnblogs.com/caolei1108/p/6169950.html" target="_blank" rel="external">https://www.cnblogs.com/caolei1108/p/6169950.html</a></p>
+<p>2、<a href="https://segmentfault.com/a/1190000011093597" target="_blank" rel="external">https://segmentfault.com/a/1190000011093597</a></p>
+<p>如果想和我进一步交流请关注：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/h5HaHC6g12.png-1" alt="mark"></p>
 
       
 
@@ -305,7 +437,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -361,7 +493,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3a204DMQwFwP7/T4PEG4K25zhJu4jZJ9TuJbNIsWv7douPj68jP+fjx/H4nPbbzQceHh7eaOn3jnbpjz9ZX1W+Zjw8PLzTvHajTzbudonJ0/M14+Hh4V2B1z4+x+fhAQ8PD+9v8fJNPL9bfn88PDy8q/FmP/5nYSMvary01oKHh4cX89oG2BX+Ptjfw8PDw1voqq+EgZUzZ8Hgl6vw8PDwDvCSRTz+fL1c244s1CNZeHh4eFt5s+GqWTDIAe23d9eGh4eH9yZeEip2UXcVQfDw8PDO8fIbtYtuW1/565t9joeHh7eXVySpo7GAtgi7Ui6JYgseHh7eVl6eNOcPWC/15uvEw8PDO82bFQJmjf8cv56Of6u14OHh4W3ltYxZ6WF9+GD2MwAPDw/vHC9Zev6ANuFONv28eBH9J/Hw8PAWeMk4VP5JkeaOSsD1vwEPDw/vAG+WRs9KsSvFi3awAA8PD+80Lx8aaEsSs0GuNlAlJRU8PDy81/CKi0eNqzZs5Gl9Pb+Ah4eHF/NOtKPaV9Omy0U4wcPDwzvMS8oBeRqdn7MyUPXkuXh4eHiHee1jkm29/bvFPLkPHh4e3mFekkZHraayJZafk7y+2yyvx8PDwyt5662s2fl1+x8PDw/vMrw2RW5DxaxhNhvP+nYVHh4e3gFe24JaGYdaGR1IirZ3QwUeHh7eVt7KppwnwbPRgZX0Gg8PD+81vHzbXW9xzVpibdEEDw8P7wRvtvnOiqqny8G3XbEFDw8Pr2zw14NNQaLc3jMfZo1aaHh4eHjHeMWP/PjaZKH5K5i10PDw8PDey5u18NsQsnmkAA8PD+8yvDaEzMoTecB4UqvGw8PDO8BLbpePW82uzV9BXizGw8PDO8E71wDLt/L1xP0N/T08PLz/yPsEzIZK35Yyl50AAAAASUVORK5CYII=" alt="微信分享二维码">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3awW6DMBAE0Pz/T6dST5Va0pk1qYp5nBAith+Hidf24xFfz8/r6/3XJ9+fH73/+vlRy6ddGBgYl2UkzeX3SQvJGGoqBgbGDRhJyCYRvDLcpN/D5xgYGBjBQJ8LV/75MDAwMNrAzUN59gQDAwOjLWLXo/l1m39Ui2NgYFyQMdsY+Jv7t+9vYGBg/HvGetmZR+Tr3lfGg4GBsTcjmfa14TvbtsyRj1lzGBgYF2esl5TJ0thZC23FohsGBsYWjLyDZEB5x2dFdv2dMDAwLshoJ3yvAW2AzgrjYj8WAwNjI8YsQNtjFrN5a70Ti4GBsR1jNtxk4jgL0OGxDAwMjNswVpbD2jdnx8gO38fAwLgBI4nLduqWR3B+LCMqXzEwMDZl5PHXLsyde5wiOt2GgYGxHSMvQYcbivFw294PR4KBgbE1o11Qy0NwVri2xS0GBsaujPyQxKy8bCeXsyjHwMC4A6P4QVxqnhXH0QQRAwNja8YM0HawsqA2m8JiYGDsx8gr3dkkst0waEkYGBj3YeRxmQ/93LXAX/rFwMDYmrHeUHL8a32WioGBcU/Gs7zODeh8KvlLMYyBgbE1o94sXGasbEKst4yBgXFdRh6yeWdt7LaBW/97YGBgbMFYCb52g6F9Jwl6DAwMjFlneTHcbiT8MB4MDAyMuBzNh/vGOhsDA2NTRhuO69GZH9HAwMDAWF+sbweav9N+CAwMjO0YH4EniYdD+6J7AAAAAElFTkSuQmCC" alt="微信分享二维码">
     </div>
 </div>
 
@@ -375,18 +507,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/11/17/Money-management/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          谈谈我的理财
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/11/recommended-books/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">送你一份双十一剁手书单【墙裂推荐】</div>
+    <a href="/2017/12/02/wx-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">实习圈群里提问小记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -405,7 +528,7 @@ var _hmt = _hmt || [];
 
   <section id="comments">
 <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-<div id="SOHUCS" sid="Maven 中 dependencies 与 dependencyManagement 的区别"  style="padding: 0px 30px 0px 46px;"></div>
+<div id="SOHUCS" sid="RestTemplate 详解"  style="padding: 0px 30px 0px 46px;"></div>
 <script>
   (function(){
     var appid = 'cysWCg9Ij',

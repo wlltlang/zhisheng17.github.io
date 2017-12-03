@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-02T15:19:36.268Z</updated>
+  <updated>2017-12-03T07:08:10.734Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,165 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RestTemplate 详解</title>
+    <link href="http://yoursite.com/2017/12/03/RestTemplate/"/>
+    <id>http://yoursite.com/2017/12/03/RestTemplate/</id>
+    <published>2017-12-03T07:00:07.852Z</published>
+    <updated>2017-12-03T07:08:10.734Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1" alt=""></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。<br><a id="more"></a></p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>先讲讲如何使用吧，我项目是 SpringBoot 项目，可以在启动类中加入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在 Controller 层中引入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> RestTemplate restTemplate;</div></pre></td></tr></table></figure>
+<p>接下来就可以在 Controller 中各个方法中使用 restTemplate 了，但是 restTemplate 里面有什么方法呢？</p>
+<h3 id="RestTemplate-内部方法"><a href="#RestTemplate-内部方法" class="headerlink" title="RestTemplate 内部方法"></a>RestTemplate 内部方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/dB18a2j7bi.png-1" alt="mark"></p>
+<p>从图中 RestTemplate 可以看到有很多方法，我们可以提取出主要的几种方法是：</p>
+<ul>
+<li><strong>GET</strong></li>
+<li><strong>POST</strong></li>
+<li><strong>PUT</strong></li>
+<li><strong>DELETE</strong></li>
+<li><strong>HEAD</strong></li>
+<li><strong>OPTIONS</strong></li>
+<li><strong>EXCHANGE</strong></li>
+<li><strong>EXECUTE</strong></li>
+</ul>
+<p>图片中依然可以知道 RestTemplate 类中的方法主要是来自接口 RestOperations，下面我们具体看看这些方法里面的具体实现与该如何使用。</p>
+<h3 id="Get-方法"><a href="#Get-方法" class="headerlink" title="Get 方法"></a>Get 方法</h3><p>在 RestTemplate 中，发送一个 GET 请求，我们可以通过如下两种方式：</p>
+<ul>
+<li><p><strong>getForEntity</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/HIdKJdjkCC.png-1" alt="mark"></p>
+<p>getForEntity 方法的返回值是一个<code>ResponseEntity&lt;T&gt;</code>，<code>ResponseEntity&lt;T&gt;</code>是 Spring 对 HTTP 请求响应的封装，包括了几个重要的元素，如响应码、contentType、contentLength、响应消息体等。比如下面一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/gethello"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getHello</span><span class="params">()</span> </span>&#123;</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/hello"</span>, String.class);</div><div class="line">    String body = responseEntity.getBody();</div><div class="line">    HttpStatus statusCode = responseEntity.getStatusCode();</div><div class="line">    <span class="keyword">int</span> statusCodeValue = responseEntity.getStatusCodeValue();</div><div class="line">    HttpHeaders headers = responseEntity.getHeaders();</div><div class="line">    StringBuffer result = <span class="keyword">new</span> StringBuffer();</div><div class="line">    result.append(<span class="string">"responseEntity.getBody()："</span>).append(body).append(<span class="string">"&lt;hr&gt;"</span>)</div><div class="line">            .append(<span class="string">"responseEntity.getStatusCode()："</span>).append(statusCode).append(<span class="string">"&lt;hr&gt;"</span>)</div><div class="line">            .append(<span class="string">"responseEntity.getStatusCodeValue()："</span>).append(statusCodeValue).append(<span class="string">"&lt;hr&gt;"</span>)</div><div class="line">            .append(<span class="string">"responseEntity.getHeaders()："</span>).append(headers).append(<span class="string">"&lt;hr&gt;"</span>);</div><div class="line">    <span class="keyword">return</span> result.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关于这段代码，说如下几点：</p>
+<ul>
+<li><p>getForEntity 的第一个参数为我要调用的服务的地址，这里我调用了服务提供者提供的 /hello 接口，注意这里是通过服务名调用而不是服务地址，如果写成服务地址就没法实现客户端负载均衡了。（备注：我项目中需要通过 ConsulClient 去获取服务名，然后在去获取服务的 IP 和 Port，并把它拼接起来组合成我的服务地址，所以就没法实现客户端的负载均衡了，如果要是实现负载均衡，可以在 SpringBoot 启动类的中加入注解 <code>@LoadBalanced</code>, 如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="meta">@LoadBalanced</span></div><div class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> ）</p>
+</li>
+<li><p>getForEntity 第二个参数 String.class 表示我希望返回的 body 类型是 String</p>
+</li>
+<li><p>拿到返回结果之后，将返回结果遍历打印出来</p>
+</li>
+</ul>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/97g3ha24HG.png" alt="mark"></p>
+</li>
+</ul>
+<p>  有时候我在调用服务提供者提供的接口时，可能需要传递参数，有两种不同的方式:</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/sayhello"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/sayhello?name=&#123;1&#125;"</span>, String.class, <span class="string">"张三"</span>);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/sayhello2"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">sayHello2</span><span class="params">()</span> </span>&#123;</div><div class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">    map.put(<span class="string">"name"</span>, <span class="string">"李四"</span>);</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/sayhello?name=&#123;name&#125;"</span>, String.class, map);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>可以用一个数字做占位符，最后是一个可变长度的参数，来一 一替换前面的占位符</li>
+<li><p>也可以前面使用 name={name} 这种形式，最后一个参数是一个 map，map 的 key 即为前边占位符的名字，map的 value 为参数值</p>
+<p>第一个调用地址也可以是一个URI而不是字符串，这个时候我们构建一个URI即可，参数神马的都包含在URI中了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/sayhello3"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">sayHello3</span><span class="params">()</span> </span>&#123;</div><div class="line">    UriComponents uriComponents = UriComponentsBuilder.fromUriString(<span class="string">"http://HELLO-SERVICE/sayhello?name=&#123;name&#125;"</span>).build().expand(<span class="string">"王五"</span>).encode();</div><div class="line">    URI uri = uriComponents.toUri();</div><div class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(uri, String.class);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过Spring中提供的UriComponents来构建Uri即可。</p>
+<p>当然，服务提供者不仅可以返回String，也可以返回一个自定义类型的对象，比如我的服务提供者中有如下方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/getbook1"</span>, method = RequestMethod.GET)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book1</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Book(<span class="string">"三国演义"</span>, <span class="number">90</span>, <span class="string">"罗贯中"</span>, <span class="string">"花城出版社"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于该方法我可以在服务消费者中通过如下方式来调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book1"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book1</span><span class="params">()</span> </span>&#123;</div><div class="line">    ResponseEntity&lt;Book&gt; responseEntity = restTemplate.getForEntity(<span class="string">"http://HELLO-SERVICE/getbook1"</span>, Book.class);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/jHbbB37bjC.png" alt="mark"></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>getForObject</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/hbllDEdjLe.png-1" alt="mark"><br>​</p>
+<p>getForObject 函数实际上是对 getForEntity 函数的进一步封装，如果你只关注返回的消息体的内容，对其他信息都不关注，此时可以使用 getForObject，举一个简单的例子，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book2"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book2</span><span class="params">()</span> </span>&#123;</div><div class="line">    Book book = restTemplate.getForObject(<span class="string">"http://HELLO-SERVICE/getbook1"</span>, Book.class);</div><div class="line">    <span class="keyword">return</span> book;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h3><p>在 RestTemplate 中，POST 请求可以通过如下三个方法来发起：</p>
+<ul>
+<li><p><strong>postForEntity</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/Lb08cmh0CL.png-1" alt="mark"></p>
+<p>该方法和get请求中的getForEntity方法类似，如下例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book3"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book3</span><span class="params">()</span> </span>&#123;</div><div class="line">    Book book = <span class="keyword">new</span> Book();</div><div class="line">    book.setName(<span class="string">"红楼梦"</span>);</div><div class="line">    ResponseEntity&lt;Book&gt; responseEntity = restTemplate.postForEntity(<span class="string">"http://HELLO-SERVICE/getbook2"</span>, book, Book.class);</div><div class="line">    <span class="keyword">return</span> responseEntity.getBody();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>方法的第一参数表示要调用的服务的地址</li>
+<li>方法的第二个参数表示上传的参数</li>
+<li>方法的第三个参数表示返回的消息体的数据类型</li>
+</ul>
+<p>我这里创建了一个Book对象，这个Book对象只有name属性有值，将之传递到服务提供者那里去，服务提供者代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/getbook2"</span>, method = RequestMethod.POST)</div><div class="line"><span class="function"><span class="keyword">public</span> Book <span class="title">book2</span><span class="params">(@RequestBody Book book)</span> </span>&#123;</div><div class="line">    System.out.println(book.getName());</div><div class="line">    book.setPrice(<span class="number">33</span>);</div><div class="line">    book.setAuthor(<span class="string">"曹雪芹"</span>);</div><div class="line">    book.setPublisher(<span class="string">"人民文学出版社"</span>);</div><div class="line">    <span class="keyword">return</span> book;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>服务提供者接收到服务消费者传来的参数book，给其他属性设置上值再返回，调用结果如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/aFjFlhl4l2.png" alt="mark"></p>
+</li>
+<li><p><strong>postForObject</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/ij0G627Flh.png-1" alt="mark"></p>
+<p>如果你只关注，返回的消息体，可以直接使用postForObject。用法和getForObject一致。</p>
+</li>
+<li><p><strong>postForLocation</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/2dhJF1ld7b.png-1" alt="mark"></p>
+<p>postForLocation 也是提交新资源，提交成功之后，返回新资源的 URI，postForLocation 的参数和前面两种的参数基本一致，只不过该方法的返回值为 URI ，这个只需要服务提供者返回一个 URI 即可，该 URI 表示新资源的位置。</p>
+</li>
+</ul>
+<h3 id="PUT-方法"><a href="#PUT-方法" class="headerlink" title="PUT 方法"></a>PUT 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/C7EJl11A7a.png-1" alt="mark"></p>
+<p>在 RestTemplate 中，PUT 请求可以通过 put 方法调用，put 方法的参数和前面介绍的 postForEntity 方法的参数基本一致，只是 put 方法没有返回值而已。举一个简单的例子，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/put"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">()</span> </span>&#123;</div><div class="line">    Book book = <span class="keyword">new</span> Book();</div><div class="line">    book.setName(<span class="string">"红楼梦"</span>);</div><div class="line">    restTemplate.put(<span class="string">"http://HELLO-SERVICE/getbook3/&#123;1&#125;"</span>, book, <span class="number">99</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>book对象是我要提交的参数，最后的99用来替换前面的占位符{1}</p>
+<h3 id="DELETE-方法"><a href="#DELETE-方法" class="headerlink" title="DELETE 方法"></a>DELETE 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/gF7ID9a8bk.png-1" alt="mark"></p>
+<p>delete 请求我们可以通过 delete 方法调用来实现，如下例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/delete"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</div><div class="line">    restTemplate.delete(<span class="string">"http://HELLO-SERVICE/getbook4/&#123;1&#125;"</span>, <span class="number">100</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HEADER-方法"><a href="#HEADER-方法" class="headerlink" title="HEADER 方法"></a>HEADER 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/707a2704Ij.png-1" alt="mark"></p>
+<p>返回资源的所有 HTTP headers。</p>
+<h3 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/DGJF2243G2.png-1" alt="mark"></p>
+<p>问可以执行哪些方法。</p>
+<h3 id="EXCHANGE"><a href="#EXCHANGE" class="headerlink" title="EXCHANGE"></a>EXCHANGE</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/CmFD4kl9g4.png-1" alt="mark"></p>
+<p>与其它接口的不同：</p>
+<ul>
+<li>允许调用者指定HTTP请求的方法（GET,POST,PUT等）</li>
+<li>可以在请求中增加body以及头信息，其内容通过参数 HttpEntity&lt;?&gt;requestEntity 描述</li>
+<li>exchange支持‘含参数的类型’（即泛型类）作为返回类型，该特性通过 ParameterizedTypeReference<t>responseType 描述</t></li>
+</ul>
+<h3 id="EXECUTE"><a href="#EXECUTE" class="headerlink" title="EXECUTE"></a>EXECUTE</h3><p>细心的你，不知道有没有发现上面所有的方法内部返回值都调用了同一个方法 —— execute  方法。</p>
+<p>下面我们来看看：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/1l7Il8faKH.png-1" alt="mark"></p>
+<p>可以看到，Excute方法只是将 String 格式的 URI 转成了 java.net.URI，之后调用了doExecute方法。整个调用过程关键起作用的是 doExecute 方法</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/756HHijFIh.png-1" alt="mark"></p>
+<h3 id="doExecute-方法"><a href="#doExecute-方法" class="headerlink" title="doExecute 方法"></a>doExecute 方法</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/A9dgDiG1JL.png-1" alt="mark"></p>
+<p>这里需要了解两个类： RequestCallback 和 ResponseExtractor</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/B7k85lBkBk.png-1" alt="mark"></p>
+<p>RestTemplate 类中可以看到他们两的实现类。</p>
+<p><strong>RequestCallback</strong> ：用于操作请求头和body，在请求发出前执行。</p>
+<p>该接口有两个实现类：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">AcceptHeaderRequestCallback</th>
+<th style="text-align:left">只处理请求头，用于getXXX()方法。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">HttpEntityRequestCallback</td>
+<td style="text-align:left">继承于AcceptHeaderRequestCallback可以处理请求头和body，用于putXXX()、postXXX()和exchange()方法。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ResponseExtractor</strong>：解析HTTP响应的数据，而且不需要担心异常和资源的关闭</p>
+<p>上面图纸这个实现类 ResponseEntityResponseExtractor 的作用是：使用 HttpMessageConverterExtractor 提取 body（委托模式），然后将 body 和响应头、状态封装成 ResponseEntity 对象。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>转载请注明地址：<a href="http://www.54tianzhisheng.cn/2017/12/03/RestTemplate/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/12/03/RestTemplate/</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>1、<a href="https://www.cnblogs.com/caolei1108/p/6169950.html" target="_blank" rel="external">https://www.cnblogs.com/caolei1108/p/6169950.html</a></p>
+<p>2、<a href="https://segmentfault.com/a/1190000011093597" target="_blank" rel="external">https://segmentfault.com/a/1190000011093597</a></p>
+<p>如果想和我进一步交流请关注：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171203/h5HaHC6g12.png-1" alt="mark"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>实习圈群里提问小记</title>
@@ -2225,34 +2384,6 @@
     
     
       <category term="Nginx" scheme="http://yoursite.com/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>马云热血励志演讲《最伟大的成功》</title>
-    <link href="http://yoursite.com/2017/08/11/most-success/"/>
-    <id>http://yoursite.com/2017/08/11/most-success/</id>
-    <published>2017-08-11T13:56:34.713Z</published>
-    <updated>2017-08-11T14:05:19.788Z</updated>
-    
-    <content type="html"><![CDATA[<p>当你乐观的时候，总是会有机会的。那么你可能要问了“机会在哪呢？”你可能没有特别想实现的事，没有迫切要成功的欲望，没有勇攀高峰的决心，没有水滴石穿的毅力，也没有一颗所向披靡的强大心脏。那么，让来自马云的这段演讲来告诉你，你有什么。你有年轻的身体，你有奇妙的想法，你有乐观的心态，你有无限的可能性。<br><a id="more"></a></p>
-<iframe height="492" width="798" src="http://qiniu-xpc3.vmoviercdn.com/59883b6633ea6.mp4" frameborder="0" allowfullscreen>  </iframe>
-
-<p>我想，马云的这段励志演讲为我们提供了一面镜子可以用于自照。上面“你有什么”说完了，接下来让我讨论一下“你可能没有什么”。</p>
-<p>你总爱抱怨，机会却总是躲在人们抱怨的地方。你没有仔细想想怎么能把事情做得不一样。你没有行动力，你缺少坚持下去的长劲儿。你抗压能力差，你动不动就玻璃心。你不相信自己也不相信别人，你怕犯错。现在是不是觉得这碗鸡汤有点难以下咽了？如果认识到差距，不如从今天开始改变。明天的你只要比今天的你多迈出0.1步，也是进步。</p>
-<p>为自己而工作。停止抱怨，用抱怨的时间多做事。把那些夜里冒出来的好点子在白天付诸行动，既然有了设想，那就行动起来。行动是你迈出的第一步，后面可能会更难，历经无数次动摇，面临无数次诱惑，感受无数次失败的苦味和难以为继的辛酸。顶住这一切，比常人更勇敢地去面对，并且坚持下去。排除万难，别被来自世人的非议和质疑影响。相信你自己，相信你的团队。服务好你的客户，之后再想怎么回馈社会。犯足够多的错，年轻时走过的弯路是最棒的收获。</p>
-<p>马云还曾经说过“今天很艰难，明天比今天更难，后天可能是美好的，但更多的人死在了明天”。是不是感到膝盖中箭了？不妨干了这碗“毒鸡汤”。<strong>成功的法则本就并非千篇一律，你会有你自己向上的学问。</strong>那不如从明天开始，去摸索，去践行，哪怕只比昨天的你多迈出0.01步。</p>
-<p>送给正在找实习工作的自己！加油！！！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当你乐观的时候，总是会有机会的。那么你可能要问了“机会在哪呢？”你可能没有特别想实现的事，没有迫切要成功的欲望，没有勇攀高峰的决心，没有水滴石穿的毅力，也没有一颗所向披靡的强大心脏。那么，让来自马云的这段演讲来告诉你，你有什么。你有年轻的身体，你有奇妙的想法，你有乐观的心态，你有无限的可能性。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="励志" scheme="http://yoursite.com/tags/%E5%8A%B1%E5%BF%97/"/>
     
   </entry>
   
