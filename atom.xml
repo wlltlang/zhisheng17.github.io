@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-13T15:05:53.723Z</updated>
+  <updated>2017-12-13T15:15:18.292Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/12/13/Google-Developer-Days/"/>
     <id>http://yoursite.com/2017/12/13/Google-Developer-Days/</id>
     <published>2017-12-13T14:29:37.107Z</published>
-    <updated>2017-12-13T15:05:53.723Z</updated>
+    <updated>2017-12-13T15:15:18.292Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171213/1DJAFA7Kmb.png-1" alt="mark"><br>全文图片较多，请在 WiFi 下阅读，土豪请随意！<br><a id="more"></a></p>
 <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>今年 Google 开发者大会再度来袭，大会将于 12 月 13 日和 14 日在上海举办，主题涵盖机器学习(Machine Learning)、Android、移动网络(Mobile Web)、TensorFlow、Firebase、云服务(Cloud)、AR/VR、设计(Design)以及更多开发者相关内容。</p>
@@ -59,13 +59,13 @@
 <p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171213/232lbee3Dg.png-1" alt="mark"></p>
 <p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171213/Dlb96kdIfh.png-1" alt="mark"></p>
 <p>另外除了照片，还拍了三个视频</p>
-<video width="1080" height="1920" controls="controls"><br>  <source src="http://ohfk1r827.bkt.clouddn.com/VID_20171213_183743.mp4" type="video/mp4"><br></video>
+<video width="400" height="800" controls="controls"><br>  <source src="http://ohfk1r827.bkt.clouddn.com/VID_20171213_183743.mp4" type="video/mp4"><br></video>
 
 <p><br></p>
-<video width="1080" height="1920" controls="controls"><br>  <source src="http://ohfk1r827.bkt.clouddn.com/VID_20171213_183253.mp4" type="video/mp4"><br></video>
+<video width="400" height="800" controls="controls"><br>  <source src="http://ohfk1r827.bkt.clouddn.com/VID_20171213_183253.mp4" type="video/mp4"><br></video>
 
 <p><br></p>
-<video width="1080" height="1920" controls="controls"><br>  <source src="http://ohfk1r827.bkt.clouddn.com/VID_20171213_185542.mp4" type="video/mp4"><br></video>
+<video width="400" height="800" controls="controls"><br>  <source src="http://ohfk1r827.bkt.clouddn.com/VID_20171213_185542.mp4" type="video/mp4"><br></video>
 
 
 <h3 id="回家"><a href="#回家" class="headerlink" title="回家"></a>回家</h3><p>吃饱喝足，回家拍了张照</p>
