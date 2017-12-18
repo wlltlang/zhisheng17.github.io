@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-13T15:15:18.292Z</updated>
+  <updated>2017-12-18T15:45:11.500Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo + yilia 搭建博客可能会遇到的所有疑问</title>
+    <link href="http://yoursite.com/2017/12/18/hexo-yilia/"/>
+    <id>http://yoursite.com/2017/12/18/hexo-yilia/</id>
+    <published>2017-12-18T15:38:44.067Z</published>
+    <updated>2017-12-18T15:45:11.500Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/BaE3G1imDm.png-1" alt="mark"></p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>为什么会再次写这篇博客？请看下图：<br><a id="more"></a></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/b4j29CkGgJ.png-1" alt="mark"></p>
+<p>这是我博客搜索引擎的主要关键字。为什么会有这些关键字呢？</p>
+<p>我猜估计是曾经写了几篇关于搭建博客的文章，被搜索引擎收入了，所以搜索引擎才会将这些流量引导至我的博客，文章如下：</p>
+<p>1、<a href="http://www.54tianzhisheng.cn/2017/03/28/%E5%88%A9%E7%94%A8Github%20Page%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" target="_blank" rel="external">利用Github Page 搭建个人博客网站</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2017/06/13/Hexo-yilia-toc/" target="_blank" rel="external">Hexo + yilia 主题实现文章目录</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2017/04/13/Hexo-yilia-changyan/" target="_blank" rel="external">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></p>
+<p>那还有这么多人搜索这些关键字？说明碰到问题的还有不少，所以才有了这篇文章的诞生！</p>
+<h3 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a>问题解答</h3><p><strong>1、hexo  yilia 文章目录</strong></p>
+<p>这个我以前写过一篇文章：<a href="http://www.54tianzhisheng.cn/2017/06/13/Hexo-yilia-toc/" target="_blank" rel="external">Hexo + yilia 主题实现文章目录</a>    那篇文章写了我那个版本的 yilia 怎么添加文章目录的，但是好像新版本的 yilia 已经自带了这个文章目录功能。所以如果你是使用的新版本的 yilia ，请不要做任何修改！但是前几天有人给我发了个图片，又好像有点区别，如果实在有不同的话，请加群 528776268 找我要我那个主题版本的所有配置文件。再次说明，我前端也不是很擅长，我写那篇文章也是参考其他博客的修改，所以无能为力了。有什么问题，建议直接在 yilia 主题的 GitHub 去找作者聊！</p>
+<p><strong>2、Hexo  yilia  随笔</strong></p>
+<p>随笔如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/0kkIFEkcja.png-1" alt="mark"></p>
+<p>对此想说的就是，“随笔”  其实就是文章的一个 tags(标签)，如果你想把文章作为随笔的话，请在文章的首部写个 tags  为 “随笔”   的标签。如下图：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/13539aGJF5.png-1" alt="mark"></p>
+<p>注意：-  后面有个空格。</p>
+<p><strong>3、yilia 主题分类实现</strong></p>
+<p>如果要有多个标签，可以如下图所示：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/lF42EedCJA.png-1" alt="mark"></p>
+<p><strong>4、hexo yilia 设置文章显示长度，不展开全文</strong></p>
+<p>yilia 主题中可以用 <code>&lt;!-- more --&gt;</code>  截取文章的显示长度，如果你想在哪截取文章，就在那行使用该字符。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/2ickeEEFbh.png-1" alt="mark"></p>
+<p><strong>5、yilia 添加阅读量</strong></p>
+<p>我添加的是 “不蒜子” 计数，它可以区分 pv/uv 的统计方式，统计更精准，满足更多需求。有这个需求的可以去查找下博客怎么添加。（网上有很多这方面的博客）</p>
+<p><strong>6、yilia 主题使用 “畅言” 评论系统</strong></p>
+<p>参见我以前的文章：  <a href="http://www.54tianzhisheng.cn/2017/04/13/Hexo-yilia-changyan/" target="_blank" rel="external">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></p>
+<p><strong>7、hexo yilia 引入音乐</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/fA367Gej62.png-1" alt="mark"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">"no"</span> <span class="attr">border</span>=<span class="string">"0"</span> <span class="attr">marginwidth</span>=<span class="string">"0"</span> <span class="attr">marginheight</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">330</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">"填写音乐链接地址"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如下图，可以在网易云音乐里搜到你想要引入的音乐，然后点击如下的 “生成外链播放器” 即可：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/lLLLBlH1FK.png-1" alt="mark"></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/ibaCjDEhEa.png-1" alt="mark"></p>
+<p><strong>8、hexo yilia 引入视频</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/1f6gC2mJ1f.png-1" alt="mark"></p>
+<p>hexo  支持 html 语法的，所以可以如上图这样引入视频！</p>
+<p><strong>9、hexo  yilia  相册</strong></p>
+<p>这个抱歉，我自己也没做这方面的功能，暂时不太清楚怎么实现。不过有文章写怎么实现，大家可以搜索下！</p>
+<p><strong>10、hexo  yilia  怎么写文章</strong></p>
+<p>我一般写文章就是先用本地 markdown 编辑器写好后，然后放在 hexo 的 <code>source/_posts</code> 目录下。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/0HjLacBcfe.png-1" alt="mark"></p>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>好了，大概就这些问题，我也一一解答了，希望搭建博客的你可以看到这篇文章，让你少走点弯路，如果你也遇到过这些问题，还请你能分享下文章，让更多人避免入坑！</p>
+<p>本文地址是：<a href="http://www.54tianzhisheng.cn/2017/12/18/hexo-yilia" target="_blank" rel="external">Hexo + yilia 搭建博客可能会遇到的所有疑问</a>  本文原创，转载请注明原创地址。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p><a href="http://www.54tianzhisheng.cn/2017/12/18/hexo-yilia" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/12/18/hexo-yilia</a>  这个链接是让推酷爬虫吞掉的，哈哈！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/blog/171218/BaE3G1imDm.png-1&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;前提&quot;&gt;&lt;a href=&quot;#前提&quot; class=&quot;headerlink&quot; title=&quot;前提&quot;&gt;&lt;/a&gt;前提&lt;/h3&gt;&lt;p&gt;为什么会再次写这篇博客？请看下图：&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="yilia" scheme="http://yoursite.com/tags/yilia/"/>
+    
+  </entry>
   
   <entry>
     <title>谷歌开发者大会收获满满，不去真 “可惜” 了</title>
@@ -1958,200 +2025,6 @@
     
     
       <category term="lua" scheme="http://yoursite.com/tags/lua/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>全文搜索引擎 Elasticsearch 集群搭建入门教程</title>
-    <link href="http://yoursite.com/2017/09/09/Elasticsearch-install/"/>
-    <id>http://yoursite.com/2017/09/09/Elasticsearch-install/</id>
-    <published>2017-09-09T03:56:42.374Z</published>
-    <updated>2017-09-09T04:59:12.775Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>ElasticSearch 是一个基于 Lucene 的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于 RESTful web 接口。Elasticsearch 是用 Java 开发的，并作为 Apache 许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。基百科、Stack Overflow、Github 都采用它。</p>
-<p>本文从零开始，讲解如何使用 Elasticsearch 搭建自己的全文搜索引擎。每一步都有详细的说明，大家跟着做就能学会。<br><a id="more"></a></p>
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>1、VMware</p>
-<p>2、Centos 6.6</p>
-<p>3、Elasticsearch 5.5.2</p>
-<p>4、JDK 1.8</p>
-<p>VMware 安装以及在 VMware 中安装 Centos 这个就不说了，环境配置直接默认就好，不过分配给机器的内存最好设置大点（建议 2G），</p>
-<p>使用 dhclient 命令来自动获取 IP 地址，查看获取的 IP 地址则使用命令 ip addr 或者 ifconfig ，则会看到网卡信息和 lo 卡信息。</p>
-<p>给虚拟机额中的 linux 设置固定的  ip（因为后面发现每次机器重启后又要重新使用 dhclient 命令来自动获取 IP 地址）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim  /etc/sysconfig/network-scripts/ifcfg-eth0</div></pre></td></tr></table></figure>
-<p>修改：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">onboot=yes</div><div class="line">bootproto=static</div></pre></td></tr></table></figure>
-<p>增加：（下面可设置可不设置）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">IPADDR=192.168.1.113            网卡IP地址</div><div class="line">GATEWAY=192.168.1.1</div><div class="line">NETMASK=255.255.255.0</div></pre></td></tr></table></figure>
-<p>设置好之后，把网络服务重启一下， <code>service network restart</code></p>
-<p>修改 ip 地址参考： <a href="http://jingyan.baidu.com/article/e4d08ffdd417660fd3f60d70.html" target="_blank" rel="external">http://jingyan.baidu.com/article/e4d08ffdd417660fd3f60d70.html</a></p>
-<p>大环境都准备好了，下面开始安装步骤：</p>
-<h3 id="安装-JDK-1-8"><a href="#安装-JDK-1-8" class="headerlink" title="安装 JDK 1.8"></a>安装 JDK 1.8</h3><p>先卸载自带的 openjdk，查找  openjdk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep java</div></pre></td></tr></table></figure>
-<p>卸载 openjdk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum -y remove  java-1.7.0-openjdk-1.7.0.65-2.5.1.2.el65.x8664</div><div class="line">yum -y remove java-1.6.0-openjdk-1.6.0.0-11.1.13.4.el6.x86_64</div></pre></td></tr></table></figure>
-<p><strong>解压 JDK 安装包：</strong></p>
-<p>附上jdk1.8的下载地址：<br><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
-<p>解压完成后配置一下环境变量就 ok</p>
-<p>1、在/usr/local/下创建Java文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/                                    进入目录</div><div class="line">mkdir java                                     新建java目录</div></pre></td></tr></table></figure>
-<p>2、文件夹创建完毕，把安装包拷贝到 Java 目录中，然后解压 jdk 到当前目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /usr/jdk-8u144-linux-x64.tar.gz /usr/local/java/    **注意匹配你自己的文件名**  拷贝到java目录</div><div class="line">tar -zxvf jdk-8u144-linux-x64.tar.gz       解压到当前目录（Java目录）</div></pre></td></tr></table></figure>
-<p>3、解压完之后，Java目录中会出现一个jdk1.8.0_144的目录，这就解压完成了。之后配置一下环境变量。<br>编辑/etc/下的profile文件，配置环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">vi /etc/profile                  进入profile文件的编辑模式</div><div class="line"></div><div class="line">在最后边追加一下内容(**配置的时候一定要根据自己的目录情况而定哦！**)</div><div class="line"></div><div class="line"> JAVA_HOME=/usr/local/java/jdk1.8.0_144</div><div class="line"> CLASSPATH=$JAVA_HOME/lib/</div><div class="line"> PATH=$PATH:$JAVA_HOME/bin</div><div class="line"> export PATH JAVA_HOME CLASSPATH</div></pre></td></tr></table></figure>
-<p>之后保存并退出文件之后。</p>
-<p>让文件生效：<code>source /etc/profile</code></p>
-<p>在控制台输入Java 和 Java -version 看有没有信息输出，如下： <code>java -version</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_144&quot;</div><div class="line"> Java(TM) SE Runtime Environment (build 1.8.0_60-b27)</div><div class="line"> Java HotSpot(TM) Client VM (build 25.60-b23, mixed mode)</div></pre></td></tr></table></figure>
-<p>能显示以上信息，就说明 JDK 安装成功啦</p>
-<hr>
-<h3 id="安装-Maven"><a href="#安装-Maven" class="headerlink" title="安装 Maven"></a>安装 Maven</h3><p>因为后面可能会用到 maven ，先装上这个。</p>
-<p>1、下载 maven</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz</div></pre></td></tr></table></figure>
-<p>2、解压至 /usr/local 目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf apache-maven-3.2.5-bin.tar.gz</div></pre></td></tr></table></figure>
-<p>3、配置公司给的配置</p>
-<p>替换成公司给的 setting.xml 文件，修改关于本地仓库的位置, 默认位置: ${user.home}/.m2/repository</p>
-<p>4、配置环境变量etc/profile 最后添加以下两行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export MAVEN_HOME=/usr/local/apache-maven-3.2.5</div><div class="line">export PATH=$&#123;PATH&#125;:$&#123;MAVEN_HOME&#125;/bin</div></pre></td></tr></table></figure>
-<p>5、测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mvn -v</div><div class="line">Apache Maven 3.2.5 (12a6b3acb947671f09b81f49094c53f426d8cea1; 2014-12-14T09:29:23-08:00)</div><div class="line">Maven home: /usr/local/apache-maven-3.2.5</div></pre></td></tr></table></figure>
-<p>VMware 虚拟机里面的三台机器 IP 分别是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">192.168.153.133</div><div class="line">192.168.153.134</div><div class="line">192.168.153.132</div></pre></td></tr></table></figure>
-<h3 id="配置-hosts"><a href="#配置-hosts" class="headerlink" title="配置 hosts"></a>配置 hosts</h3><p>在 /etc/hosts下面编写：ip  node 节点的名字（域名解析）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim  /etc/hosts</div></pre></td></tr></table></figure>
-<p>新增：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">192.168.153.133  es1</div><div class="line">192.168.153.134  es2</div><div class="line">192.168.153.132  es3</div></pre></td></tr></table></figure>
-<h3 id="设置-SSH-免密码登录"><a href="#设置-SSH-免密码登录" class="headerlink" title="设置 SSH 免密码登录"></a>设置 SSH 免密码登录</h3><p>安装expect命令 ： yum -y install expect</p>
-<p>将 ssh_p2p.jar 随便解压到任何目录下： (这个 jar 包可以去网上下载)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip ssh_p2p.zip</div></pre></td></tr></table></figure>
-<p>修改 resource 的 ip 值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /ssh_p2p/deploy_data/resource  （各个节点和账户名，密码，free代表相互都可以无密码登陆）</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#设置为你每台虚拟机的ip地址，用户名，密码</div><div class="line">address=(</div><div class="line">&quot;192.168.153.133,root,123456,free&quot;</div><div class="line">&quot;192.168.153,134,root,123456,free&quot;</div><div class="line">&quot;192.168.153.132,root,123456,free&quot;</div><div class="line">)</div></pre></td></tr></table></figure>
-<p>修改 start.sh 的运行权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod u+x start.sh</div></pre></td></tr></table></figure>
-<p>运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./start.sh</div></pre></td></tr></table></figure>
-<p>测试：</p>
-<p>ssh ip地址  （测试是否可以登录）</p>
-<h3 id="安装-ElasticSearch"><a href="#安装-ElasticSearch" class="headerlink" title="安装 ElasticSearch"></a>安装 ElasticSearch</h3><p>下载地址： <a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="external">https://www.elastic.co/downloads/elasticsearch</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.tar.gz</div><div class="line">cd /usr/local</div><div class="line">tar -zxvf   elasticsearch-5.5.2.tar.gz</div></pre></td></tr></table></figure>
-<p><code>su tzs</code>  切换到 tzs 用户下 ( 默认不支持 root 用户)</p>
-<p><code>sh /usr/local/elasticsearch/bin/elasticsearch -d</code>  其中 -d 表示后台启动</p>
-<p>在 vmware 上测试是否成功：curl <a href="http://localhost:9200/" target="_blank" rel="external">http://localhost:9200/</a></p>
-<p><img src="http://ohfk1r827.bkt.clouddn.com/test.jpg-1" alt="test"></p>
-<p>出现如上图这样的效果，就代表已经装好了。</p>
-<p>elasticsearch 默认 restful-api 的端口是 9200 不支持 IP 地址，也就是说无法从主机访问虚拟机中的服务，只能在本机用 <a href="http://localhost:9200" target="_blank" rel="external">http://localhost:9200</a> 来访问。如果需要改变，需要修改配置文件 /usr/local/elasticsearch/config/elasticsearch.yml 文件，加入以下两行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">network.bind_host: 0.0.0.0</div><div class="line">network.publish_host: _nonloopback:ipv4</div></pre></td></tr></table></figure>
-<p>或去除 network.host 和 http.port 之前的注释，并将 network.host 的 IP 地址修改为本机外网 IP。然后重启，Elasticsearch</p>
-<p>关闭方法（输入命令：<code>ps -ef | grep elasticsearch</code> ，找到进程，然后 kill 掉就行了。</p>
-<p>如果外网还是不能访问，则有可能是防火墙设置导致的 ( 关闭防火墙：<code>service iptables stop</code> )</p>
-<p>修改配置文件：<code>vim config/elasticsearch.yml</code></p>
-<p>cluster.name : my-app  (集群的名字，名字相同的就是一个集群)</p>
-<p>node.name : es1  （节点的名字, 和前面配置的 hosts 中的 name 要一致）</p>
-<p>path.data: /data/elasticsearch/data  （数据的路径。没有要创建（<code>mkdir -p /data/elasticsearch/{data,logs}</code>），并且给执行用户权限 <code>chown tzs /data/elasticsearch/{data,logs} -R</code> ）<br>path.logs: /data/elasticsearch/logs    （数据 log 信息的路径，同上）<br>network.host: 0.0.0.0    //允许外网访问，也可以是自己的ip地址<br>http.port: 9200        //访问的端口<br>discovery.zen.ping.unicast.hosts: [“192.168.153.133”, “192.168.153.134”, “192.168.153.132”]   //各个节点的ip地址</p>
-<p>记得需要添加上：（这个是安装 head 插件要用的， 目前不需要）<br>http.cors.enabled: true<br>http.cors.allow-origin: “*”</p>
-<p>最后在外部浏览器的效果如下图：</p>
-<p><img src="http://ohfk1r827.bkt.clouddn.com/test-on-bro.jpg-1" alt="test-on-bro"></p>
-<h3 id="安装-IK-中文分词"><a href="#安装-IK-中文分词" class="headerlink" title="安装 IK 中文分词"></a>安装 IK 中文分词</h3><p>可以自己下载源码使用 maven 编译，当然如果怕麻烦可以直接下载编译好的</p>
-<p><a href="https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v5.5.2" target="_blank" rel="external">https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v5.5.2</a></p>
-<p>注意下载对应的版本放在 plugins 目录下</p>
-<p>解压</p>
-<p><code>unzip elasticsearch-analysis-ik-5.5.2.zip</code></p>
-<p>在 es 的 plugins 下新建 ik 目录</p>
-<p><code>mkdir ik</code></p>
-<p>将刚才解压的复制到ik目录下</p>
-<p><code>cp -r elasticsearch/* ik</code></p>
-<p>删除刚才解压后的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rm -rf elasticsearch</div><div class="line">rm -rf elasticsearch-analysis-ik-5.5.2.zip</div></pre></td></tr></table></figure>
-<h4 id="IK-带有两个分词器"><a href="#IK-带有两个分词器" class="headerlink" title="IK 带有两个分词器"></a>IK 带有两个分词器</h4><p><strong>ik_max_word</strong> ：会将文本做最细粒度的拆分；尽可能多的拆分出词语</p>
-<p><strong>ik_smart</strong>：会做最粗粒度的拆分；已被分出的词语将不会再次被其它词语占有</p>
-<p>安装完 IK 中文分词器后（当然不止这种中文分词器，还有其他的，可以参考我的文章  <a href="http://www.54tianzhisheng.cn/2017/09/07/Elasticsearch-analyzers/" target="_blank" rel="external">Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a>），测试区别如下：</p>
-<h5 id="ik-max-word"><a href="#ik-max-word" class="headerlink" title="ik_max_word"></a>ik_max_word</h5><p>curl -XGET ‘<a href="http://192.168.153.134:9200/_analyze?pretty&amp;analyzer=ik_max_word" target="_blank" rel="external">http://192.168.153.134:9200/_analyze?pretty&amp;analyzer=ik_max_word</a>‘ -d ‘联想是全球最大的笔记本厂商’</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;tokens&quot; : [</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;联想&quot;,</div><div class="line">      &quot;start_offset&quot; : 0,</div><div class="line">      &quot;end_offset&quot; : 2,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 0</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;是&quot;,</div><div class="line">      &quot;start_offset&quot; : 2,</div><div class="line">      &quot;end_offset&quot; : 3,</div><div class="line">      &quot;type&quot; : &quot;CN_CHAR&quot;,</div><div class="line">      &quot;position&quot; : 1</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;全球&quot;,</div><div class="line">      &quot;start_offset&quot; : 3,</div><div class="line">      &quot;end_offset&quot; : 5,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 2</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;最大&quot;,</div><div class="line">      &quot;start_offset&quot; : 5,</div><div class="line">      &quot;end_offset&quot; : 7,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 3</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;的&quot;,</div><div class="line">      &quot;start_offset&quot; : 7,</div><div class="line">      &quot;end_offset&quot; : 8,</div><div class="line">      &quot;type&quot; : &quot;CN_CHAR&quot;,</div><div class="line">      &quot;position&quot; : 4</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;笔记本&quot;,</div><div class="line">      &quot;start_offset&quot; : 8,</div><div class="line">      &quot;end_offset&quot; : 11,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 5</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;笔记&quot;,</div><div class="line">      &quot;start_offset&quot; : 8,</div><div class="line">      &quot;end_offset&quot; : 10,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 6</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;本厂&quot;,</div><div class="line">      &quot;start_offset&quot; : 10,</div><div class="line">      &quot;end_offset&quot; : 12,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 7</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;厂商&quot;,</div><div class="line">      &quot;start_offset&quot; : 11,</div><div class="line">      &quot;end_offset&quot; : 13,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 8</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h5 id="ik-smart"><a href="#ik-smart" class="headerlink" title="ik_smart"></a>ik_smart</h5><p>curl -XGET ‘<a href="http://localhost:9200/_analyze?pretty&amp;analyzer=ik_smart" target="_blank" rel="external">http://localhost:9200/_analyze?pretty&amp;analyzer=ik_smart</a>‘ -d ‘联想是全球最大的笔记本厂商’</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;tokens&quot; : [</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;联想&quot;,</div><div class="line">      &quot;start_offset&quot; : 0,</div><div class="line">      &quot;end_offset&quot; : 2,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 0</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;是&quot;,</div><div class="line">      &quot;start_offset&quot; : 2,</div><div class="line">      &quot;end_offset&quot; : 3,</div><div class="line">      &quot;type&quot; : &quot;CN_CHAR&quot;,</div><div class="line">      &quot;position&quot; : 1</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;全球&quot;,</div><div class="line">      &quot;start_offset&quot; : 3,</div><div class="line">      &quot;end_offset&quot; : 5,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 2</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;最大&quot;,</div><div class="line">      &quot;start_offset&quot; : 5,</div><div class="line">      &quot;end_offset&quot; : 7,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 3</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;的&quot;,</div><div class="line">      &quot;start_offset&quot; : 7,</div><div class="line">      &quot;end_offset&quot; : 8,</div><div class="line">      &quot;type&quot; : &quot;CN_CHAR&quot;,</div><div class="line">      &quot;position&quot; : 4</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;笔记本&quot;,</div><div class="line">      &quot;start_offset&quot; : 8,</div><div class="line">      &quot;end_offset&quot; : 11,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 5</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      &quot;token&quot; : &quot;厂商&quot;,</div><div class="line">      &quot;start_offset&quot; : 11,</div><div class="line">      &quot;end_offset&quot; : 13,</div><div class="line">      &quot;type&quot; : &quot;CN_WORD&quot;,</div><div class="line">      &quot;position&quot; : 6</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="安装-head-插件"><a href="#安装-head-插件" class="headerlink" title="安装 head 插件"></a>安装 head 插件</h3><p>elasticsearch-head 是一个 elasticsearch 的集群管理工具，它是完全由 html5 编写的独立网页程序，你可以通过插件把它集成到 es。</p>
-<p>效果如下图：（图片来自网络）</p>
-<p><img src="http://img.my.csdn.net/uploads/201211/17/1353133910_8134.jpg" alt=""></p>
-<p><img src="http://img.my.csdn.net/uploads/201211/17/1353133911_9624.jpg" alt=""></p>
-<p><img src="http://img.my.csdn.net/uploads/201211/17/1353134135_7264.jpg" alt=""></p>
-<p><img src="http://img.my.csdn.net/uploads/201211/17/1353134135_5729.jpg" alt=""></p>
-<p><img src="http://img.my.csdn.net/uploads/201211/17/1353133911_8912.jpg" alt=""></p>
-<h4 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum remove git</div><div class="line">yum install git</div><div class="line">git clone git://github.com/mobz/elasticsearch-head.git   拉取 head 插件到本地，或者直接在 GitHub 下载 压缩包下来</div></pre></td></tr></table></figure>
-<h4 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h4><p>先去官网下载 node-v8.4.0-linux-x64.tar.xz</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -Jxv -f  node-v8.4.0-linux-x64.tar.xz</div><div class="line">mv node-v8.4.0-linux-x64  node</div></pre></td></tr></table></figure>
-<p>环境变量设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim  /etc/profile</div></pre></td></tr></table></figure>
-<p>新增：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export NODE_HOME=/opt/node</div><div class="line">export PATH=$PATH:$NODE_HOME/bin</div><div class="line">export NODE_PATH=$NODE_HOME/lib/node_modules</div></pre></td></tr></table></figure>
-<p>使配置文件生效（这步很重要，自己要多注意这步）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
-<p>测试是否全局可用了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure>
-<p>然后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mv elasticsearch-head head</div><div class="line">cd head/</div><div class="line">npm install -g grunt-cli</div><div class="line">npm install</div><div class="line">grunt server</div></pre></td></tr></table></figure>
-<p>再 es 的配置文件中加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http.cors.enabled: true</div><div class="line">http.cors.allow-origin: &quot;*&quot;</div></pre></td></tr></table></figure>
-<p>在浏览器打开 <code>http://192.168.153.133:9100/</code>  就可以看到效果了，</p>
-<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><p>把坑都走了一遍，防止以后再次入坑，特此记录下来</p>
-<p><strong>1、ERROR Could not register mbeans java.security.AccessControlException: access denied (“javax.management.MBeanTrustPermission” “register”)</strong></p>
-<p>改变 elasticsearch 文件夹所有者到当前用户</p>
-<p>sudo chown -R noroot:noroot elasticsearch</p>
-<p>这是因为 elasticsearch 需要读写配置文件，我们需要给予 config 文件夹权限，上面新建了 elsearch 用户，elsearch 用户不具备读写权限，因此还是会报错，解决方法是切换到管理员账户，赋予权限即可：</p>
-<p>sudo -i</p>
-<p>chmod -R 775 config</p>
-<p><strong>2、[WARN ][o.e.b.ElasticsearchUncaughtExceptionHandler] [] uncaught exception in thread [main]</strong><br><strong>org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root</strong></p>
-<p>原因是elasticsearch默认是不支持用root用户来启动的。</p>
-<p>解决方案一：Des.insecure.allow.root=true</p>
-<p>修改/usr/local/elasticsearch-2.4.0/bin/elasticsearch，</p>
-<p>添加 ES_JAVA_OPTS=”-Des.insecure.allow.root=true”</p>
-<p>或执行时添加： sh /usr/local/elasticsearch-2.4.0/bin/elasticsearch -d -Des.insecure.allow.root=true</p>
-<p>注意：正式环境用root运行可能会有安全风险，不建议用root来跑。</p>
-<p>解决方案二：添加专门的用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">useradd elastic</div><div class="line">chown -R elastic:elastic  elasticsearch-2.4.0</div><div class="line">su elastic</div><div class="line">sh /usr/local/elasticsearch-2.4.0/bin/elasticsearch -d</div></pre></td></tr></table></figure>
-<p><strong>3、UnsupportedOperationException: seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled in</strong></p>
-<p>只是警告，使用新的linux版本，就不会出现此类问题了。</p>
-<p><strong>4、ERROR: [4] bootstrap checks failed</strong><br><strong>[1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]</strong></p>
-<p>原因：无法创建本地文件问题,用户最大可创建文件数太小</p>
-<p>解决方案：切换到 root 用户，编辑 limits.conf 配置文件， 添加类似如下内容：</p>
-<p>vim /etc/security/limits.conf</p>
-<p>添加如下内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*  soft nofile 65536</div><div class="line">* hard nofile 131072</div><div class="line">* soft nproc 2048</div><div class="line">* hard nproc 4096</div></pre></td></tr></table></figure>
-<p><strong>[2]: max number of threads [1024] for user [tzs] is too low, increase to at least [2048]</strong></p>
-<p>原因：无法创建本地线程问题,用户最大可创建线程数太小</p>
-<p>解决方案：切换到root用户，进入limits.d目录下，修改90-nproc.conf 配置文件。</p>
-<p>vim /etc/security/limits.d/90-nproc.conf</p>
-<p>找到如下内容：</p>
-<ul>
-<li>soft nproc 1024</li>
-</ul>
-<p>修改为</p>
-<ul>
-<li>soft nproc 2048</li>
-</ul>
-<p><strong>[3]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</strong></p>
-<p>原因：最大虚拟内存太小</p>
-<p>root用户执行命令：</p>
-<p><code>sysctl -w vm.max_map_count=262144</code></p>
-<p>或者修改 /etc/sysctl.conf 文件，添加 “vm.max_map_count”设置<br>设置后，可以使用<br>$ sysctl -p</p>
-<p><strong>[4]: system call filters failed to install; check the logs and fix your configuration or disable system call filters at your own risk</strong></p>
-<p>原因：Centos6不支持SecComp，而ES5.4.1默认bootstrap.system_call_filter为true进行检测，所以导致检测失败，失败后直接导致ES不能启动。<br>详见 ：<a href="https://github.com/elastic/elasticsearch/issues/22899" target="_blank" rel="external">https://github.com/elastic/elasticsearch/issues/22899</a></p>
-<p>解决方法：在elasticsearch.yml中新增配置bootstrap.system_call_filter，设为false，注意要在Memory下面:<br>bootstrap.memory_lock: false<br>bootstrap.system_call_filter: false</p>
-<p><strong>5、 java.lang.IllegalArgumentException: property [elasticsearch.version] is missing for plugin [head]</strong></p>
-<p>再 es 的配置文件中加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http.cors.enabled: true</div><div class="line">http.cors.allow-origin: &quot;*&quot;</div></pre></td></tr></table></figure>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>整个搭建的过程全程自己手动安装，不易，如果安装很多台机器，是否可以写个脚本之类的自动搭建呢？可以去想想的。首发于：<a href="http://www.54tianzhisheng.cn/2017/09/09/Elasticsearch-install/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/09/09/Elasticsearch-install/</a>   ，转载请注明出处，谢谢配合！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;p&gt;ElasticSearch 是一个基于 Lucene 的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于 RESTful web 接口。Elasticsearch 是用 Java 开发的，并作为 Apache 许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。基百科、Stack Overflow、Github 都采用它。&lt;/p&gt;
-&lt;p&gt;本文从零开始，讲解如何使用 Elasticsearch 搭建自己的全文搜索引擎。每一步都有详细的说明，大家跟着做就能学会。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Elasticsearch" scheme="http://yoursite.com/tags/Elasticsearch/"/>
     
   </entry>
   

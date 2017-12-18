@@ -15,14 +15,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Zhisheng的博客</title>
+  <title>Hexo + yilia 搭建博客可能会遇到的所有疑问 | Zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zhisheng的博客">
-<meta property="og:url" content="http://yoursite.com/page/14/index.html">
+  <meta name="description" content="前提为什么会再次写这篇博客？请看下图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo + yilia 搭建博客可能会遇到的所有疑问">
+<meta property="og:url" content="http://yoursite.com/2017/12/18/hexo-yilia/index.html">
 <meta property="og:site_name" content="Zhisheng的博客">
+<meta property="og:description" content="前提为什么会再次写这篇博客？请看下图：">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/BaE3G1imDm.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/b4j29CkGgJ.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/0kkIFEkcja.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/13539aGJF5.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/lF42EedCJA.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/2ickeEEFbh.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/fA367Gej62.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/lLLLBlH1FK.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/ibaCjDEhEa.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/1f6gC2mJ1f.png-1">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/0HjLacBcfe.png-1">
+<meta property="og:updated_time" content="2017-12-18T15:45:11.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhisheng的博客">
+<meta name="twitter:title" content="Hexo + yilia 搭建博客可能会遇到的所有疑问">
+<meta name="twitter:description" content="前提为什么会再次写这篇博客？请看下图：">
+<meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171218/BaE3G1imDm.png-1">
   
     <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
   
@@ -181,22 +197,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-深入分析 Java Web 中的中文编码问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-hexo-yilia" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/27/深入分析 Java Web 中的中文编码问题/">深入分析 Java Web 中的中文编码问题</a>
+    <h1 class="article-title" itemprop="name">
+      Hexo + yilia 搭建博客可能会遇到的所有疑问
     </h1>
   
 
         
-        <a href="/2017/03/27/深入分析 Java Web 中的中文编码问题/" class="archive-article-date">
-  	<time datetime="2017-03-26T16:39:33.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-27</time>
+        <a href="/2017/12/18/hexo-yilia/" class="archive-article-date">
+  	<time datetime="2017-12-18T15:38:44.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
 </a>
         
       </header>
@@ -204,19 +218,112 @@ var _hmt = _hmt || [];
 
     <!-- 目录内容 -->
 
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+    <div id="toc-article" class="toc-article">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题解答"><span class="toc-number">2.</span> <span class="toc-text">问题解答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结尾"><span class="toc-number">3.</span> <span class="toc-text">结尾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+      
 <!-- 目录内容结束 -->
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>背景：</p>
-<blockquote>
-<p>编码问题一直困扰着程序开发人员，尤其是在 Java 中更加明显，因为 Java 是跨平台的语言，在不同平台的编码之间的切换较多。接下来将介绍 Java 编码问题出现的根本原因；在 Java 中经常遇到的几种编码格式的区别；在 Java 中经常需要编码的场景；出现中文问题的原因分析；在开发 Java Web 中可能存在编码的几个地方；一个 HTTP 请求怎么控制编码格式；如何避免出现中文编码问题等。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/03/27/深入分析 Java Web 中的中文编码问题/#more">more >></a>
-        
+        <p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/BaE3G1imDm.png-1" alt="mark"></p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>为什么会再次写这篇博客？请看下图：<br><a id="more"></a></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/b4j29CkGgJ.png-1" alt="mark"></p>
+<p>这是我博客搜索引擎的主要关键字。为什么会有这些关键字呢？</p>
+<p>我猜估计是曾经写了几篇关于搭建博客的文章，被搜索引擎收入了，所以搜索引擎才会将这些流量引导至我的博客，文章如下：</p>
+<p>1、<a href="http://www.54tianzhisheng.cn/2017/03/28/%E5%88%A9%E7%94%A8Github%20Page%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" target="_blank" rel="external">利用Github Page 搭建个人博客网站</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2017/06/13/Hexo-yilia-toc/" target="_blank" rel="external">Hexo + yilia 主题实现文章目录</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2017/04/13/Hexo-yilia-changyan/" target="_blank" rel="external">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></p>
+<p>那还有这么多人搜索这些关键字？说明碰到问题的还有不少，所以才有了这篇文章的诞生！</p>
+<h3 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a>问题解答</h3><p><strong>1、hexo  yilia 文章目录</strong></p>
+<p>这个我以前写过一篇文章：<a href="http://www.54tianzhisheng.cn/2017/06/13/Hexo-yilia-toc/" target="_blank" rel="external">Hexo + yilia 主题实现文章目录</a>    那篇文章写了我那个版本的 yilia 怎么添加文章目录的，但是好像新版本的 yilia 已经自带了这个文章目录功能。所以如果你是使用的新版本的 yilia ，请不要做任何修改！但是前几天有人给我发了个图片，又好像有点区别，如果实在有不同的话，请加群 528776268 找我要我那个主题版本的所有配置文件。再次说明，我前端也不是很擅长，我写那篇文章也是参考其他博客的修改，所以无能为力了。有什么问题，建议直接在 yilia 主题的 GitHub 去找作者聊！</p>
+<p><strong>2、Hexo  yilia  随笔</strong></p>
+<p>随笔如下：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/0kkIFEkcja.png-1" alt="mark"></p>
+<p>对此想说的就是，“随笔”  其实就是文章的一个 tags(标签)，如果你想把文章作为随笔的话，请在文章的首部写个 tags  为 “随笔”   的标签。如下图：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/13539aGJF5.png-1" alt="mark"></p>
+<p>注意：-  后面有个空格。</p>
+<p><strong>3、yilia 主题分类实现</strong></p>
+<p>如果要有多个标签，可以如下图所示：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/lF42EedCJA.png-1" alt="mark"></p>
+<p><strong>4、hexo yilia 设置文章显示长度，不展开全文</strong></p>
+<p>yilia 主题中可以用 <code>&lt;!-- more --&gt;</code>  截取文章的显示长度，如果你想在哪截取文章，就在那行使用该字符。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/2ickeEEFbh.png-1" alt="mark"></p>
+<p><strong>5、yilia 添加阅读量</strong></p>
+<p>我添加的是 “不蒜子” 计数，它可以区分 pv/uv 的统计方式，统计更精准，满足更多需求。有这个需求的可以去查找下博客怎么添加。（网上有很多这方面的博客）</p>
+<p><strong>6、yilia 主题使用 “畅言” 评论系统</strong></p>
+<p>参见我以前的文章：  <a href="http://www.54tianzhisheng.cn/2017/04/13/Hexo-yilia-changyan/" target="_blank" rel="external">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></p>
+<p><strong>7、hexo yilia 引入音乐</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/fA367Gej62.png-1" alt="mark"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">"no"</span> <span class="attr">border</span>=<span class="string">"0"</span> <span class="attr">marginwidth</span>=<span class="string">"0"</span> <span class="attr">marginheight</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">330</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">"填写音乐链接地址"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如下图，可以在网易云音乐里搜到你想要引入的音乐，然后点击如下的 “生成外链播放器” 即可：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/lLLLBlH1FK.png-1" alt="mark"></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/ibaCjDEhEa.png-1" alt="mark"></p>
+<p><strong>8、hexo yilia 引入视频</strong></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/1f6gC2mJ1f.png-1" alt="mark"></p>
+<p>hexo  支持 html 语法的，所以可以如上图这样引入视频！</p>
+<p><strong>9、hexo  yilia  相册</strong></p>
+<p>这个抱歉，我自己也没做这方面的功能，暂时不太清楚怎么实现。不过有文章写怎么实现，大家可以搜索下！</p>
+<p><strong>10、hexo  yilia  怎么写文章</strong></p>
+<p>我一般写文章就是先用本地 markdown 编辑器写好后，然后放在 hexo 的 <code>source/_posts</code> 目录下。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171218/0HjLacBcfe.png-1" alt="mark"></p>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>好了，大概就这些问题，我也一一解答了，希望搭建博客的你可以看到这篇文章，让你少走点弯路，如果你也遇到过这些问题，还请你能分享下文章，让更多人避免入坑！</p>
+<p>本文地址是：<a href="http://www.54tianzhisheng.cn/2017/12/18/hexo-yilia" target="_blank" rel="external">Hexo + yilia 搭建博客可能会遇到的所有疑问</a>  本文原创，转载请注明原创地址。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p><a href="http://www.54tianzhisheng.cn/2017/12/18/hexo-yilia" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/12/18/hexo-yilia</a>  这个链接是让推酷爬虫吞掉的，哈哈！</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你支持我买服务器！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -227,11 +334,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
         		</li>
       		
 		</ul>
@@ -240,18 +347,74 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/27/深入分析 Java Web 中的中文编码问题/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxklEQVR42u3aW26EMAwF0Nn/pukCKui1naRodPJVMUAO/bD8yOcTr+tx3d3/+9m7K4sXLi7umJtQ7q7cvSGhP1+//SRcXNyD3CQY5aGq9+94NuDi4r6Zm6QmeVDDxcX9Du7zs/OECRcX9z3cagqSFz/Pu2ys1XBxcQfcvEu57+8t/V1cXNwW9yqufDSS31/YHRcX9wh33uZISqBqQfXHe3BxcTdze0lJNcxFzY7HTGaUZ+Hi4g64eQt1Eraq0NtAhouLu5mbvyIPc0kjtTxowcXFPcKdHJ7IG6x5EpOHSFxc3JPcZMyZ/5pfabZOcHFxt3EnG/TuGTVZcHFxD3KrhUc1MM0DHy4u7hlu0uxItqyWQM2DHbi4uEe4eXjqjWALnZhWewUXF3cfNwlSvURn7dgVFxf3PLfXqqgWNr3DHLi4uP/LrQ5Kq02QxVkYLi7uBu5VXEmgqQ5QCx+Gi4t7hFsNLmuPauUDm/LH4OLijrl58Jo0VXsHvMrRFxcXdyk3SUd6CVMv8I1qNVxc3OPcvHlaHdJE+RcuLu4rudWSpncUYzRKwcXFXcSdD1bzp6qNElxc3PPcasWRH6iaDGgX9HdxcXE73B+yigsJV4vlrgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/13/Google-Developer-Days/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">谷歌开发者大会收获满满，不去真 “可惜” 了</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -259,89 +422,30 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-详细深入分析 Java ClassLoader 工作机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/26/详细深入分析 Java ClassLoader 工作机制/">详细深入分析 Java ClassLoader 工作机制</a>
-    </h1>
+    <div class="duoshuo"></div>
   
 
-        
-        <a href="/2017/03/26/详细深入分析 Java ClassLoader 工作机制/" class="archive-article-date">
-  	<time datetime="2017-03-26T13:27:57.101Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-26</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="什么是-ClassLoader-？"><a href="#什么是-ClassLoader-？" class="headerlink" title="什么是 ClassLoader ？"></a>什么是 ClassLoader ？</h3><p>大家都知道，当我们写好一个 Java 程序之后，不是管是 C/S 还是 B/S 应用，都是由若干个 .class 文件组织而成的一个完整的 Java 应用程序，当程序在运行时，即会调用该程序的一个入口函数来调用系统的相关功能，而这些功能都被封装在不同的 class 文件当中，所以经常要从这个 class 文件中要调用另外一个 class 文件中的方法，如果另外一个文件不存在的，则会引发系统异常。而程序在启动的时候，并不会一次性加载程序所要用的所有class文件，而是根据程序的需要，通过Java的类加载机制（ClassLoader）来动态加载某个 class 文件到内存当中的，从而只有 class 文件被载入到了内存之后，才能被其它 class 所引用。所以 ClassLoader 就是用来动态加载 class 文件到内存当中用的。</p>
-        
-          <a class="article-more-a" href="/2017/03/26/详细深入分析 Java ClassLoader 工作机制/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">类加载机制</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/26/详细深入分析 Java ClassLoader 工作机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
 
 
-
-
-
-
-
-
+  <section id="comments">
+<!--高速版，加载速度快，使用前需测试页面的兼容性-->
+<div id="SOHUCS" sid="Hexo + yilia 搭建博客可能会遇到的所有疑问"  style="padding: 0px 30px 0px 46px;"></div>
+<script>
+  (function(){
+    var appid = 'cysWCg9Ij',
+    conf = '7f51baf245f3217589bb3b4ba8d8c691';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+    window.SCS_NO_IFRAME = true;
+  })()
+</script>
+  </section>
   
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/13/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -371,8 +475,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
