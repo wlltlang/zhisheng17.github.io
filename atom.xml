@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-18T15:45:11.500Z</updated>
+  <updated>2017-12-25T15:05:17.182Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ELK 实时日志分析平台环境搭建</title>
+    <link href="http://yoursite.com/2017/12/25/ELK/"/>
+    <id>http://yoursite.com/2017/12/25/ELK/</id>
+    <published>2017-12-25T15:06:03.858Z</published>
+    <updated>2017-12-25T15:05:17.182Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171225/82lhH8E4Hk.jpg-1" alt="mark"></p>
+<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>ELK（ElasticSearch, Logstash, Kibana），三者组合在一起搭建实时的日志分析平台，目前好多公司都是这套！<br><a id="more"></a></p>
+<ul>
+<li>Elasticsearch 是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful 风格接口，多数据源，自动搜索负载等。</li>
+<li>Logstash 是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用（如，搜索）。</li>
+<li>Kibana 也是一个开源和免费的工具，它 Kibana 可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。</li>
+</ul>
+<h3 id="安装-ES"><a href="#安装-ES" class="headerlink" title="安装 ES"></a>安装 ES</h3><p>。。。这个省略，不 bb 了，以前写过。。。传送门：<a href="http://www.54tianzhisheng.cn/2017/09/09/Elasticsearch-install/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/09/09/Elasticsearch-install/</a></p>
+<h3 id="安装-Logstash"><a href="#安装-Logstash" class="headerlink" title="安装 Logstash"></a>安装 Logstash</h3><p>ELK 整套环境搭建版本很关键，最好全统一一个版本，否则出啥问题就不太好找了。这是我见过版本统一最严格的了。而已 ES 版本升了后，其他的都要都要升级，包括其插件。升级代价挺大的，最好一开始就定位好要安装哪个版本！</p>
+<p>在官网下好安装包后传到 Linux 上，这是速度最快的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">在 /usr/local 目录下解压：</div><div class="line"></div><div class="line">tar -zxvf  logstash-5.5.2.tar.gz</div><div class="line"></div><div class="line">进入解压后的目录：</div><div class="line"></div><div class="line">cd /usr/local/logstash-5.5.2/bin</div><div class="line"></div><div class="line">新增配置文件：</div><div class="line"></div><div class="line">vim logstash.conf</div><div class="line"></div><div class="line">增加：</div><div class="line"></div><div class="line">input&#123;</div><div class="line">    file&#123;</div><div class="line">      path =&gt; [&quot;/var/log/*.log&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output&#123;</div><div class="line">   elasticsearch&#123;</div><div class="line">       hosts =&gt; [&quot;192.168.153.135:9200&quot;]</div><div class="line">       index =&gt; &quot;logstash__log&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Logstash 的启动方式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">在 /usr/local/logstash-5.5.2/bin 目录下运行：</div><div class="line"></div><div class="line">./logstash -f logstash.conf</div></pre></td></tr></table></figure>
+<h3 id="安装-Kibana"><a href="#安装-Kibana" class="headerlink" title="安装 Kibana"></a>安装 Kibana</h3><p>同样，官网下好安装包，上传到 Linux。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">解压：</div><div class="line"></div><div class="line">tar -zxvf kibana-5.5.2-linux-x86_64.tar.gz</div><div class="line"></div><div class="line">修改配置文件 kibana-5.5.2/config/kibana.yml 如下：</div><div class="line"></div><div class="line">Server.host  //配置机器ip/hostname</div><div class="line"></div><div class="line">Server.name  //此kibana服务的名称</div><div class="line"></div><div class="line">elasticsearch.url  //es master节点url</div></pre></td></tr></table></figure>
+<p>Kibana 启动方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">在 /usr/local/kibana-5.5.2/bin 目录下运行：</div><div class="line"></div><div class="line">./kibana</div></pre></td></tr></table></figure>
+<p>Web界面访问: <a href="http://ip:5601" target="_blank" rel="external">http://ip:5601</a> 此时需要输入用户名和密码登录,默认分别是 elastic 和 changeme</p>
+<h3 id="X-Pack"><a href="#X-Pack" class="headerlink" title="X-Pack"></a>X-Pack</h3><p>X-Pack 是一个 Elastic Stack 的扩展，将安全，警报，监控，报告和图形功能包含在一个易于安装的软件包中。</p>
+<p>ES 和 Kibana 都可安装。</p>
+<p>插件 x-pack-5.5.2.zip  依旧官网下。</p>
+<h4 id="ES-安装-X-Pack"><a href="#ES-安装-X-Pack" class="headerlink" title="ES 安装 X-Pack"></a>ES 安装 X-Pack</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/elasticsearch/bin</div><div class="line"></div><div class="line">./elasticsearch-plugin install file:///opt/es/x-pack-5.5.2.zip</div></pre></td></tr></table></figure>
+<p>如果成功：显示如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">[root@node1 bin]# ./elasticsearch-plugin install file:///opt/es/x-pack-5.5.2.zip</div><div class="line">-&gt; Downloading file:///opt/es/x-pack-5.5.2.zip</div><div class="line">[=================================================] 100%</div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</div><div class="line">@     WARNING: plugin requires additional permissions     @</div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</div><div class="line">* java.io.FilePermission \\.\pipe\* read,write</div><div class="line">* java.lang.RuntimePermission accessClassInPackage.com.sun.activation.registries</div><div class="line">* java.lang.RuntimePermission getClassLoader</div><div class="line">* java.lang.RuntimePermission setContextClassLoader</div><div class="line">* java.lang.RuntimePermission setFactory</div><div class="line">* java.security.SecurityPermission createPolicy.JavaPolicy</div><div class="line">* java.security.SecurityPermission getPolicy</div><div class="line">* java.security.SecurityPermission putProviderProperty.BC</div><div class="line">* java.security.SecurityPermission setPolicy</div><div class="line">* java.util.PropertyPermission * read,write</div><div class="line">* java.util.PropertyPermission sun.nio.ch.bugLevel write</div><div class="line">* javax.net.ssl.SSLPermission setHostnameVerifier</div><div class="line">See http://docs.oracle.com/javase/8/docs/technotes/guides/security/permissions.html</div><div class="line">for descriptions of what these permissions allow and the associated risks.</div><div class="line"></div><div class="line">Continue with installation? [y/N]y</div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</div><div class="line">@        WARNING: plugin forks a native controller        @</div><div class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</div><div class="line">This plugin launches a native controller that is not subject to the Java</div><div class="line">security manager nor to system call filters.</div><div class="line"></div><div class="line">Continue with installation? [y/N]y</div><div class="line">-&gt; Installed x-pack</div></pre></td></tr></table></figure>
+<h4 id="Kibana-安装-X-Pack"><a href="#Kibana-安装-X-Pack" class="headerlink" title="Kibana 安装 X-Pack"></a>Kibana 安装 X-Pack</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/kibana-5.5.2/bin</div><div class="line"></div><div class="line">./kibana-plugin install file:///opt/es/x-pack-5.5.2.zip</div></pre></td></tr></table></figure>
+<p>安装成功如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@node1 bin]# ./kibana-plugin install file:///opt/es/x-pack-5.5.2.zip</div><div class="line">Attempting to transfer from file:///opt/es/x-pack-5.5.2.zip</div><div class="line">Transferring 159867054 bytes....................</div><div class="line">Transfer complete</div><div class="line">Retrieving metadata from plugin archive</div><div class="line">Extracting plugin archive</div><div class="line">Extraction complete</div><div class="line">Optimizing and caching browser bundles...</div><div class="line">Plugin installation complete</div></pre></td></tr></table></figure>
+<h4 id="启用-x-pack-安全机制"><a href="#启用-x-pack-安全机制" class="headerlink" title="启用 x-pack 安全机制"></a>启用 x-pack 安全机制</h4><p>分别在 kibana.yml 和 elasticsearch.yml 中加入下行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xpack.security.enabled: true</div></pre></td></tr></table></figure>
+<p>这样后，你再打开 ES 的 head 界面和 Kibana 管理界面就需要输入账号密码了。</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/171225/i8ebl0jgLl.png-1" alt="mark"></p>
+<p>上图右边是安装 X-Pack 后的，功能多了几个。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>环境搭建很简单，后面如果有时间的话可以再讲讲在 Kibana 的 Dev Tools 上构建 ES 的 JSON 串来对 ES 进行操作。</p>
+<p>我还写过 ES 相关的文章：</p>
+<p>1、<a href="http://www.54tianzhisheng.cn/2017/09/07/Elasticsearch-analyzers/" target="_blank" rel="external">Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2017/09/09/Elasticsearch-install/" target="_blank" rel="external">全文搜索引擎 Elasticsearch 集群搭建入门教程</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2017/10/15/ElasticSearch-cluster-health-metrics/" target="_blank" rel="external">ElasticSearch 集群监控</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2017/10/18/ElasticSearch-nodes-metrics/" target="_blank" rel="external">ElasticSearch 单个节点监控</a></p>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><blockquote>
+<p>本文首发于：<a href="http://www.54tianzhisheng.cn/" target="_blank" rel="external">zhisheng 的博客</a></p>
+<p>转载请注明地址：<a href="http://www.54tianzhisheng.cn/2017/12/25/ELK/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2017/12/25/ELK/</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/blog/171225/82lhH8E4Hk.jpg-1&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;简单介绍&quot;&gt;&lt;a href=&quot;#简单介绍&quot; class=&quot;headerlink&quot; title=&quot;简单介绍&quot;&gt;&lt;/a&gt;简单介绍&lt;/h3&gt;&lt;p&gt;ELK（ElasticSearch, Logstash, Kibana），三者组合在一起搭建实时的日志分析平台，目前好多公司都是这套！&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="ElasticSearch" scheme="http://yoursite.com/tags/ElasticSearch/"/>
+    
+      <category term="LogStash" scheme="http://yoursite.com/tags/LogStash/"/>
+    
+      <category term="Kibana" scheme="http://yoursite.com/tags/Kibana/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo + yilia 搭建博客可能会遇到的所有疑问</title>
@@ -1972,59 +2039,6 @@
     
     
       <category term="面经" scheme="http://yoursite.com/tags/%E9%9D%A2%E7%BB%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 下 lua 开发环境安装及安装 luafilesystem</title>
-    <link href="http://yoursite.com/2017/09/15/linux-lua-lfs-install/"/>
-    <id>http://yoursite.com/2017/09/15/linux-lua-lfs-install/</id>
-    <published>2017-09-15T15:17:26.540Z</published>
-    <updated>2017-09-15T15:21:45.473Z</updated>
-    
-    <content type="html"><![CDATA[<p>火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。</p>
-<p><img src="http://www.lua.org/images/lua.gif" alt=""><br><a id="more"></a><br>最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！</p>
-<p>安装：</p>
-<h3 id="1-先安装-lua-的相关依赖"><a href="#1-先安装-lua-的相关依赖" class="headerlink" title="1.先安装 lua 的相关依赖"></a>1.先安装 lua 的相关依赖</h3><p>安装 C 开发环境<br>由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因此我们只需要执行 9 条指令即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">gcc：命令未找到（解决方法）</div><div class="line">yum install cpp</div><div class="line">yum install binutils</div><div class="line">yum install glibc</div><div class="line">yum install glibc-kernheaders</div><div class="line">yum install glibc-common</div><div class="line">yum install glibc-devel</div><div class="line">yum install gcc</div><div class="line">yum install make</div><div class="line">yum install readline-devel</div></pre></td></tr></table></figure>
-<h3 id="2-安装-lua5-1-5"><a href="#2-安装-lua5-1-5" class="headerlink" title="2.安装  lua5.1.5"></a>2.安装  lua5.1.5</h3><p>下载地址：<a href="http://www.lua.org/ftp/" target="_blank" rel="external">http://www.lua.org/ftp/</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">tar -zxvf lua-5.1.5.tar.gz</div><div class="line">cd lua-5.1.5</div><div class="line">vi Makefile</div><div class="line">设置 INSTALL_TOP= /usr/local/lua</div><div class="line">make linux</div><div class="line">make test</div><div class="line">make install</div><div class="line">rm -rf  /usr/bin/lua</div><div class="line">ln -s /usr/local/lua/bin/lua /usr/bin/lua</div><div class="line">ln -s /usr/local/lua/share/lua /usr/share/lua</div><div class="line"></div><div class="line">设置环境变量：</div><div class="line">vim /etc/profile</div><div class="line"></div><div class="line">添加：</div><div class="line">export LUA_HOME=/usr/local/lua</div><div class="line">export PATH=$PATH:$LUA_HOME/bin</div><div class="line"></div><div class="line">环境变量生效：</div><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
-<h3 id="3、安装-luarocks"><a href="#3、安装-luarocks" class="headerlink" title="3、安装  luarocks"></a>3、安装  luarocks</h3><p>是一个 Lua 包管理器，基于 Lua 语言开发，提供一个命令行的方式来管理 Lua 包依赖、安装第三方 Lua 包等。</p>
-<p>地址： <a href="https://github.com/luarocks/luarocks" target="_blank" rel="external">https://github.com/luarocks/luarocks</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">使用 luarocks-2.2.1 版本在我机器上没有问题，但是使用 luarocks-2.4.2 出现问题</div><div class="line"></div><div class="line">wget http://luarocks.org/releases/luarocks-2.2.1.tar.gz</div><div class="line"></div><div class="line">tar -zxvf luarocks-2.2.1.tar.gz</div><div class="line"></div><div class="line">cd luarocks-2.2.1</div><div class="line"></div><div class="line">./configure --with-lua=/usr/local --with-lua-include=/usr/local/lua/include</div><div class="line"></div><div class="line">设置环境变量：</div><div class="line"></div><div class="line">export LUA_LUAROCKS_PATH=/usr/local/luarocks-2.2.1</div><div class="line">export PATH=$PATH:$LUA_LUAROCKS_PATH</div><div class="line"></div><div class="line">make &amp; make install</div></pre></td></tr></table></figure>
-<h3 id="4、安装-luafilesystem"><a href="#4、安装-luafilesystem" class="headerlink" title="4、安装  luafilesystem"></a>4、安装  luafilesystem</h3><p>是一个用于 lua 进行文件访问的库，可以支持 lua 5.1 和 lua5.2，且是跨平台的，在为 lua 安装 lfs 之前需要先安装luarocks。因为自己的需求刚好需要这模块。</p>
-<p>地址：<a href="https://github.com/keplerproject/luafilesystem" target="_blank" rel="external">https://github.com/keplerproject/luafilesystem</a></p>
-<p>文档： <a href="http://keplerproject.github.io/luafilesystem/index.html" target="_blank" rel="external">http://keplerproject.github.io/luafilesystem/index.html</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">luarocks install luafilesystem</div></pre></td></tr></table></figure>
-<h3 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h3><p>测试 lua 是否安装成功</p>
-<p><code>lua -v</code></p>
-<p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio</div></pre></td></tr></table></figure>
-<p>测试 luafilesystem 是否安装成功</p>
-<p>a.lua</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">local lfs = require&quot;lfs&quot;</div><div class="line"></div><div class="line">function Rreturn(filePath)</div><div class="line">        local time = os.date(&quot;%a, %d %b %Y %X GMT&quot;, lfs.attributes(filePath).modification)</div><div class="line">        --打印文件的修改时间</div><div class="line">        print(time)</div><div class="line">end</div><div class="line"></div><div class="line">Rreturn(&quot;/opt/lua/a.txt&quot;)</div></pre></td></tr></table></figure>
-<p>a.txt</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a</div><div class="line">b</div><div class="line">c</div></pre></td></tr></table></figure>
-<p>运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lua  a.lua</div></pre></td></tr></table></figure>
-<p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tue, 12 Sep 2017 18:43:13 GMT</div></pre></td></tr></table></figure>
-<p>出现打印出时间的结果就意味着已经安装好了。</p>
-<hr>
-<p>当然以上这是在 Linux 安装的， Windows 上的其实比这还简单了，但是安装 luafilesystem 的话需要自己去下载个 lfs.dll ，然后把这个放到 lua 的安装路径去。很简单的，这里就不细说了。</p>
-<h3 id="出现过的错误："><a href="#出现过的错误：" class="headerlink" title="出现过的错误："></a>出现过的错误：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root@n1 lua-5.1.5]# make linux test</div><div class="line">cd src &amp;&amp; make linux</div><div class="line">make[1]: Entering directory `/opt/lua-5.1.5/src&apos;</div><div class="line">make all MYCFLAGS=-DLUA_USE_LINUX MYLIBS=&quot;-Wl,-E -ldl -lreadline -lhistory -lncurses&quot;</div><div class="line">make[2]: Entering directory `/opt/lua-5.1.5/src&apos;</div><div class="line">gcc -O2 -Wall -DLUA_USE_LINUX   -c -o lapi.o lapi.c</div><div class="line">make[2]: gcc：命令未找到</div><div class="line">make[2]: *** [lapi.o] 错误 127</div><div class="line">make[2]: Leaving directory `/opt/lua-5.1.5/src&apos;</div><div class="line">make[1]: *** [linux] 错误 2</div><div class="line">make[1]: Leaving directory `/opt/lua-5.1.5/src&apos;</div><div class="line">make: *** [linux] 错误 2</div></pre></td></tr></table></figure>
-<p><strong>原因</strong>：最开始的那些依赖没安装</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.lua.org/images/lua.gif&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="lua" scheme="http://yoursite.com/tags/lua/"/>
     
   </entry>
   
