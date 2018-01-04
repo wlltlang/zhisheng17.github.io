@@ -15,13 +15,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>RestTemplate 详解 | Zhisheng的博客</title>
+  <title>RestTemplate 详解 | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="背景这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RestTemplate 详解">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/RestTemplate/index.html">
-<meta property="og:site_name" content="Zhisheng的博客">
+<meta property="og:site_name" content="zhisheng的博客">
 <meta property="og:description" content="背景这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。">
 <meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1">
 <meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/171203/dB18a2j7bi.png-1">
@@ -49,7 +49,7 @@
 <meta name="twitter:description" content="背景这段时间自己做的项目中需要调用服务提供者的服务（接口），具体就是：我这边需要将页面所输入的 Groovy 脚本代码传给别人提供的服务接口，然后那边返回脚本编译的结果给我，我需要将编译结果展示在页面，用的就是 RestTemplate 了，那 RestTemplate 是什么呢？简单说就是：简化了发起 HTTP 请求以及处理响应的过程，并且支持 REST 。下文就稍微总结下。">
 <meta name="twitter:image" content="http://ohfk1r827.bkt.clouddn.com/p3.jpeg-1">
   
-    <link rel="alternative" href="/atom.xml" title="Zhisheng的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/favicon.ico">
@@ -88,7 +88,7 @@ var _hmt = _hmt || [];
 			<img src="/img/avatar.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Zhisheng Tian</a></h1>
+		  <h1 class="header-author"><a href="/">zhisheng</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">坑要一个个填，路要一步步走！</p>
@@ -152,7 +152,7 @@ var _hmt = _hmt || [];
 				<img src="/img/avatar.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Zhisheng Tian</h1>
+			  <h1 class="header-author js-header-author">zhisheng</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>坑要一个个填，路要一步步走！<i class="icon icon-quo-right"></i></p>
@@ -562,7 +562,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Zhisheng Tian
+    		&copy; 2018 zhisheng
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -650,10 +650,6 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -663,10 +659,6 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,6 +674,10 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
@@ -690,15 +686,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Guava</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -707,6 +699,10 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Guava</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,11 +726,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color5">JSON</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JSON</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -742,7 +738,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">投资理财</a>
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,11 +750,19 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">投资理财</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -770,19 +774,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Pyspider</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Hibernate JPA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -794,15 +794,19 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Consul</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Velocity</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Consul</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -814,11 +818,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">文件</a>
+                <a href="javascript:void(0)" class="js-tag color4">lua</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lua</a>
+                <a href="javascript:void(0)" class="js-tag color3">文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -826,7 +830,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书籍</a>
+                <a href="javascript:void(0)" class="js-tag color4">实习圈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,11 +838,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">实习圈</a>
+                <a href="javascript:void(0)" class="js-tag color3">书籍</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -854,7 +862,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">循环队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -866,7 +874,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">循环队列</a>
+                <a href="javascript:void(0)" class="js-tag color3">finally</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -874,11 +882,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">finally</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color1">类加载机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -886,15 +890,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">类加载机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Filter过滤器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
             
             <div class="clearfix"></div>

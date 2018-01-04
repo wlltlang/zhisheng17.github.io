@@ -1,26 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Zhisheng的博客</title>
+  <title>zhisheng的博客</title>
   <subtitle>坑要一个个填，路要一步步走！</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-03T15:06:04.618Z</updated>
+  <updated>2018-01-04T13:16:54.649Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>Zhisheng Tian</name>
+    <name>zhisheng</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Kafka 安装及快速入门</title>
+    <link href="http://yoursite.com/2018/01/04/Kafka/"/>
+    <id>http://yoursite.com/2018/01/04/Kafka/</id>
+    <published>2018-01-04T13:11:39.211Z</published>
+    <updated>2018-01-04T13:16:54.649Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/2K14BekelF.jpg-1" alt="mark"></p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>官网：<a href="http://kafka.apache.org/" target="_blank" rel="external">http://kafka.apache.org/</a></p>
+<p>Apache Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司开发，之后成为Apache项目的一部分。Kafka是一种快速、可扩展的、设计内在就是分布式的，分区的和可复制的提交日志服务。<br><a id="more"></a><br>Apache Kafka与传统消息系统相比，有以下不同：</p>
+<ul>
+<li><p>它被设计为一个分布式系统，易于向外扩展；</p>
+</li>
+<li><p>它同时为发布和订阅提供高吞吐量；</p>
+</li>
+<li><p>它支持多订阅者，当失败时能自动平衡消费者；</p>
+</li>
+<li><p>它将消息持久化到磁盘，因此可用于批量消费，例如ETL，以及实时应用程序。</p>
+</li>
+</ul>
+<h3 id="安装-kafka"><a href="#安装-kafka" class="headerlink" title="安装 kafka"></a>安装 kafka</h3><p>下载地址：<a href="https://kafka.apache.org/downloads" target="_blank" rel="external">https://kafka.apache.org/downloads</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.shuosc.org/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz</div></pre></td></tr></table></figure>
+<p>解压：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar -zxvf kafka_2.11-1.0.0.tgz</div><div class="line"></div><div class="line">cd /usr/local/kafka_2.11-1.0.0/</div></pre></td></tr></table></figure></p>
+<p>修改 kafka-server 的配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /usr/local/kafka/config/server.properties</div></pre></td></tr></table></figure>
+<p>修改其中的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">broker.id=1</div><div class="line">log.dir=/data/kafka/logs-1</div></pre></td></tr></table></figure>
+<h3 id="功能验证："><a href="#功能验证：" class="headerlink" title="功能验证："></a>功能验证：</h3><h4 id="1、启动-zk"><a href="#1、启动-zk" class="headerlink" title="1、启动 zk"></a>1、启动 zk</h4><p>使用安装包中的脚本启动单节点 Zookeeper 实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</div></pre></td></tr></table></figure>
+<h4 id="2、启动Kafka-服务"><a href="#2、启动Kafka-服务" class="headerlink" title="2、启动Kafka 服务"></a>2、启动Kafka 服务</h4><p>使用 <code>kafka-server-start.sh</code> 启动 kafka 服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-server-start.sh  config/server.properties</div></pre></td></tr></table></figure>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/Lc2CiKfIee.png-1" alt="mark"></p>
+<h4 id="3、创建-topic"><a href="#3、创建-topic" class="headerlink" title="3、创建 topic"></a>3、创建 topic</h4><p>使用 <code>kafka-topics.sh</code> 创建单分区单副本的 topic test：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</div></pre></td></tr></table></figure>
+<p>查看topic：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-topics.sh --list --zookeeper localhost:2181</div></pre></td></tr></table></figure>
+<p>查询创建的 topic 报错：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/c3K5D805eI.png-1" alt="mark"></p>
+<p>解决方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/hosts</div></pre></td></tr></table></figure>
+<p>将 host 里的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</div><div class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</div></pre></td></tr></table></figure>
+<p>修改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</div><div class="line">::1         ip6-localhost ip6-localhost.localdomain localhost6 localhost6.localdomain6</div></pre></td></tr></table></figure>
+<p>方法参考：<a href="https://stackoverflow.com/questions/28109669/zookeeper-unable-to-open-socket-to-localhost-000000012181" target="_blank" rel="external">zookeeper unable to open socket to localhost/0:0:0:0:0:0:0:1:2181</a></p>
+<p>再次查询就不报错了。</p>
+<h4 id="4、产生消息"><a href="#4、产生消息" class="headerlink" title="4、产生消息"></a>4、产生消息</h4><p>使用 <code>kafka-console-producer.sh</code> 发送消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</div></pre></td></tr></table></figure>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/4F1EAgdmI1.png-1" alt="mark"></p>
+<h4 id="5、消费消息"><a href="#5、消费消息" class="headerlink" title="5、消费消息"></a>5、消费消息</h4><p>使用 <code>kafka-console-consumer.sh</code> 接收消息并在终端打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning</div></pre></td></tr></table></figure>
+<p>打开个新的命令窗口执行上面命令即可查看信息：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/c8mg8jJFki.png-1" alt="mark"></p>
+<h4 id="6、查看描述-topics-信息"><a href="#6、查看描述-topics-信息" class="headerlink" title="6、查看描述 topics 信息"></a>6、查看描述 topics 信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test</div></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Topic:test	PartitionCount:1	ReplicationFactor:1	Configs:</div><div class="line">	Topic: test	Partition: 0	Leader: 1	Replicas: 1	Isr: 1</div></pre></td></tr></table></figure>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/6JlmHdLcI5.png-1" alt="mark"></p>
+<p>第一行给出了所有分区的摘要，每个附加行给出了关于一个分区的信息。 由于我们只有一个分区，所以只有一行。</p>
+<p>“Leader”: 是负责给定分区的所有读取和写入的节点。 每个节点将成为分区随机选择部分的领导者。</p>
+<p>“Replicas”: 是复制此分区日志的节点列表，无论它们是否是领导者，或者即使他们当前处于活动状态。</p>
+<p>“Isr”: 是一组“同步”副本。这是复制品列表的子集，当前活着并被引导到领导者。</p>
+<h3 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h3><p>Kafka 支持两种模式的集群搭建：可以在单机上运行多个 broker 实例来实现集群，也可在多台机器上搭建集群，下面介绍下如何实现单机多 broker 实例集群，其实很简单，只需要如下配置即可。</p>
+<h4 id="单机多broker-集群配置"><a href="#单机多broker-集群配置" class="headerlink" title="单机多broker 集群配置"></a>单机多broker 集群配置</h4><p>利用单节点部署多个 broker。 不同的 broker 设置不同的 id，监听端口及日志目录。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cp config/server.properties config/server-2.properties</div><div class="line"></div><div class="line">cp config/server.properties config/server-3.properties</div><div class="line"></div><div class="line">vim config/server-2.properties</div><div class="line"></div><div class="line">vim config/server-3.properties</div></pre></td></tr></table></figure>
+<p>修改 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">broker.id=2</div><div class="line"></div><div class="line">listeners = PLAINTEXT://your.host.name:9093</div><div class="line"></div><div class="line">log.dir=/data/kafka/logs-2</div></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">broker.id=3</div><div class="line"></div><div class="line">listeners = PLAINTEXT://your.host.name:9094</div><div class="line"></div><div class="line">log.dir=/data/kafka/logs-3</div></pre></td></tr></table></figure>
+<p>启动Kafka服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bin/kafka-server-start.sh config/server-2.properties &amp;</div><div class="line"></div><div class="line">bin/kafka-server-start.sh config/server-3.properties &amp;</div></pre></td></tr></table></figure>
+<p>至此，单机多broker实例的集群配置完毕。</p>
+<h4 id="多机多-broker-集群配置"><a href="#多机多-broker-集群配置" class="headerlink" title="多机多 broker 集群配置"></a>多机多 broker 集群配置</h4><p>分别在多个节点按上述方式安装 Kafka，配置启动多个 Zookeeper 实例。</p>
+<p>假设三台机器 IP 地址是 ： 192.168.153.135， 192.168.153.136， 192.168.153.137</p>
+<p>分别配置多个机器上的 Kafka 服务，设置不同的 broker id，zookeeper.connect 设置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim config/server.properties</div></pre></td></tr></table></figure>
+<p>里面的 <code>zookeeper.connect</code></p>
+<p>修改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zookeeper.connect=192.168.153.135:2181,192.168.153.136:2181,192.168.153.137:2181</div></pre></td></tr></table></figure>
+<h3 id="使用-Kafka-Connect-来导入-导出数据"><a href="#使用-Kafka-Connect-来导入-导出数据" class="headerlink" title="使用 Kafka Connect 来导入/导出数据"></a>使用 Kafka Connect 来导入/导出数据</h3><p>从控制台写入数据并将其写回控制台是一个方便的起点，但您可能想要使用其他来源的数据或将数据从 Kafka 导出到其他系统。对于许多系统，您可以使用 Kafka Connect 来导入或导出数据，而不必编写自定义集成代码。</p>
+<p>Kafka Connect 是 Kafka 包含的一个工具，可以将数据导入和导出到 Kafka。它是一个可扩展的工具，运行 连接器，实现与外部系统交互的自定义逻辑。在这个快速入门中，我们将看到如何使用简单的连接器运行 Kafka Connect，这些连接器将数据从文件导入到 Kafka topic，并将数据从 Kafka topic 导出到文件。</p>
+<p>首先，我们将通过创建一些种子数据开始测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo -e &quot;zhisheng\ntian&quot; &gt; test.txt</div></pre></td></tr></table></figure>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/79EG4ilBAH.png-1" alt="mark"></p>
+<p>接下来，我们将启动两个以独立模式运行的连接器，这意味着它们将在单个本地专用进程中运行。我们提供三个配置文件作为参数。首先是 Kafka Connect 过程的配置，包含常见的配置，例如要连接的 Kafka 代理以及数据的序列化格式。其余的配置文件都指定一个要创建的连接器。这些文件包括唯一的连接器名称，要实例化的连接器类以及连接器所需的任何其他配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/connect-standalone.sh  config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties</div></pre></td></tr></table></figure>
+<p>Kafka 附带的这些示例配置文件使用您之前启动的默认本地群集配置，并创建两个连接器：第一个是源连接器，用于读取输入文件中的行，并将每个连接生成为 Kafka topic，第二个为连接器它从 Kafka topic 读取消息，并在输出文件中产生每行消息。</p>
+<p>在启动过程中，您会看到一些日志消息，其中一些指示连接器正在实例化。Kafka Connect 进程启动后，源连接器应该开始读取 test.txt topic connect-test，并将其生成 topic ，并且接收器连接器应该开始读取 topic 中的消息 connect-test 并将其写入文件 test.sink.txt。我们可以通过检查输出文件的内容来验证通过整个管道传输的数据：</p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/Jh18BCJcb6.png-1" alt="mark"></p>
+<p>数据存储在 Kafka topic 中 connect-test，因此我们也可以运行控制台使用者来查看 topic 中的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-test --from-beginning</div></pre></td></tr></table></figure>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/LBC5fF1LK6.png-1" alt="mark"></p>
+<p>连接器继续处理数据，所以我们可以将数据添加到文件中，并看到它在管道中移动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">echo zhishengtian&gt;&gt; test.txt</div><div class="line">echo zhishengtian2&gt;&gt; test.txt</div><div class="line">echo zhishengtian3&gt;&gt; test.txt</div><div class="line">echo zhishengtian4&gt;&gt; test.txt</div></pre></td></tr></table></figure>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/0DH6K1dkBA.png-1" alt="mark"></p>
+<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/6JLE96B87K.png-1" alt="mark"></p>
+<h3 id="使用-Kafka-流来处理数据"><a href="#使用-Kafka-流来处理数据" class="headerlink" title="使用 Kafka 流来处理数据"></a>使用 Kafka 流来处理数据</h3><p>Kafka Streams 是用于构建关键任务实时应用程序和微服务的客户端库，输入和/或输出数据存储在 Kafka 集群中。Kafka Streams 结合了在客户端编写和部署标准 Java 和 Scala 应用程序的简单性以及 Kafka 服务器端集群技术的优势，使这些应用程序具有高度可伸缩性，弹性，容错性，分布式等特性。</p>
+<p>可参考官网入门案例：<a href="http://kafka.apache.org/10/documentation/streams/quickstart" target="_blank" rel="external">http://kafka.apache.org/10/documentation/streams/quickstart</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1、<a href="https://www.mtyun.com/library/how-to-install-kafka-on-centos7" target="_blank" rel="external">在CentOS 7上安装Kafka</a></p>
+<p>2、<a href="http://kafka.apache.org/10/documentation/streams/quickstart" target="_blank" rel="external">http://kafka.apache.org/10/documentation/streams/quickstart</a></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>转载请注明原创地址为：<a href="http://www.54tianzhisheng.cn/2018/01/04/Kafka/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2018/01/04/Kafka/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/blog/180104/2K14BekelF.jpg-1&quot; alt=&quot;mark&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;p&gt;官网：&lt;a href=&quot;http://kafka.apache.org/&quot;&gt;http://kafka.apache.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Apache Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司开发，之后成为Apache项目的一部分。Kafka是一种快速、可扩展的、设计内在就是分布式的，分区的和可复制的提交日志服务。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Kafka" scheme="http://yoursite.com/tags/Kafka/"/>
+    
+  </entry>
+  
+  <entry>
     <title>为什么要重新运营以前的公众号呢？</title>
     <link href="http://yoursite.com/2018/01/03/weixin/"/>
     <id>http://yoursite.com/2018/01/03/weixin/</id>
     <published>2018-01-03T14:55:16.420Z</published>
-    <updated>2018-01-03T15:06:04.618Z</updated>
+    <updated>2018-01-04T13:09:35.052Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180103/mL5G5acdd4.png-1" alt="mark"></p>
 <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>老读者可能会发现现在我的公众号已经改名了。（由 “猿blog”  变成  “zhisheng” 了，细心的童鞋会发现不仅名字变了， ID 也变了，但是图片还没改，暂时还没想到好的 logo 图片），下面说说为啥吧！<br><a id="more"></a></p>
@@ -56,7 +171,9 @@
 <p>2、本人一开始会亲自教授该怎么做，所以没经验的朋友不用担心</p>
 <p>3、可以增加和大牛勾搭的机会，你们懂的。。</p>
 <p>4、本人可以亲自传授经验（编程和生活点滴经验）</p>
-<h2 id="如果你有意愿的话，请加我-QQ-：-1041218129-聊聊吧"><a href="#如果你有意愿的话，请加我-QQ-：-1041218129-聊聊吧" class="headerlink" title="如果你有意愿的话，请加我 QQ ： 1041218129  聊聊吧"></a><strong>如果你有意愿的话，请加我 QQ ： 1041218129  聊聊吧</strong></h2><h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180103/C6LG3mGa12.jpg" alt="mark"></p>
+<p><strong>如果你有意愿的话，请加我 QQ ： 1041218129  聊聊吧</strong></p>
+<hr>
+<h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180103/C6LG3mGa12.jpg" alt="mark"></p>
 ]]></content>
     
     <summary type="html">
@@ -1651,85 +1768,6 @@
     
     
       <category term="Maven" scheme="http://yoursite.com/tags/Maven/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JsonPath —— JSON 解析神器</title>
-    <link href="http://yoursite.com/2017/10/13/JsonPath/"/>
-    <id>http://yoursite.com/2017/10/13/JsonPath/</id>
-    <published>2017-10-13T15:59:12.727Z</published>
-    <updated>2017-10-13T16:16:21.962Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ohfk1r827.bkt.clouddn.com/cb3.jpeg-1" alt=""></p>
-<p>真乃神器也，再复杂的 Json 都能给你解析出来，非常方便的获取 JSON 的内容，很强大！<br><a id="more"></a><br>语法简介</p>
-<table>
-<thead>
-<tr>
-<th><strong>JsonPath</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$</td>
-<td>根节点</td>
-</tr>
-<tr>
-<td>@</td>
-<td>当前节点</td>
-</tr>
-<tr>
-<td>.or[]</td>
-<td>子节点</td>
-</tr>
-<tr>
-<td>..</td>
-<td>选择所有符合条件的节点</td>
-</tr>
-<tr>
-<td>*</td>
-<td>所有节点</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>迭代器标示，如数组下标</td>
-</tr>
-<tr>
-<td>[,]</td>
-<td>支持迭代器中做多选</td>
-</tr>
-<tr>
-<td>[start:end:step]</td>
-<td>数组切片运算符</td>
-</tr>
-<tr>
-<td>?()</td>
-<td>支持过滤操作</td>
-</tr>
-<tr>
-<td>()</td>
-<td>支持表达式计算</td>
-</tr>
-</tbody>
-</table>
-<p>JSON 值：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">"store"</span>: &#123;</div><div class="line">    <span class="attr">"book"</span>: [</div><div class="line">      &#123; <span class="attr">"category"</span>: <span class="string">"reference"</span>,</div><div class="line">        <span class="attr">"author"</span>: <span class="string">"Nigel Rees"</span>,</div><div class="line">        <span class="attr">"title"</span>: <span class="string">"Sayings of the Century"</span>,</div><div class="line">        <span class="attr">"price"</span>: <span class="number">8.95</span></div><div class="line">      &#125;,</div><div class="line">      &#123; <span class="attr">"category"</span>: <span class="string">"fiction"</span>,</div><div class="line">        <span class="attr">"author"</span>: <span class="string">"Evelyn Waugh"</span>,</div><div class="line">        <span class="attr">"title"</span>: <span class="string">"Sword of Honour"</span>,</div><div class="line">        <span class="attr">"price"</span>: <span class="number">12.99</span>,</div><div class="line">        <span class="attr">"isbn"</span>: <span class="string">"0-553-21311-3"</span></div><div class="line">      &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"bicycle"</span>: &#123;</div><div class="line">      <span class="attr">"color"</span>: <span class="string">"red"</span>,</div><div class="line">      <span class="attr">"price"</span>: <span class="number">19.95</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>导包：<code>import com.jayway.jsonpath.JsonPath</code></p>
-<p>解析代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//输出book[0]的author值</span></div><div class="line">String author = JsonPath.read(json, <span class="string">"$.store.book[0].author"</span>);</div><div class="line">System.out.println(<span class="string">"author\t"</span>+author);</div><div class="line"><span class="comment">//输出全部author的值，使用Iterator迭代</span></div><div class="line">List&lt;String&gt; authors = JsonPath.read(json, <span class="string">"$.store.book[*].author"</span>);</div><div class="line">System.out.println(<span class="string">"authors\t"</span>+authors);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中category == 'reference'的book</span></div><div class="line">List&lt;Object&gt; books = JsonPath.read(json, <span class="string">"$.store.book[?(@.category == 'reference')]"</span>);</div><div class="line">System.out.println(<span class="string">"books\t"</span>+books);</div><div class="line"><span class="comment">//输出book[*]中category == 'reference'的book或者</span></div><div class="line">List&lt;Object&gt; books2 = JsonPath.read(json, <span class="string">"$.store.book[?(@.category == 'reference' || @.price&gt;10)]"</span>);</div><div class="line">System.out.println(<span class="string">"books2\t"</span>+books2);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中category == 'reference'的book的author</span></div><div class="line">List&lt;Object&gt; books1 = JsonPath.read(json, <span class="string">"$.store.book[?(@.category == 'reference')].author"</span>);</div><div class="line">System.out.println(<span class="string">"books1\t"</span>+books1);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中price&gt;10的book</span></div><div class="line">List&lt;Object&gt; b1 = JsonPath.read(json, <span class="string">"$.store.book[?(@.price&gt;10)]"</span>);</div><div class="line">System.out.println(<span class="string">"b1"</span>+b1);</div><div class="line"></div><div class="line"><span class="comment">//输出book[*]中含有isbn元素的book</span></div><div class="line">List&lt;Object&gt; b2 = JsonPath.read(json, <span class="string">"$.store.book[?(@.isbn)]"</span>);</div><div class="line">System.out.println(<span class="string">"b2"</span>+b2);</div><div class="line"></div><div class="line"><span class="comment">//输出该json中所有price的值</span></div><div class="line">List&lt;Double&gt; prices = JsonPath.read(json, <span class="string">"$..price"</span>);</div><div class="line">System.out.println(<span class="string">"prices"</span>+prices);</div><div class="line"></div><div class="line"><span class="comment">//输出该json中所有title的值</span></div><div class="line">List&lt;Double&gt; title = JsonPath.read(json, <span class="string">"$..title"</span>);</div><div class="line">System.out.println(<span class="string">"title"</span>+title);</div><div class="line"><span class="comment">//输出该json中book 0,1的值</span></div><div class="line">List&lt;Double&gt; book01 = JsonPath.read(json, <span class="string">"$..book[0,1]"</span>);</div><div class="line">System.out.println(<span class="string">"book01"</span>+book01);</div><div class="line"><span class="comment">/* //输出该json中book 0,1的值</span></div><div class="line">List&lt;Double&gt; book012 = JsonPath.read(json, "$..book[-2:]");</div><div class="line">System.out.println("book012"+book012);*/</div><div class="line"></div><div class="line"><span class="comment">//可以提前编辑一个路径，并多次使用它</span></div><div class="line">JsonPath path = JsonPath.compile(<span class="string">"$.store.book[*]"</span>);</div><div class="line">List&lt;Object&gt; b3 = path.read(json);</div><div class="line">System.out.println(<span class="string">"path\t"</span>+path+<span class="string">"\n"</span>+b3);</div></pre></td></tr></table></figure>
-<p>用法比较简单，多使用几次就会使用了！文章主要参考网上！原谅很多天不跟博的我现在竟然这样水了这么一篇文章，哈哈！实在是忙！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ohfk1r827.bkt.clouddn.com/cb3.jpeg-1&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;真乃神器也，再复杂的 Json 都能给你解析出来，非常方便的获取 JSON 的内容，很强大！&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JSON" scheme="http://yoursite.com/tags/JSON/"/>
     
   </entry>
   
