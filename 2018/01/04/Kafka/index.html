@@ -36,7 +36,8 @@ Apache Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司�
 <meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/180104/LBC5fF1LK6.png-1">
 <meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/180104/0DH6K1dkBA.png-1">
 <meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/180104/6JLE96B87K.png-1">
-<meta property="og:updated_time" content="2018-01-04T13:16:54.649Z">
+<meta property="og:image" content="http://ohfk1r827.bkt.clouddn.com/blog/180103/C6LG3mGa12.jpg">
+<meta property="og:updated_time" content="2018-01-05T13:12:54.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka 安装及快速入门">
 <meta name="twitter:description" content="介绍官网：http://kafka.apache.org/
@@ -228,7 +229,7 @@ var _hmt = _hmt || [];
     <div id="toc-article" class="toc-article">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-kafka"><span class="toc-number">2.</span> <span class="toc-text">安装 kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能验证："><span class="toc-number">3.</span> <span class="toc-text">功能验证：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、启动-zk"><span class="toc-number">3.1.</span> <span class="toc-text">1、启动 zk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、启动Kafka-服务"><span class="toc-number">3.2.</span> <span class="toc-text">2、启动Kafka 服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、创建-topic"><span class="toc-number">3.3.</span> <span class="toc-text">3、创建 topic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、产生消息"><span class="toc-number">3.4.</span> <span class="toc-text">4、产生消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、消费消息"><span class="toc-number">3.5.</span> <span class="toc-text">5、消费消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、查看描述-topics-信息"><span class="toc-number">3.6.</span> <span class="toc-text">6、查看描述 topics 信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群配置"><span class="toc-number">4.</span> <span class="toc-text">集群配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单机多broker-集群配置"><span class="toc-number">4.1.</span> <span class="toc-text">单机多broker 集群配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多机多-broker-集群配置"><span class="toc-number">4.2.</span> <span class="toc-text">多机多 broker 集群配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-Kafka-Connect-来导入-导出数据"><span class="toc-number">5.</span> <span class="toc-text">使用 Kafka Connect 来导入/导出数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-Kafka-流来处理数据"><span class="toc-number">6.</span> <span class="toc-text">使用 Kafka 流来处理数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">8.</span> <span class="toc-text">最后</span></a></li></ol>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-kafka"><span class="toc-number">2.</span> <span class="toc-text">安装 kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能验证："><span class="toc-number">3.</span> <span class="toc-text">功能验证：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、启动-zk"><span class="toc-number">3.1.</span> <span class="toc-text">1、启动 zk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、启动Kafka-服务"><span class="toc-number">3.2.</span> <span class="toc-text">2、启动Kafka 服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、创建-topic"><span class="toc-number">3.3.</span> <span class="toc-text">3、创建 topic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、产生消息"><span class="toc-number">3.4.</span> <span class="toc-text">4、产生消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、消费消息"><span class="toc-number">3.5.</span> <span class="toc-text">5、消费消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、查看描述-topics-信息"><span class="toc-number">3.6.</span> <span class="toc-text">6、查看描述 topics 信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群配置"><span class="toc-number">4.</span> <span class="toc-text">集群配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单机多broker-集群配置"><span class="toc-number">4.1.</span> <span class="toc-text">单机多broker 集群配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多机多-broker-集群配置"><span class="toc-number">4.2.</span> <span class="toc-text">多机多 broker 集群配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-Kafka-Connect-来导入-导出数据"><span class="toc-number">5.</span> <span class="toc-text">使用 Kafka Connect 来导入/导出数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-Kafka-流来处理数据"><span class="toc-number">6.</span> <span class="toc-text">使用 Kafka 流来处理数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关注我"><span class="toc-number">8.</span> <span class="toc-text">关注我</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">9.</span> <span class="toc-text">最后</span></a></li></ol>
          </div>
    <script type="text/javascript">
     function showToc(){
@@ -276,9 +277,9 @@ var _hmt = _hmt || [];
 <p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/Lc2CiKfIee.png-1" alt="mark"></p>
 <h4 id="3、创建-topic"><a href="#3、创建-topic" class="headerlink" title="3、创建 topic"></a>3、创建 topic</h4><p>使用 <code>kafka-topics.sh</code> 创建单分区单副本的 topic test：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</div></pre></td></tr></table></figure>
-<p>查看topic：</p>
+<p>查看 topic 列表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-topics.sh --list --zookeeper localhost:2181</div></pre></td></tr></table></figure>
-<p>查询创建的 topic 报错：</p>
+<p>查询创建的 topic 列表报错：</p>
 <p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180104/c3K5D805eI.png-1" alt="mark"></p>
 <p>解决方法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/hosts</div></pre></td></tr></table></figure>
@@ -341,6 +342,7 @@ var _hmt = _hmt || [];
 <p>可参考官网入门案例：<a href="http://kafka.apache.org/10/documentation/streams/quickstart" target="_blank" rel="external">http://kafka.apache.org/10/documentation/streams/quickstart</a></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1、<a href="https://www.mtyun.com/library/how-to-install-kafka-on-centos7" target="_blank" rel="external">在CentOS 7上安装Kafka</a></p>
 <p>2、<a href="http://kafka.apache.org/10/documentation/streams/quickstart" target="_blank" rel="external">http://kafka.apache.org/10/documentation/streams/quickstart</a></p>
+<h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p><img src="http://ohfk1r827.bkt.clouddn.com/blog/180103/C6LG3mGa12.jpg" alt="mark"></p>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>转载请注明原创地址为：<a href="http://www.54tianzhisheng.cn/2018/01/04/Kafka/" target="_blank" rel="external">http://www.54tianzhisheng.cn/2018/01/04/Kafka/</a></p>
 
       
@@ -455,6 +457,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/01/05/SpringBoot-Kafka/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SpringBoot Kafka 整合使用
+        
+      </div>
+    </a>
   
   
     <a href="/2018/01/03/weixin/" id="article-nav-older" class="article-nav-link-wrap">
@@ -598,6 +609,14 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
@@ -614,7 +633,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,11 +641,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Guava</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,7 +657,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Guava</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -666,6 +681,10 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JSON</a>
               </li>
              
@@ -678,7 +697,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Oracle</a>
+                <a href="javascript:void(0)" class="js-tag color5">投资理财</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,19 +709,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">投资理财</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,6 +725,14 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spring MVC</a>
               </li>
              
@@ -722,7 +741,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,19 +753,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Consul</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Velocity</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Consul</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,11 +773,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lua</a>
+                <a href="javascript:void(0)" class="js-tag color3">文件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">文件</a>
+                <a href="javascript:void(0)" class="js-tag color4">lua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -770,7 +785,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">实习圈</a>
+                <a href="javascript:void(0)" class="js-tag color3">书籍</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,15 +793,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书籍</a>
+                <a href="javascript:void(0)" class="js-tag color4">实习圈</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -802,7 +813,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">循环队列</a>
+                <a href="javascript:void(0)" class="js-tag color4">表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -814,7 +825,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">finally</a>
+                <a href="javascript:void(0)" class="js-tag color5">循环队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,7 +833,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">类加载机制</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">finally</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -830,15 +845,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Filter过滤器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">类加载机制</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
             
             <div class="clearfix"></div>
